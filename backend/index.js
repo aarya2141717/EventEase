@@ -6,6 +6,9 @@ require("dotenv").config({ path: __dirname + '/.env' });
 const { connectDB } = require("./db/db");
 
 const app = express();
+const artistRoutes = require("./routes/artists");
+app.use("/api/artists", artistRoutes);
+
 app.use(cors());
 app.use(express.json());
 
