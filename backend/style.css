@@ -1,0 +1,632 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background: #fff;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* navbar */
+.navbar {
+      width: 100%;
+      background: #fff;
+      border-bottom: 1px solid #eee;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .nav-container {
+      max-width: 1400px;
+      margin: auto;
+      padding: 12px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-img {
+      width: 60px;
+      height: auto;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.2;
+    }
+
+    .logo-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .logo-subtitle {
+      font-size: 0.75rem;
+      color: #000000;
+      font-weight: 400;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 35px;
+      
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #000000;
+      font-weight: 500;
+      font-size: 15px;
+      transition: 0.3s;
+      position: relative;
+    }
+
+
+
+    .nav-icons {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+     .book-btn {
+      background: #e66c00;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    .login-btn {
+      background: #f3f3f3;
+      color: #333;
+      padding: 10px 30px;
+      border-radius: 6px;
+      border: none;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 14px;
+      transition: 0.3s;
+    }
+
+    /* hero */
+    .hero {
+      min-height: 90vh;
+      background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url("./images/wedding.png") center/cover no-repeat;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin-top: 70px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      color: #000000;
+      padding: 40px 20px;
+    }
+
+    .hero-logo {
+      width: 140px;
+      height: auto;
+      margin-bottom: 5px;
+      margin-top: 0px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    }
+
+    .hero-content h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: #000000;
+    }
+
+    .hero-content .subtitle {
+      font-size: 1.1rem;
+      margin-bottom: 25px;
+      color: #333;
+      font-weight: 500;
+      line-height: 1.6;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .search-box {
+      margin-top: 35px;
+      margin-bottom: 30px;
+      position: relative;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 16px 50px 16px 20px;
+      border-radius: 50px;
+      border: 2px solid #e0e0e0;
+      font-size: 15px;
+      background: rgba(255,255,255,0.95);
+      transition: 0.3s;
+      padding-left: 35px;
+      
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: #e66c00;
+      background: #fff;
+      
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: #999;
+    }
+
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 30px;
+      flex-wrap: wrap;
+    }
+
+    .hero-btn {
+      padding: 14px 32px;
+      border-radius: 8px;
+      border: 2px solid;
+      font-weight: 600;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-btn {
+        width: 80%;
+        justify-content: center;
+      }
+    
+
+/*section*/
+.section {
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
+.section h2 {
+  font-size: 28px;
+  margin-bottom:0px;
+  
+}
+
+.see-more {
+  font-size: 14px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+}
+
+
+.see-more .arrow {
+  font-size: 13px;
+  transition: 0.3s;
+  ;
+}
+
+.see-more:hover .arrow {
+  transform: translateX(3px);
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 20px;
+}
+
+
+.card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+  border: 1px solid #eee;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+
+
+/* Info section */
+.card-info h3 {
+  font-size: 18px;
+  margin: 10px 0 5px 0; 
+  color: #333;
+}
+
+.card-info p.address {
+  font-size: 14px;
+  color: #000000;
+  margin: 0;
+}
+
+
+/* Bottom section with rating and button */
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.rating {
+  font-size: 14px;
+  color: #000000; 
+}
+
+.view-btn {
+  background: #ff7f00;
+  color: white;
+  padding: 6px 15px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.view-btn:hover {
+  background: #e66c00;
+}
+
+.card-info p.role {
+  font-size: 14px;
+  color: #000000;
+  margin: 0;
+}
+
+.cards-bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.about-section {
+ background: #f5f5f5;
+ padding: 80px 5%;
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 40px;
+  align-items: center;
+}
+
+        .about-content h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #000;
+        }
+
+        .about-content p {
+            color: #999;
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 40px;
+        }
+
+        .explore-btn {
+            background: linear-gradient(135deg, #00bcd4, #0097a7);
+            color: white;
+            padding: 15px 35px;
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            clip-path: polygon(0 0, 92% 0, 100% 100%, 0% 100%);
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        .explore-btn:hover {
+            background: linear-gradient(135deg, #0097a7, #00838f);
+        }
+
+        .about-images {
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .image-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .image-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .image-card.venue-hall {
+            grid-column: 1 / -1;
+            height: 200px;
+        }
+
+        .image-card.venue-resort {
+            height: 250px;
+        }
+
+        .image-card.performer {
+            height: 250px;
+        }
+
+        .venue-badge {
+            position: absolute;
+            bottom: -5px;
+            left: 0px;
+            background: #00bcd4;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 700;
+            box-shadow: 0 4px 20px rgba(0,188,212,0.3);
+            z-index: 10;
+        }
+
+        .venue-badge .number {
+            font-size: 2.5rem;
+            display: block;
+            line-height: 1;
+        }
+
+        .venue-badge .label {
+            font-size: 1.3rem;
+            display: block;
+        }
+
+        /* Why Choose Section */
+        .why-choose-section {
+            background: #eae8e8;
+            padding: 80px 5%;
+        }
+
+        .why-choose-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .why-choose-content h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 50px;
+            color: #000;
+        }
+
+        .features-grid {
+            display: grid;
+            gap: 40px;
+        }
+
+        .feature-item {
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .feature-icon {
+            width: 35px;
+            height: 35px;
+            background: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .feature-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: #000;
+        }
+
+        .feature-content p {
+            color: #666;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .book-now-btn {
+            background: #000;
+            color: white;
+            padding: 15px 45px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 40px;
+            display: inline-block;
+        }
+
+        .book-now-btn:hover {
+            background: #333;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a2332;
+            color: #8b93a7;
+            padding: 60px 5%;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            font-weight: 600;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #8b93a7;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 12px;
+            font-size: 0.95rem;
+            line-height: 1.8;
+        }
+
+        .footer-section a:hover {
+            color: #00bcd4;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+
+/*responsive*/
+
+  @media (max-width: 1024px) {
+            .about-section {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .about-content h1,
+            .why-choose-content h1 {
+                font-size: 2rem;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .about-images {
+                grid-template-columns: 1fr;
+            }
+        }
+@media(max-width: 768px) {
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .hero-content h1 {
+    font-size: 36px;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+  }
+}
