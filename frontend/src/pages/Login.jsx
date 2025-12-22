@@ -11,7 +11,9 @@ export default function Login() {
       <header className="topbar">
         <div className="container header-inner">
           <div className="brand">
-            <img src="/images/logo.png" alt="EventEase" className="logo" />
+            <Link to="/">
+              <img src="/images/logo.png" alt="EventEase" className="logo" />
+            </Link>
             <div className="brand-text">
               <span className="brand-title">EventEase</span>
               <small className="brand-tag">Book venue & artists - fast</small>
@@ -19,10 +21,10 @@ export default function Login() {
           </div>
 
           <nav className="nav">
-            <a href="#">Home</a>
-            <a href="#">Venues</a>
-            <a href="#">Artists</a>
-            <a href="#">Dashboard</a>
+            <Link to="/">Home</Link>
+            <Link to="/venues">Venues</Link>
+            <Link to="/artists">Artists</Link>
+            <Link to="/dashboard">Dashboard</Link>
             <button className="cta">Book now</button>
             <button className="login-outline">Log In</button>
           </nav>
@@ -48,23 +50,22 @@ export default function Login() {
             />
 
             <img
-  src={showPw ? "/images/visibilityon.png" : "/images/visibilityoff.png"}
-  alt="toggle"
-  className="eye-icon"
-  onClick={() => setShowPw(!showPw)}
-/>
-
+              src={showPw ? "/images/visibilityon.png" : "/images/visibilityoff.png"}
+              alt="toggle"
+              className="eye-icon"
+              onClick={() => setShowPw(!showPw)}
+            />
           </div>
 
           <p className="forgot">
-  <Link to="/forgot-password" className="link">Forgot password?</Link>
-</p>
+            <Link to="/forgot-password" className="link">Forgot password?</Link>
+          </p>
 
           <button className="login-btn">Log In</button>
 
           <p className="signup">
-  Don't have an account? <Link to="/register" className="link">Sign up</Link>
-</p>
+            Don't have an account? <Link to="/register" className="link">Sign up</Link>
+          </p>
         </div>
       </main>
     </div>

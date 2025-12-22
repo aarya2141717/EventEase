@@ -329,3 +329,15 @@
     height: 36px;
   }
 }
+
+.nav a,
+.nav Link {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s;
+}
+
+.nav a:hover,
+.nav Link:hover {
+  color: #007bff;
+}
