@@ -1,4 +1,4 @@
-// frontend/src/pages/ArtistDetails.jsx
+ 0// frontend/src/pages/ArtistDetails.jsx
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./ArtistDetails.css";
