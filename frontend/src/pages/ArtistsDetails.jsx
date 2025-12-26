@@ -2,7 +2,7 @@ import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./ArtistDetails.css";
 
-// Artist data from your screenshot
+// Artist data
 const artistsData = {
   "raju-lama": {
     id: "raju-lama",

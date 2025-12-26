@@ -3,7 +3,7 @@
   background-color: #f8f9fa;
 }
 
-/* Reuse navbar styles from VenueDetails.css  */
+/* Reuse navbar styles from VenueDetails.css - they will be applied automatically */
 
 .artist-details-container {
   max-width: 1400px;
