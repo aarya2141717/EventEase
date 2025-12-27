@@ -8,10 +8,12 @@ const artistsData = {
     id: "raju-lama",
     name: "Raju Lama",
     type: "Singer",
-    image: "/images/artists/raju-lama.jpg",
+    image: "/images/raju-lama.jpg",
     description: "Raju Lama is a renowned Nepali singer and composer, best known as the lead vocalist of the band 'Mongolian Heart'. He has been a prominent figure in the Nepali music industry for over two decades.",
     awards: [
-      "Hits FM & Kanipur FM awards for best albums/songs (2002-2005)"
+      "Hits FM & Kantipur FM awards for best albums/songs (2002-2005)",
+      "Winning Coach on The Voice of Nepal Season 4",
+      "Successfully summited Mt. Everest and performed at 6,574m for Climate Change (2022)"
     ],
     genre: ["Pop", "Rock", "Adhunik"],
     experience: "25+ years",
@@ -21,9 +23,9 @@ const artistsData = {
     contact: "+977 98XXXXXXX",
     availability: ["Available for Weddings", "Corporate Events", "Concerts", "Private Parties"],
     socialMedia: {
-      facebook: "https://facebook.com/rajulamamusic",
-      instagram: "https://instagram.com/rajulamamusic",
-      youtube: "https://youtube.com/rajulamamusic"
+      facebook: "https://www.facebook.com/therajulamaofficial",
+    youtube: "https://www.youtube.com/@RajuLamaMongolianHeart",
+    instagram: "https://www.instagram.com/therajulamaofficial"
     },
     popularSongs: ["Mayalu", "Samjhi Baschu", "Hijo Aaja Bholi", "Parkhai Parkhai"]
   },
@@ -31,11 +33,12 @@ const artistsData = {
     id: "the-elements",
     name: "The Elements",
     type: "Band",
-    image: "/images/artists/the-elements.jpg",
+    image: "/images/elements.jpg",
     description: "The Elements is a popular Nepali rock band known for their unique fusion of traditional Nepali music with contemporary rock. Formed in 2005, they have gained a massive following across Nepal.",
     awards: [
-      "Best Newcomer (2006)",
-      "Best International Album (2009)"
+    "Best Newcomer (2006)",
+      "Best International Album (2009)",
+      "YouTube Silver Creator Award for reaching 100k+ subscribers"
     ],
     genre: ["Rock", "Fusion", "Alternative"],
     experience: "18+ years",
@@ -45,9 +48,9 @@ const artistsData = {
     contact: "+977 98XXXXXXX",
     availability: ["Concerts", "Festivals", "Corporate Events", "College Events"],
     socialMedia: {
-      facebook: "https://facebook.com/theelements",
-      instagram: "https://instagram.com/theelements",
-      spotify: "https://spotify.com/theelements"
+      facebook: "https://www.facebook.com/theelementsnepal",
+      instagram: "https://www.instagram.com/theelements.nepal",
+      youtube: "https://www.youtube.com/@TheElementsNepal"
     },
     popularSongs: ["Wave", "Elements", "Riverside", "Mountain High"]
   },
@@ -55,10 +58,12 @@ const artistsData = {
     id: "kuma-sagar-khwopa",
     name: "Kuma Sagar & The Khwopa",
     type: "Band",
-    image: "/images/artists/kuma-sagar.jpg",
+    image: "/images/kuma.jpeg",
     description: "Kuma Sagar & The Khwopa is a traditional Nepali folk music band that preserves and promotes authentic Nepali cultural music with a modern touch.",
     awards: [
-      "Best band award at the National Music Award 2081"
+      "Best band award at the National Music Award 2081",
+      "Bhaktapur Youth Icon Award for Cultural Preservation",
+      "Special Recognition at Newa Music Festival"
     ],
     genre: ["Folk", "Traditional", "Cultural"],
     experience: "10+ years",
@@ -68,9 +73,9 @@ const artistsData = {
     contact: "+977 98XXXXXXX",
     availability: ["Cultural Events", "Weddings", "Festivals", "Government Functions"],
     socialMedia: {
-      facebook: "https://facebook.com/kumasagar",
-      instagram: "https://instagram.com/kumasagar",
-      youtube: "https://youtube.com/kumasagar"
+     facebook: "https://www.facebook.com/kumasagar",
+      instagram: "https://www.instagram.com/kumasagar",
+      youtube: "https://www.youtube.com/@kumasagar"
     },
     popularSongs: ["Pahadi Lokgeet", "Basanta Ritu", "Himal Ko Chauri", "Nepali Asmita"]
   },
@@ -78,11 +83,12 @@ const artistsData = {
     id: "saijan-raj-vaidya",
     name: "Saijan Raj Vaidya",
     type: "Singer",
-    image: "/images/artists/saijan-raj.jpg",
+    image: "/images/sajan.jpg",
     description: "Saijan Raj Vaidya is one of the most popular contemporary Nepali singers, known for his soulful voice and meaningful lyrics. He rose to fame through his debut album and has since become a household name.",
     awards: [
-      "Best New Artist (2018)",
-      "Artist of the Month (March 2019)"
+   "Best New Artist (2018)",
+      "Artist of the Month (March 2019)",
+      "Most Streamed Independent Nepali Artist on Digital Platforms"
     ],
     genre: ["Pop", "Adhunik", "Soul"],
     experience: "7+ years",
@@ -92,9 +98,9 @@ const artistsData = {
     contact: "+977 98XXXXXXX",
     availability: ["Concerts", "Weddings", "Private Events", "TV Shows"],
     socialMedia: {
-      facebook: "https://facebook.com/saijanraj",
-      instagram: "https://instagram.com/saijanraj",
-      tiktok: "https://tiktok.com/@saijanraj"
+      facebook: "https://www.facebook.com/sajjanrajvaidya",
+      instagram: "https://www.instagram.com/sajjanrajvaidya",
+      youtube: "https://www.youtube.com/@sajjanrajvaidya"
     },
     popularSongs: ["Jindagiko Gaadi", "Maile Timro", "Kaha Bhetiyela", "Birsana"]
   },
@@ -102,10 +108,12 @@ const artistsData = {
     id: "sushant-kc",
     name: "Sushant K.C",
     type: "Singer",
-    image: "/images/artists/sushant-kc.jpg",
+    image: "/images/sushant.jpeg",
     description: "Sushant K.C is a versatile Nepali playback singer and performer, known for his powerful voice and emotional renditions. He has contributed to numerous Nepali film soundtracks.",
     awards: [
-      "Radio Kanipur National Music Awards (NMA) 2081 (2025) for his song 'Bardali'"
+     "Radio Kantipur National Music Awards (NMA) 2081 (2025) for 'Bardali'",
+      "Most Streamed Nepali Artist on Spotify with over 50M+ streams",
+      "First Nepali Artist to be featured on the global T-Series YouTube channel"
     ],
     genre: ["Playback", "Pop", "Romantic"],
     experience: "12+ years",
@@ -115,9 +123,9 @@ const artistsData = {
     contact: "+977 98XXXXXXX",
     availability: ["Film Events", "Concerts", "Weddings", "Award Functions"],
     socialMedia: {
-      facebook: "https://facebook.com/sushantkc",
-      instagram: "https://instagram.com/sushantkcofficial",
-      youtube: "https://youtube.com/sushantkc"
+      facebook: "hhttps://www.facebook.com/sushantkcofficial",
+      instagram: "https://www.instagram.com/sushantkcofficial",
+      youtube: "https://www.youtube.com/@SushantKC"
     },
     popularSongs: ["Bardali", "Malai Nasodha", "Mero Maya", "Chameli"]
   },
@@ -125,11 +133,12 @@ const artistsData = {
     id: "melina-rai",
     name: "Melina Rai",
     type: "Singer",
-    image: "/images/artists/melina-rai.jpg",
+    image: "/images/melina.jpg",
     description: "Melina Rai is a celebrated Nepali singer and actress, known for her melodious voice and significant contributions to both music and film industries.",
     awards: [
-      "Filmy Khabar Annual Prize (Film Person of the Year Female in 2020)",
-      "Cine Circle Award (2075 BS)"
+    "Filmy Khabar Annual Prize (Film Person of the Year Female in 2020)",
+      "Cine Circle Award (2075 BS) for Best Playback Singer",
+      "Winner Coach on The Voice Kids Nepal (2025)"
     ],
     genre: ["Filmi", "Pop", "Folk"],
     experience: "15+ years",
@@ -139,11 +148,74 @@ const artistsData = {
     contact: "+977 98XXXXXXX",
     availability: ["Film Events", "Concerts", "Cultural Programs", "Private Shows"],
     socialMedia: {
-      facebook: "https://facebook.com/melinarai",
-      instagram: "https://instagram.com/melinarai",
-      twitter: "https://twitter.com/melinarai"
+      facebook: "https://www.facebook.com/melinaraiofficial",
+      instagram: "https://www.instagram.com/melina.rai.official",
+      youtube: "https://www.youtube.com/@melinaraiofficial"
     },
     popularSongs: ["Resham", "Phoolko Aankhama", "Maya Lai Maya", "Sunaulo Sansar"]
+  },
+  "DJ-ashish": {
+    id: "DJ-ashish",
+    name: "DJ-ashish",
+    type: "DJ",
+    image: "/images/aashish.jpg",
+    description: "DJ Aashish is a leading figure in the Nepali EDM and club scene, known for his high-energy sets and folk-electronic fusions.",
+    awards: [
+      "Winner of 'Best Club DJ' at Nepal Nightlife Awards",
+      "Featured Artist at Global EDM Festival Dubai",
+      "Most Influential DJ in the Kathmandu Club Circuit"
+    ],
+    genre: ["EDM", "House", "Folk-Fusion"],
+    experience: "12+ years",
+    languages: ["Nepali", "English"],
+    performances: "1500+ club nights",
+    bookingFee: "NPR 50,000 - 150,000",
+    contact: "+977 98XXXXXXX",
+    availability: ["Clubs", "Private Parties", "Music Festivals"],
+    socialMedia: { facebook: "https://www.facebook.com/djaashishofficial", instagram: "https://www.instagram.com/djaashish_", youtube: "https://www.youtube.com/c/DJAashish" },
+    popularSongs: ["Kathmandu Night Remix", "Folk Beat Drop", "Luku Mari"]
+  },
+  "Tenzing Sherpa": {
+    id: "Tenzing Sherpa",
+    name: "Tenzing Sherpa",
+    type: "DJ",
+    image: "/images/tenzing.jpg",
+    description: "Tenzing Sherpa is a trailblazing DJ specializing in deep house and Himalayan techno, often performing in unique high-altitude locations.",
+    awards: [
+      "Unofficial Record for highest altitude DJ set in the Himalayas",
+      "Headliner at Echoes in the Valley Festival",
+      "Pioneer of 'Himalayan Techno' genre"
+    ],
+    genre: ["Deep House", "Techno", "Electronic"],
+    experience: "8+ years",
+    languages: ["Nepali", "English", "Tibetan"],
+    performances: "500+ events",
+    bookingFee: "NPR 40,000 - 120,000",
+    contact: "+977 98XXXXXXX",
+    availability: ["Music Festivals", "Rave Parties", "Private Events"],
+    socialMedia: { facebook: "https://www.facebook.com/djtenzingsherpa", instagram: "https://www.instagram.com/dj_tenzing_sherpa", youtube: "https://www.youtube.com/@tenzingsherpa" },
+    popularSongs: ["Mountain Echo", "Sherpa Soul", "Lhasa Night Beat"]
+  },
+  "Kutumba": {
+    id: "kutumba",
+    name: "Kutumba",
+    type: "Band",
+    image: "/images/kutumba.jpg",
+    description: "Kutumba is an instrumental folk ensemble dedicated to the preservation of indigenous Nepali instruments and sounds.",
+    awards: [
+      "Cultural Ambassadors of Nepal Award",
+      "Best Instrumental Group at National Music Awards",
+      "Successfully completed the 'Kutumba World Tour' across 20 countries"
+    ],
+    genre: ["Folk", "Instrumental", "Traditional"],
+    experience: "20+ years",
+    members: ["Pavit Maharjan", "Raju Maharjan", "Kiran Nepali", "Siddhartha Maharjan"],
+    performances: "2500+ shows",
+    bookingFee: "NPR 200,000 - 450,000",
+    contact: "+977 98XXXXXXX",
+    availability: ["International Tours", "Cultural Festivals", "Corporate Events"],
+    socialMedia: { facebook: "https://www.facebook.com/KutumbaNepal", instagram: "https://www.instagram.com/kutumbanepal", youtube: "https://www.youtube.com/user/kutumbaband" },
+    popularSongs: ["Utsav", "Sannani", "Panchai Baja", "Himalaya"]
   }
 };
 
@@ -342,17 +414,40 @@ const ArtistDetails = () => {
         </div>
       </div>
 
-      {/* Footer */}
+      {/* FOOTER */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-section">
             <h3>EventEase</h3>
-            <p>Your ultimate platform for booking events and venues.</p>
+            <p>EventEase is your ultimate platform for booking events, venues, and artists effortlessly. We bring together the best venues and performers under one roof, making event planning seamless and enjoyable. Whether it's a corporate party, wedding, or music festival, we've got you covered.</p>
+          </div>
+          <div className="footer-section">
+            <h3>Services</h3>
+            <ul>
+              <li><a href="#">Venue</a></li>
+              <li><a href="#">Artists</a></li>
+              <li><a href="#">Videography</a></li>
+              <li><a href="#">Wedding Plans</a></li>
+              <li><a href="#">Entertainment</a></li>
+            </ul>
+          </div>
+          <div className="footer-section">
+            <h3>Quick Lines</h3>
+            <ul>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Venue</a></li>
+              <li><a href="#">Artists</a></li>
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Book now</a></li>
+            </ul>
+          </div>
+          <div className="footer-section">
+            <h3>Contact us</h3>
+            <p>Kathmandu, Nepal<br />+977 9823812398<br />info@eventease.com</p>
           </div>
         </div>
       </footer>
     </div>
   );
 };
-
 export default ArtistDetails;

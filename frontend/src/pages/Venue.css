@@ -1,0 +1,132 @@
+.venues-content {
+  padding: 160px 8% 80px; /* 🔥 pushes content below fixed navbar */
+  background-color: #ffffff;
+}
+
+/* PAGE HEADER */
+.page-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.page-header h1 {
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  font-size: 16px;
+  color: #6b7280;
+}
+
+/* CATEGORY BUTTONS */
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.category-tab {
+  padding: 10px 24px;
+  border-radius: 25px;
+  border: 2px solid #ff5a1f;
+  background: #ffffff;
+  color: #ff5a1f;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-tab:hover {
+  background-color: #ff5a1f;
+  color: #ffffff;
+}
+
+.category-tab.active {
+  background-color: #ff5a1f;
+  color: #ffffff;
+}
+
+/* GRID */
+.venues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+}
+
+/* CARD */
+.venue-card {
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.venue-card:hover {
+  transform: translateY(-6px);
+}
+
+/* IMAGE */
+.venue-image img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+}
+
+/* DETAILS */
+.venue-details {
+  padding: 22px;
+}
+
+.venue-details h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.venue-location {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.venue-rating {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.venue-description {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 16px;
+}
+
+/* ACTIONS */
+.venue-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-btn {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ff5a1f;
+  text-decoration: none;
+}
+
+.book-btn {
+  padding: 8px 18px;
+  background-color: #ff5a1f;
+  color: #ffffff;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+}
