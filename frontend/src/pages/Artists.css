@@ -190,6 +190,10 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+<<<<<<< HEAD
+=======
+  
+>>>>>>> origin/pranish
 }
 
 .artist-card {
@@ -211,6 +215,10 @@
   height: 280px;
   overflow: hidden;
   position: relative;
+<<<<<<< HEAD
+=======
+  border-radius: 0%;
+>>>>>>> origin/pranish
 }
 
 .artist-image img {
@@ -218,6 +226,11 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s;
+<<<<<<< HEAD
+=======
+  border-radius: 20px;
+
+>>>>>>> origin/pranish
 }
 
 .artist-card:hover .artist-image img {

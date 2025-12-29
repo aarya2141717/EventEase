@@ -1,10 +1,9 @@
-/* frontend/src/pages/ArtistDetails.css */
 .artist-details-page {
   min-height: 100vh;
   background-color: #f8f9fa;
 }
 
-/* Reuse navbar styles from VenueDetails.css - they will be applied automatically */
+/* navbar  */
 
 .artist-details-container {
   max-width: 1400px;
@@ -43,9 +42,9 @@
 }
 
 .artist-profile {
-  display: flex;
-  gap: 30px;
-  align-items: center;
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr 850px;
 }
 
 .artist-image {
@@ -314,6 +313,7 @@
 }
 
 .price-label {
+  color: white;
   display: block;
   font-size: 14px;
   opacity: 0.9;
@@ -321,6 +321,7 @@
 }
 
 .price-amount {
+  color: white;
   display: block;
   font-size: 28px;
   font-weight: bold;

@@ -73,33 +73,33 @@ const Artists = () => {
       achievements: "Filmy Khabar Annual Prize (Film Person of the Year Female in 2020)"
     },
     {
-      id: "artist-7",
+      id: "DJ-ashish",
       name: "DJ Ashish",
       category: "DJs",
       genre: "Electronic/EDM",
-      image: "/images/artist1.jpg",
+      image: "/images/aashish.jpg",
       rating: 4.5,
       reviews: 290,
       experience: "10+ years",
       achievements: "Best Club DJ Award 2023"
     },
     {
-      id: "artist-8",
-      name: "DJ Krish",
+      id: "Tenzing Sherpa",
+      name: "Tenzing Sherpa",
       category: "DJs",
       genre: "Hip-Hop/Dance",
-      image: "/images/artist2.png",
+      image: "/images/tenzing.jpg",
       rating: 4.4,
       reviews: 250,
       experience: "8+ years",
       achievements: "Top Wedding DJ 2024"
     },
     {
-      id: "artist-9",
-      name: "Classical Ensemble",
+      id: "Kutumba",
+      name: " Kutumba",
       category: "Bands",
       genre: "Classical",
-      image: "/images/artist3.jpg",
+      image: "/images/kutumba.jpg",
       rating: 4.8,
       reviews: 180,
       experience: "25+ years",
@@ -186,27 +186,31 @@ const Artists = () => {
         </div>
       </div>
 
-      {/* Footer */}
+      {/* FOOTER */}
       <footer className="footer">
         <div className="footer-content">
           <div className="footer-section">
             <h3>EventEase</h3>
-            <p>Your ultimate platform for booking events and artists.</p>
+            <p>EventEase is your ultimate platform for booking events, venues, and artists effortlessly. We bring together the best venues and performers under one roof, making event planning seamless and enjoyable. Whether it's a corporate party, wedding, or music festival, we've got you covered.</p>
           </div>
           <div className="footer-section">
             <h3>Services</h3>
             <ul>
-              <li><Link to="/venue">Venue</Link></li>
-              <li><Link to="/artists">Artists</Link></li>
+              <li><a href="#">Venue</a></li>
+              <li><a href="#">Artists</a></li>
               <li><a href="#">Videography</a></li>
+              <li><a href="#">Wedding Plans</a></li>
+              <li><a href="#">Entertainment</a></li>
             </ul>
           </div>
           <div className="footer-section">
             <h3>Quick Lines</h3>
             <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/venue">Venue</Link></li>
-              <li><Link to="/booking">Book now</Link></li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Venue</a></li>
+              <li><a href="#">Artists</a></li>
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Book now</a></li>
             </ul>
           </div>
           <div className="footer-section">
@@ -218,5 +222,4 @@ const Artists = () => {
     </div>
   );
 };
-
 export default Artists;

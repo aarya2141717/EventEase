@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Home.css";
+import "./Home.css"; // keep your styles
 
 const Home = () => {
   return (
@@ -8,14 +8,9 @@ const Home = () => {
       {/* NAVBAR */}
       <header className="navbar">
         <div className="nav-container">
-          <div className="brand">
-            <Link to="/">
-              <img src="/images/logos.jpg" className="logo-img" alt="EventEase Logo" />
-            </Link>
-            <div className="brand-text">
-              <span className="brand-title">EventEase</span>
-              <small className="brand-tag">Book venue & artists - fast</small>
-            </div>
+          <div className="logo">
+            <img src="./images/logos.jpg" className="logo-img" alt="EventEase Logo" />
+            <span>EventEase</span>
           </div>
           <nav className="nav-links">
             <Link to="/">Home</Link>
@@ -31,7 +26,7 @@ const Home = () => {
       {/* HERO SECTION */}
       <section className="hero">
         <div className="hero-content">
-          <img src="/images/logos-removebg-preview.png" className="hero-logo" alt="EventEase Logo" />
+          <img src="./images/logos-removebg-preview.png" className="hero-logo" alt="EventEase Logo" />
           <h1>EventEase</h1>
           <p>Find venues & book artists – all in one place.</p>
           <p className="sub-text">
@@ -52,142 +47,116 @@ const Home = () => {
         </div>
         <div className="grid-3">
           <div className="card">
-            <img src="/images/smart palace.webp" alt="Smart Palace" />
+            <img src="./images/smart palace.webp" alt="Smart Palace" />
             <div className="card-info">
               <h3>Smart Palace</h3>
               <p className="address">Chabahil / Chuchhepati area</p>
             </div>
             <div className="card-bottom">
               <span className="rating">⭐ 4.5 (977+ reviews)</span>
-              <Link to="/venue/smart-palace" className="view-btn">View</Link>
+              <button className="view-btn">View</button>
             </div>
           </div>
-
           <div className="card">
-            <img src="/images/queens palace.jpg" alt="Queen's Palace & Events" />
+            <img src="./images/queens palace.jpg" alt="Queen's Palace & Events" />
             <div className="card-info">
               <h3>Queen's Palace & Events</h3>
               <p className="address">Sukedhara Chowk</p>
             </div>
             <div className="card-bottom">
               <span className="rating">⭐ 4.8 (600+ reviews)</span>
-              <Link to="/venue/queens-palace" className="view-btn">View</Link>
+              <button className="view-btn">View</button>
             </div>
           </div>
-
           <div className="card">
-            <img src="/images/silveroak.jpg" alt="Silver Oak Banquet and Events" />
+            <img src="./images/silveroak.jpg" alt="Silver Oak Banquet and Events" />
             <div className="card-info">
               <h3>Silver Oak Banquet and Events</h3>
               <p className="address">Gairidhara, Kathmandu</p>
             </div>
             <div className="card-bottom">
               <span className="rating">⭐ 4.4 (1400+ reviews)</span>
-              <Link to="/venue/silver-oak" className="view-btn">View</Link>
+              <button className="view-btn">View</button>
             </div>
           </div>
         </div>
       </section>
 
+      {/* ARTISTS */}
       <section className="section">
-  <div className="section-header">
-    <h2>Featured Artists</h2>
-    <Link to="/artists" className="see-more">View All Artists <span className="arrow">→</span></Link>
-  </div>
-  <div className="artists-grid">
-    
-    {/* Artist 1: Raju Lama */}
-    <div className="artist-card">
-      <div className="artist-img-container">
-        <img src="/images/raju.jpg" alt="Raju Lama" className="artist-img" />
-      </div>
-      <div className="artist-info">
-        <h3>Raju Lama</h3>
-        <p className="artist-role">Singer</p>
-        <p className="artist-highlights">Hits FM & Kantipur FM awards for best albums/songs (2002-2005)</p>
-        <div className="card-bottom">
-          <Link to="/artist/raju-lama" className="artist-view-btn">View Profile</Link>
+        <div className="section-header">
+          <h2>Artists</h2>
+          <Link to="#" className="see-more">See More <span className="arrow">→</span></Link>
         </div>
-      </div>
-    </div>
-
-    {/* Artist 2: The Elements */}
-    <div className="artist-card">
-      <div className="artist-img-container">
-        <img src="/images/elements.jpg" alt="The Elements" className="artist-img" />
-      </div>
-      <div className="artist-info">
-        <h3>The Elements</h3>
-        <p className="artist-role">Band</p>
-        <p className="artist-highlights">Best Newcomer (2006) and Best International Album (2009)</p>
-        <div className="card-bottom">
-          <Link to="/artist/the-elements" className="artist-view-btn">View Profile</Link>
+        <div className="grid-3">
+          <div className="card">
+            <img src="./images/raju.jpg" alt="Raju Lama" />
+            <div className="card-info">
+              <h3>Raju Lama</h3>
+              <p className="role">Singer</p>
+              <p className="highlights">Hits FM & Kantipur FM awards for best albums/songs (2002-2005)</p>
+            </div>
+            <div className="cards-bottom">
+              <Link to="/venue-details" className="view-btn">View</Link>
+            </div>
+          </div>
+          <div className="card">
+            <img src="./images/elements.jpg" alt="The Elements" />
+            <div className="card-info">
+              <h3>The Elements</h3>
+              <p className="role">Band</p>
+              <p className="highlights">Best Newcomer" (2006) and "Best International Album" (2009)</p>
+            </div>
+            <div className="cards-bottom">
+              <button className="view-btn">View</button>
+            </div>
+          </div>
+          <div className="card">
+            <img src="./images/kuma.jpeg" alt="Kuma Sagar & The Khwopa" />
+            <div className="card-info">
+              <h3>Kuma Sagar & The Khwopa</h3>
+              <p className="role">Band</p>
+              <p className="highlights">Best band award at the National Music Award 2081.</p>
+            </div>
+            <div className="cards-bottom">
+              <button className="view-btn">View</button>
+            </div>
+          </div>
+          <div className="card">
+            <img src="./images/sajan.jpg" alt="Sajjan Raj Vaidya" />
+            <div className="card-info">
+              <h3>Sajjan Raj Vaidya</h3>
+              <p className="role">Singer</p>
+              <p className="highlights">Best New Artist (2018) and Artist of the Month (March 2019)</p>
+            </div>
+            <div className="cards-bottom">
+              <button className="view-btn">View</button>
+            </div>
+          </div>
+          <div className="card">
+            <img src="./images/sushant.jpeg" alt="Sushant K.C" />
+            <div className="card-info">
+              <h3>Sushant K.C</h3>
+              <p className="role">Singer</p>
+              <p className="highlights">Radio Kantipur National Music Awards (NMA) 2081 (2025) for his song "Bardali"</p>
+            </div>
+            <div className="cards-bottom">
+              <button className="view-btn">View</button>
+            </div>
+          </div>
+          <div className="card">
+            <img src="./images/melina.jpg" alt="Melina Rai" />
+            <div className="card-info">
+              <h3>Melina Rai</h3>
+              <p className="role">Singer</p>
+              <p className="highlights">Filmy Khabar Annual Prize (Film Person of the Year Female in 2020), and a Cine Circle Award (2075 BS)</p>
+            </div>
+            <div className="cards-bottom">
+              <button className="view-btn">View</button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    {/* Artist 3: Kuma Sagar & The Khwopa */}
-    <div className="artist-card">
-      <div className="artist-img-container">
-        <img src="/images/kuma.jpeg" alt="Kuma Sagar & The Khwopa" className="artist-img" />
-      </div>
-      <div className="artist-info">
-        <h3>Kuma Sagar & The Khwopa</h3>
-        <p className="artist-role">Band</p>
-        <p className="artist-highlights">Best band award at the National Music Award 2081</p>
-        <div className="card-bottom">
-          <Link to="/artist/kuma-sagar-khwopa" className="artist-view-btn">View Profile</Link>
-        </div>
-      </div>
-    </div>
-
-    {/* Artist 4: Sajjan Raj Vaidya */}
-    <div className="artist-card">
-      <div className="artist-img-container">
-        <img src="/images/sajan.jpg" alt="Sajjan Raj Vaidya" className="artist-img" />
-      </div>
-      <div className="artist-info">
-        <h3>Sajjan Raj Vaidya</h3>
-        <p className="artist-role">Singer</p>
-        <p className="artist-highlights">Best New Artist (2018) and Artist of the Month (March 2019)</p>
-        <div className="card-bottom">
-          <Link to="/artist/saijan-raj-vaidya" className="artist-view-btn">View Profile</Link>
-        </div>
-      </div>
-    </div>
-
-    {/* Artist 5: Sushant K.C */}
-    <div className="artist-card">
-      <div className="artist-img-container">
-        <img src="/images/sushant.jpeg" alt="Sushant K.C" className="artist-img" />
-      </div>
-      <div className="artist-info">
-        <h3>Sushant K.C</h3>
-        <p className="artist-role">Singer</p>
-        <p className="artist-highlights">Radio Kantipur National Music Awards (NMA) 2081 (2025) for his song "Bardali"</p>
-        <div className="card-bottom">
-          <Link to="/artist/sushant-kc" className="artist-view-btn">View Profile</Link>
-        </div>
-      </div>
-    </div>
-
-    {/* Artist 6: Melina Rai */}
-    <div className="artist-card">
-      <div className="artist-img-container">
-        <img src="/images/melina.jpg" alt="Melina Rai" className="artist-img" />
-      </div>
-      <div className="artist-info">
-        <h3>Melina Rai</h3>
-        <p className="artist-role">Singer</p>
-        <p className="artist-highlights">Filmy Khabar Annual Prize (Film Person of the Year Female in 2020), and a Cine Circle Award (2075 BS)</p>
-        <div className="card-bottom">
-          <Link to="/artist/melina-rai" className="artist-view-btn">View Profile</Link>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
+      </section>
 
       {/* ABOUT SECTION */}
       <section className="about-section">
@@ -198,17 +167,17 @@ const Home = () => {
         </div>
         <div className="about-images">
           <div className="image-card venue-hall">
-            <img src="/images/eventhall.webp" alt="Event Hall" />
+            <img src="./images/eventhall.webp" alt="Event Hall" />
           </div>
           <div className="image-card venue-resort">
-            <img src="/images/resort.avif" alt="Resort Venue" />
+            <img src="./images/resort.avif" alt="Resort Venue" />
             <div className="venue-badge">
               <span className="number">10+</span>
               <span className="label">Venues</span>
             </div>
           </div>
           <div className="image-card performer">
-            <img src="/images/nepathya.jpg" alt="Performer" />
+            <img src="./images/nepathya.jpg" alt="Performer" />
           </div>
         </div>
       </section>
@@ -240,7 +209,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <Link to="/booking" className="book-now-btn">Book now</Link>
+          <button className="book-now-btn">Book now</button>
         </div>
       </section>
 
@@ -254,8 +223,8 @@ const Home = () => {
           <div className="footer-section">
             <h3>Services</h3>
             <ul>
-              <li><Link to="/venue">Venue</Link></li>
-              <li><Link to="/artists">Artists</Link></li>
+              <li><a href="#">Venue</a></li>
+              <li><a href="#">Artists</a></li>
               <li><a href="#">Videography</a></li>
               <li><a href="#">Wedding Plans</a></li>
               <li><a href="#">Entertainment</a></li>
@@ -264,11 +233,11 @@ const Home = () => {
           <div className="footer-section">
             <h3>Quick Lines</h3>
             <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/venue">Venue</Link></li>
-              <li><Link to="/artists">Artists</Link></li>
-              <li><Link to="/dashboard">Dashboard</Link></li>
-              <li><Link to="/booking">Book now</Link></li>
+              <li><a href="#">Home</a></li>
+              <li><a href="#">Venue</a></li>
+              <li><a href="#">Artists</a></li>
+              <li><a href="#">Dashboard</a></li>
+              <li><a href="#">Book now</a></li>
             </ul>
           </div>
           <div className="footer-section">
