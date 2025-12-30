@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-/* MAIN CONTENT (FIX FOR NAVBAR OVERLAP) */
-=======
->>>>>>> origin/pranish
 .venues-content {
   padding: 160px 8% 80px; /* 🔥 pushes content below fixed navbar */
   background-color: #ffffff;
@@ -133,9 +129,4 @@
   font-size: 14px;
   font-weight: 600;
   text-decoration: none;
-<<<<<<< HEAD
 }
-
-=======
-}
->>>>>>> origin/pranish

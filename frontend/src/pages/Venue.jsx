@@ -214,10 +214,4 @@ const Venue = () => {
   );
 };
 
-<<<<<<< HEAD
 export default Venue;
-
-
-=======
-export default Venue;
->>>>>>> origin/pranish
