@@ -8,7 +8,7 @@ const artistsData = {
     id: "raju-lama",
     name: "Raju Lama",
     type: "Singer",
-    image: "/images/raju-lama.jpg",
+    image: "/images/raju.jpg",
     description: "Raju Lama is a renowned Nepali singer and composer, best known as the lead vocalist of the band 'Mongolian Heart'. He has been a prominent figure in the Nepali music industry for over two decades.",
     awards: [
       "Hits FM & Kantipur FM awards for best albums/songs (2002-2005)",
