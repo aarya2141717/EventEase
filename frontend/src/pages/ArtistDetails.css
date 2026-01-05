@@ -1,15 +1,8 @@
 .artist-details-page {
-  min-height: 100vh;
+  padding: 100px 40px 40px;
   background-color: #f8f9fa;
 }
 
-/* navbar  */
-
-.artist-details-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 100px 40px 40px;
-}
 
 /* Breadcrumb */
 .breadcrumb {

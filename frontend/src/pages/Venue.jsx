@@ -4,37 +4,37 @@ import "./Venue.css";
 
 const venuesData = [
   {
-    id: 1,
+    id: "smart-palace",
     name: "Smart Palace",
     location: "Chabahil, Kathmandu",
     rating: 4.5,
     reviews: 977,
-    category: "Villas",
-    description: "3 bedroom villa with Swimming Pool",
-    image: "/images/garden-plaza.jpg",
+    category: "Banquets",
+    description: "Perfect for weddings, parties, and corporate events.",
+    image: "/images/smart palace 1.jpg",
   },
   {
-    id: 2,
+    id: "queens-palace-events",
     name: "Queen's Palace & Events",
     location: "Sukedhara Chowk",
     rating: 4.8,
     reviews: 600,
-    category: "Villas",
+    category: "Banquets",
     description: "Garden meets timeless elegance",
     image: "/images/Queen's palace.jpg",
   },
   {
-    id: 3,
+    id: "silver-oak-banquet",
     name: "Silver Oak Banquet",
     location: "Gairidhara, Kathmandu",
     rating: 4.4,
     reviews: 1400,
-    category: "Restaurants",
+    category: "Banquets",
     description: "Premium banquet & dining",
     image: "/images/silveroak.jpg",
   },
   {
-    id: 4,
+    id: "dorjes-resort-spa",
     name: "Dorje's Resort & Spa",
     location: "Dhulikhel",
     rating: 4.6,
@@ -44,7 +44,7 @@ const venuesData = [
     image: "/images/Dorje's Resort & Spa.jpg",
   },
   {
-    id: 5,
+    id: "fish-tail-lodge",
     name: "Fish Tail Lodge",
     location: "Pokhara",
     rating: 4.7,
@@ -54,7 +54,7 @@ const venuesData = [
     image: "/images/Fish Tail Lodge.jpg",
   },
   {
-    id: 6,
+    id: "jimbu-thakali",
     name: "Jimbu Thakali By Capital Grill",
     location: "Kathmandu",
     rating: 4.5,
@@ -64,7 +64,7 @@ const venuesData = [
     image: "/images/Jimbu Thakali By Capital Grill.jpg",
   },
   {
-    id: 7,
+    id: "hotel-mystic-mountain",
     name: "Hotel Mystic Mountain",
     location: "Nagarkot",
     rating: 4.6,
@@ -74,7 +74,7 @@ const venuesData = [
     image: "/images/Hotel Mystic Mountain.jpg",
   },
   {
-    id: 8,
+    id: "patio-soaltee",
     name: "Patio - The Soaltee Kathmandu",
     location: "Soaltee Mode",
     rating: 4.4,
@@ -84,34 +84,15 @@ const venuesData = [
     image: "/images/Patio-The Soaltee Kathmandu.jpg",
   },
   {
-    id: 9,
-    name: "Pinnacle Residency",
-    location: "Lazimpat",
-    rating: 4.3,
-    reviews: 670,
-    category: "Villas",
-    description: "Modern luxury residency",
-    image: "/images/Pinnacle Residency.jpg",
-  },
-  {
-    id: 10,
-    name: "Raksi Music Bar",
-    location: "Thamel",
-    rating: 4.2,
-    reviews: 540,
-    category: "Restaurants",
-    description: "Live music & bar",
-    image: "/images/Raksi Music Bar.jpg",
-  },
-  {
-    id: 11,
-    name: "Rooftop Terrace",
-    location: "Kathmandu",
-    rating: 4.5,
-    reviews: 780,
-    category: "Restaurants",
-    description: "Open-air rooftop venue",
-    image: "/images/rooftop-terrace.jpg",
+   id: "The White House Villa",
+name: "The White House Villa",
+location: "Tarakeshwar‑2, Kavresthali, Kathmandu, Nepal",
+rating: 4.4,
+reviews: 620,
+category: "Villas / Holiday Home",
+description: "Cozy Group Retreat and Luxury Family Stay",
+image: "/images/The White House Villa.avif"
+
   },
 ];
 
@@ -121,47 +102,27 @@ const Venue = () => {
   const filteredVenues =
     activeCategory === "All"
       ? venuesData
-      : venuesData.filter(v => v.category === activeCategory);
+      : venuesData.filter(
+          (venue) => venue.category === activeCategory
+        );
 
   return (
     <div className="venues-page">
-      {/* NAVBAR (SAME AS ARTISTS) */}
-      <header className="navbar">
-        <div className="nav-container">
-          <div className="brand">
-            <Link to="/">
-              <img src="/images/logos.jpg" className="logo-img" alt="EventEase Logo" />
-            </Link>
-            <div className="brand-text">
-              <span className="brand-title">EventEase</span>
-              <small className="brand-tag">Book venue & artists - fast</small>
-            </div>
-          </div>
-
-          <nav className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/venue">Venue</Link>
-            <Link to="/artists">Artists</Link>
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/booking" className="book-btn">Book Now</Link>
-            <Link to="/login" className="login-btn">Log In</Link>
-          </nav>
-        </div>
-      </header>
-
-      {/* MAIN CONTENT */}
       <div className="venues-content">
+        {/* HEADER */}
         <div className="page-header">
           <h1>Featured Venues</h1>
           <p>Find the perfect venue for your special event</p>
         </div>
 
-        {/* CATEGORY BUTTONS */}
+        {/* CATEGORY FILTER */}
         <div className="category-tabs">
-          {["All", "Villas", "Restaurants", "Resorts"].map(category => (
+          {["All", "Banquets", "Villas", "Restaurants", "Resorts"].map((category) => (
             <button
               key={category}
-              className={`category-tab ${activeCategory === category ? "active" : ""}`}
+              className={`category-tab ${
+                activeCategory === category ? "active" : ""
+              }`}
               onClick={() => setActiveCategory(category)}
             >
               {category}
@@ -171,7 +132,7 @@ const Venue = () => {
 
         {/* VENUE GRID */}
         <div className="venues-grid">
-          {filteredVenues.map(venue => (
+          {filteredVenues.map((venue) => (
             <div key={venue.id} className="venue-card">
               <div className="venue-image">
                 <img src={venue.image} alt={venue.name} />
@@ -185,13 +146,21 @@ const Venue = () => {
                   ⭐ {venue.rating} ({venue.reviews}+ reviews)
                 </div>
 
-                <p className="venue-description">{venue.description}</p>
+                <p className="venue-description">
+                  {venue.description}
+                </p>
 
                 <div className="venue-actions">
-                  <Link to={`/venue/${venue.id}`} className="profile-btn">
+                  <Link
+                    to={`/venue/${venue.id}`}
+                    className="profile-btn"
+                  >
                     View Details
                   </Link>
-                  <Link to={`/venue/${venue.id}`} className="book-btn">
+                  <Link
+                    to={`/venue/${venue.id}`}
+                    className="book-btn"
+                  >
                     Book Now
                   </Link>
                 </div>
@@ -200,16 +169,6 @@ const Venue = () => {
           ))}
         </div>
       </div>
-
-      {/* FOOTER (OPTIONAL BUT MATCHING ARTISTS) */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-section">
-            <h3>EventEase</h3>
-            <p>Your ultimate platform for booking events and artists.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
