@@ -11,117 +11,7 @@ body {
   line-height: 1.6;
 }
 
-/* ========= NAVBAR (Consistent with Login) ========= */
-.navbar {
-  width: 100%;
-  background: #ffffff;
-  border-bottom: 1px solid #f1f1f1;
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 14px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-/* Brand Section - Matching Login */
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-}
-
-.logo-img {
-  width: 40px;
-  height: 40px;
-  border-radius: 8px;
-}
-
-.brand-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.brand-title {
-  font-size: 20px;
-  font-weight: 800;
-  color: #111827;
-  line-height: 1.2;
-}
-
-.brand-tag {
-  font-size: 12px;
-  color: #6b7280;
-  font-weight: 500;
-  margin-top: 2px;
-}
-
-/* Navigation Links */
-.nav-links {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.nav-links a {
-  text-decoration: none;
-  color: #374151;
-  font-weight: 600;
-  font-size: 15px;
-  transition: color 0.2s;
-  padding: 4px 0;
-}
-
-.nav-links a:hover {
-  color: #ff5a1f;
-}
-
-/* Book Now Button */
-.book-btn {
-  background: linear-gradient(135deg, #ff8a2f, #ff5a1f) !important;
-  color: white !important;
-  border: none;
-  padding: 10px 24px;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.book-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 90, 31, 0.3);
-}
-
-/* Login Button */
-.login-btn {
-  background: transparent !important;
-  border: 1.5px solid #d1d5db !important;
-  color: #374151 !important;
-  padding: 8px 20px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 15px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.login-btn:hover {
-  border-color: #ff8a2f !important;
-  color: #ff5a1f !important;
-}
-
-/* ========= HERO SECTION ========= */
+/* hero section */
 .hero {
   min-height: 90vh;
   background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url("./images/wedding.png") center/cover no-repeat;
@@ -206,7 +96,7 @@ body {
   color: #999;
 }
 
-/* ========= SECTIONS ========= */
+/* sections */
 .section {
   padding: 50px 20px;
   max-width: 1200px;
@@ -245,7 +135,7 @@ body {
   transform: translateX(3px);
 }
 
-/* ========= CARD GRID ========= */
+/*card grid */
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -330,7 +220,7 @@ body {
   background: #e66c00;
 }
 
-/* ========= ABOUT SECTION ========= */
+/* about */
 .about-section {
   background: #f5f5f5;
   padding: 80px 5%;
@@ -431,7 +321,7 @@ body {
   display: block;
 }
 
-/* ========= WHY CHOOSE SECTION ========= */
+/* why choose*/
 .why-choose-section {
   background: #eae8e8;
   padding: 80px 5%;
@@ -504,51 +394,8 @@ body {
   background: #333333 !important;
 }
 
-/* ========= FOOTER ========= */
-.footer {
-  background: #1a2332;
-  color: #8b93a7;
-  padding: 60px 5%;
-}
 
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 60px;
-}
-
-.footer-section h3 {
-  color: white;
-  font-size: 1.5rem;
-  margin-bottom: 25px;
-  font-weight: 600;
-}
-
-.footer-section p,
-.footer-section a {
-  color: #8b93a7;
-  text-decoration: none;
-  display: block;
-  margin-bottom: 12px;
-  font-size: 0.95rem;
-  line-height: 1.8;
-}
-
-.footer-section a:hover {
-  color: #00bcd4;
-}
-
-.footer-section ul {
-  list-style: none;
-}
-
-.footer-section li {
-  margin-bottom: 12px;
-}
-
-/* ========= RESPONSIVE DESIGN ========= */
+/* responsive */
 @media (max-width: 1024px) {
   .about-section {
     grid-template-columns: 1fr;
@@ -623,7 +470,7 @@ body {
     font-size: 13px;
   }
 }
-/* ========= ARTISTS SECTION ========= */
+/*artists */
 .section {
   padding: 80px 0;
 }

@@ -8,24 +8,26 @@ const venuesData = {
     id: "smart-palace",
     name: "Smart Palace",
     location: "Chabahil / Chuchhepati area",
+    category: "Banquet",
     rating: 4.5,
     reviews: 977,
-    image: "/images/smart palace.webp",
+    image: "/images/smart palace 1.jpg",
     description: "Smart Palace is a premier event venue offering luxurious spaces for weddings, corporate events, and celebrations. Located in the heart of Chabahil, it features state-of-the-art facilities and elegant interiors.",
     capacity: "500-1000 guests",
     amenities: ["Air Conditioning", "Parking Available", "Catering Services", "Sound System", "Stage Setup", "Decoration Services"],
     price: "NPR 150,000 - 300,000",
     contact: "+977 9812345678",
     images: [
+      "/images/smart palace 1.jpg",
       "/images/smart palace.webp",
-      "/images/smart palace.webp",
-      "/images/smart palace.webp"
+      "/images/smart palace 2.jpg",
     ]
   },
-  "queens-palace": {
-    id: "queens-palace",
+  "queens-palace-events": {
+    id: "queens-palace-events",
     name: "Queen's Palace & Events",
     location: "Sukedhara Chowk",
+    category: "Banquet",
     rating: 4.8,
     reviews: 600,
     image: "/images/queens palace.jpg",
@@ -36,14 +38,15 @@ const venuesData = {
     contact: "+977 9823456789",
     images: [
       "/images/queens palace.jpg",
-      "/images/queens palace.jpg",
-      "/images/queens palace.jpg"
+      "/images/queens palace 1.jpg",
+      "/images/queen palace 2 .jpg"
     ]
   },
-  "silver-oak": {
-    id: "silver-oak",
-    name: "Silver Oak Banquet and Events",
+  "silver-oak-banquet": {
+    id: "silver-oak-banquet",
+    name: "Silver Oak Banquet",
     location: "Gairidhara, Kathmandu",
+    category: "Banquet",
     rating: 4.4,
     reviews: 1400,
     image: "/images/silveroak.jpg",
@@ -54,11 +57,134 @@ const venuesData = {
     contact: "+977 9834567890",
     images: [
       "/images/silveroak.jpg",
-      "/images/silveroak.jpg",
-      "/images/silveroak.jpg"
+      "/images/silveroak 1.jpg",
+      "/images/silveroak 2.jpg"
     ]
-  }
+  },
+  "dorjes-resort-spa": {
+    id: "dorjes-resort-spa",
+    name: "Dorje's Resort & Spa",
+    location: "Dhulikhel",
+    category: "Resorts",
+    rating: 4.6,
+    reviews: 820,
+    image: "/images/Dorje's Resort & Spa 3.jpg",
+    description: "Dorje's Resort & Spa is a tranquil venue nestled in the scenic beauty of Dhulikhel. Ideal for weddings and retreats, it offers luxurious accommodations and top-notch amenities.",
+    capacity: "200-600 guests",
+    amenities: ["Resort Accommodation", "Spa Services", "Outdoor Venues", "Catering Options", "Adventure Activities", "Event Coordination"],
+    price: "NPR 250,000 - 500,000",
+    contact: "+977 9845678901",
+    images: [
+      "/images/Dorje's Resort & Spa 3.jpg",
+      "/images/Dorje's Resort & Spa 1.jpg",
+      "/images/Dorje's Resort & Spa 2.jpg"
+    ]
+  },
+  "fish-tail-lodge": {
+    id: "fish-tail-lodge",
+    name: "Fish Tail Lodge",
+    location: "Kathmandu",
+    category: "Resorts",
+    rating: 4.3,
+    reviews: 750,
+    image: "/images/fish tail lodge 1.jpg",
+    description: "Fish Tail Lodge is a unique venue offering a rustic charm and natural surroundings. Perfect for intimate gatherings and outdoor celebrations.",
+    capacity: "100-300 guests",
+    amenities: ["Natural Setting", "Outdoor Fire Pit", "Catering Services", "Event Planning", "Photography Services"],
+    price: "NPR 120,000 - 250,000",
+    contact: "+977 9856789012",
+    images: [
+      "/images/fish tail lodge 1.jpg",
+      "/images/fish tail lodge 2.avif",
+      "/images/fish tail lodge 3.avif"
+    ]
+  },
+  "jimbu-thakali": {
+    id: "jimbu-thakali",
+    name: "Jimbu Thakali By Capital Grill",
+    location: "Kathmandu",
+    category: "Restaurants",
+    rating: 4.5,
+    reviews: 900,
+    image: "/images/Jimbu Thakali By Capital Grill 1.jpg",
+    description: "Jimbu Thakali By Capital Grill offers an authentic Thakali dining experience with a cozy ambiance. Ideal for small gatherings and cultural events.",
+    capacity: "50-150 guests",
+    amenities: ["Authentic Cuisine", "Cozy Ambiance", "Catering Services", "Event Planning"],
+    price: "NPR 80,000 - 150,000",
+    contact: "+977 9867890123",
+    images: [
+      "/images/Jimbu Thakali By Capital Grill 1.jpg",
+      "/images/Jimbu Thakali By Capital Grill 2.webp",
+      "/images/Jimbu Thakali By Capital Grill 3.jpg"
+    ]
+  },
+  "hotel-mystic-mountain": {
+    id: "hotel-mystic-mountain",
+    name: "Hotel Mystic Mountain",
+    location: "Nagarkot",
+    category: "Resorts",
+    rating: 4.6,
+    reviews: 1100,
+    image: "/images/Hotel Mystic Mountain 3.jpg",
+    description: "Hotel Mystic Mountain is a serene venue located in Nagarkot, perfect for weddings and corporate retreats. Enjoy breathtaking views and exceptional service.",
+    capacity: "150-400 guests",
+    amenities: ["Scenic Views", "Resort Accommodation", "Catering Services", "Event Planning", "Outdoor Venues"],
+    price: "NPR 220,000 - 450,000",
+    contact: "+977 9878901234",
+    images: [
+      "/images/Hotel Mystic Mountain 3.jpg",
+      "/images/Hotel Mystic Mountain 1.avif",
+      "/images/Hotel Mystic Mountain 2.avif"
+    ]
+  },
+  "patio-soaltee": {
+    id: "patio-soaltee",
+    name: "Patio - The Soaltee Kathmandu",
+    location: "Soaltee Mode",
+    category: "Restaurants",
+    rating: 4.4,
+    reviews: 950,
+    image: "/images/Patio-The Soaltee Kathmandu 2.jpg",
+    description: "Patio - The Soaltee Kathmandu is a stylish venue offering a blend of modern elegance and traditional charm. Perfect for weddings and social events.",
+    capacity: "250-600 guests",
+    amenities: ["Elegant Interiors", "Catering Services", "Audio Visual Equipment", "Event Planning", "Bridal Room"],
+    price: "NPR 200,000 - 400,000",
+    contact: "+977 9889012345",
+    images: [
+      "/images/Patio-The Soaltee Kathmandu 2.jpg",
+      "/images/Patio-The Soaltee Kathmandu 1.jpg",
+      "/images/Patio-The Soaltee Kathmandu 3.jpg"
+    ]
+  },
+ "The White House Villa": {
+  id: "The White House Villa",
+  name: "The White House Villa",
+  location: "Tarakeshwor‑2, Kavresthali, Kathmandu, Nepal",
+  category: "Villas",
+  rating: 4.8,
+  reviews: 10,
+  image: "/images/The White House Villa 3.webp",
+  description: "A spacious 8‑bedroom private villa in the lush hills north of Kathmandu with a private swimming pool, expansive indoor and outdoor spaces, and scenic valley and city views — perfect for family, group stays, and tranquil retreats.",
+  capacity: "Up to 20+ guests",
+  amenities: [
+    "8 Bedrooms & Bathrooms",
+    "Private Swimming Pool",
+    "Fully Equipped Kitchen",
+    "Free Wi‑Fi",
+    "Garden & Terrace",
+    "Parking",
+    "Mountain & Valley Views"
+  ],
+  price: "Varies by season / contact host for current rates",
+  contact: "+977‑9820150997",
+  images: [
+    "/images/The White House Villa 3.webp",
+    "/images/The White House Villa 1.webp",
+    "/images/The White House Villa 2.webp"
+  ]
+}
 };
+
 
 const VenueDetails = () => {
   const { venueId } = useParams();
@@ -80,28 +206,6 @@ const VenueDetails = () => {
 
   return (
     <div className="venue-details-page">
-      {/* Navbar */}
-      <header className="navbar">
-        <div className="nav-container">
-          <div className="brand">
-            <Link to="/">
-              <img src="/images/logos.jpg" className="logo-img" alt="EventEase Logo" />
-            </Link>
-            <div className="brand-text">
-              <span className="brand-title">EventEase</span>
-              <small className="brand-tag">Book venue & artists - fast</small>
-            </div>
-          </div>
-          <nav className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/venue">Venue</Link>
-            <Link to="/artists">Artists</Link>
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/booking" className="book-btn">Book Now</Link>
-            <Link to="/login" className="login-btn">Log In</Link>
-          </nav>
-        </div>
-      </header>
 
       {/* Venue Details Content */}
       <div className="venue-details-container">
@@ -182,36 +286,6 @@ const VenueDetails = () => {
           </div>
         </div>
       </div>
-
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-section">
-            <h3>EventEase</h3>
-            <p>Your ultimate platform for booking events and venues.</p>
-          </div>
-          <div className="footer-section">
-            <h3>Services</h3>
-            <ul>
-              <li><Link to="/venue">Venue</Link></li>
-              <li><Link to="/artists">Artists</Link></li>
-              <li><a href="#">Videography</a></li>
-            </ul>
-          </div>
-          <div className="footer-section">
-            <h3>Quick Lines</h3>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/venue">Venue</Link></li>
-              <li><Link to="/booking">Book now</Link></li>
-            </ul>
-          </div>
-          <div className="footer-section">
-            <h3>Contact us</h3>
-            <p>Kathmandu, Nepal<br />+977 9823812398<br />info@eventease.com</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

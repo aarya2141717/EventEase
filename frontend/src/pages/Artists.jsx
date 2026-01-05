@@ -115,29 +115,6 @@ const Artists = () => {
 
   return (
     <div className="artists-page">
-      {/* Navbar */}
-      <header className="navbar">
-        <div className="nav-container">
-          <div className="brand">
-            <Link to="/">
-              <img src="/images/logos.jpg" className="logo-img" alt="EventEase Logo" />
-            </Link>
-            <div className="brand-text">
-              <span className="brand-title">EventEase</span>
-              <small className="brand-tag">Book venue & artists - fast</small>
-            </div>
-          </div>
-          <nav className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/venue">Venue</Link>
-            <Link to="/artists">Artists</Link>
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/booking" className="book-btn">Book Now</Link>
-            <Link to="/login" className="login-btn">Log In</Link>
-          </nav>
-        </div>
-      </header>
-
       {/* Main Content */}
       <div className="artists-content">
         <div className="page-header">
@@ -185,40 +162,6 @@ const Artists = () => {
           ))}
         </div>
       </div>
-
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-section">
-            <h3>EventEase</h3>
-            <p>EventEase is your ultimate platform for booking events, venues, and artists effortlessly. We bring together the best venues and performers under one roof, making event planning seamless and enjoyable. Whether it's a corporate party, wedding, or music festival, we've got you covered.</p>
-          </div>
-          <div className="footer-section">
-            <h3>Services</h3>
-            <ul>
-              <li><a href="#">Venue</a></li>
-              <li><a href="#">Artists</a></li>
-              <li><a href="#">Videography</a></li>
-              <li><a href="#">Wedding Plans</a></li>
-              <li><a href="#">Entertainment</a></li>
-            </ul>
-          </div>
-          <div className="footer-section">
-            <h3>Quick Lines</h3>
-            <ul>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Venue</a></li>
-              <li><a href="#">Artists</a></li>
-              <li><a href="#">Dashboard</a></li>
-              <li><a href="#">Book now</a></li>
-            </ul>
-          </div>
-          <div className="footer-section">
-            <h3>Contact us</h3>
-            <p>Kathmandu, Nepal<br />+977 9823812398<br />info@eventease.com</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };

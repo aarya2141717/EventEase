@@ -1,32 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+
 import "./Home.css";
 
 const Home = () => {
+  
   return (
     <>
-      {/* NAVBAR */}
-      <header className="navbar">
-        <div className="nav-container">
-          <div className="brand">
-            <Link to="/">
-              <img src="/images/logos.jpg" className="logo-img" alt="EventEase Logo" />
-            </Link>
-            <div className="brand-text">
-              <span className="brand-title">EventEase</span>
-              <small className="brand-tag">Book venue & artists - fast</small>
-            </div>
-          </div>
-          <nav className="nav-links">
-            <Link to="/">Home</Link>
-            <Link to="/venue">Venue</Link>
-            <Link to="/artists">Artists</Link>
-            <Link to="/dashboard">Dashboard</Link>
-            <Link to="/booking" className="book-btn">Book Now</Link>
-            <Link to="/login" className="login-btn">Log In</Link>
-          </nav>
-        </div>
-      </header>
 
       {/* HERO SECTION */}
       <section className="hero">
@@ -243,40 +224,6 @@ const Home = () => {
           <Link to="/booking" className="book-now-btn">Book now</Link>
         </div>
       </section>
-
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-section">
-            <h3>EventEase</h3>
-            <p>EventEase is your ultimate platform for booking events, venues, and artists effortlessly. We bring together the best venues and performers under one roof, making event planning seamless and enjoyable. Whether it's a corporate party, wedding, or music festival, we've got you covered.</p>
-          </div>
-          <div className="footer-section">
-            <h3>Services</h3>
-            <ul>
-              <li><Link to="/venue">Venue</Link></li>
-              <li><Link to="/artists">Artists</Link></li>
-              <li><a href="#">Videography</a></li>
-              <li><a href="#">Wedding Plans</a></li>
-              <li><a href="#">Entertainment</a></li>
-            </ul>
-          </div>
-          <div className="footer-section">
-            <h3>Quick Lines</h3>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><Link to="/venue">Venue</Link></li>
-              <li><Link to="/artists">Artists</Link></li>
-              <li><Link to="/dashboard">Dashboard</Link></li>
-              <li><Link to="/booking">Book now</Link></li>
-            </ul>
-          </div>
-          <div className="footer-section">
-            <h3>Contact us</h3>
-            <p>Kathmandu, Nepal<br />+977 9823812398<br />info@eventease.com</p>
-          </div>
-        </div>
-      </footer>
     </>
   );
 };
