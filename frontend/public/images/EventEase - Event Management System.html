@@ -1,0 +1,2918 @@
+<!DOCTYPE html>
+<!-- saved from url=(0027)http://localhost:5177/venue -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script type="module">import { injectIntoGlobalHook } from "/@react-refresh";
+injectIntoGlobalHook(window);
+window.$RefreshReg$ = () => {};
+window.$RefreshSig$ = () => (type) => type;</script>
+
+    <script type="module" src="./EventEase - Event Management System_files/client"></script>
+
+    
+    <link rel="icon" type="image/svg+xml" href="http://localhost:5177/vite.svg">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EventEase - Event Management System</title>
+  <style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/components/Navbar/Navbar.css"> /* navbar */
+
+.navbar {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #f1f1f1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+
+}
+
+/* Main container */
+.nav-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 14px 80px 14px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* brand */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.brand-tag {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* right side */
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+}
+
+/* Navigation links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Nav links */
+.nav-links a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.2s ease;
+  padding: 4px 0;
+}
+
+.nav-links a:hover {
+  color: #ff5a1f;
+}
+
+.profile-icon {
+  display: flex;
+  align-items: center;
+  color: #374151;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transform: translateX(80px);
+}
+
+.profile-icon:hover {
+  color: #ff5a1f;
+  background: none;
+}
+</style><style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/pages/Home.css">* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Arial', sans-serif;
+}
+
+body {
+  background: #fff;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* hero section */
+.hero {
+  min-height: 90vh;
+  background: linear-gradient(rgba(0,0,0,0.15), rgba(0,0,0,0.15)), url("./images/wedding.png") center/cover no-repeat;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-top: 70px;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  color: #000000;
+  padding: 40px 20px;
+}
+
+.hero-logo {
+  width: 140px;
+  height: auto;
+  margin-bottom: 5px;
+  margin-top: 0px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.hero-content h1 {
+  font-size: 3rem;
+  margin-bottom: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #000000;
+}
+
+.hero-content p {
+  font-size: 1.1rem;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.sub-text {
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1rem;
+}
+
+.search-box {
+  margin-top: 35px;
+  margin-bottom: 30px;
+  position: relative;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.search-box input {
+  width: 100%;
+  padding: 16px 50px 16px 50px;
+  border-radius: 50px;
+  border: 2px solid #e0e0e0;
+  font-size: 15px;
+  background: rgba(255,255,255,0.95);
+  transition: 0.3s;
+}
+
+.search-box input:focus {
+  outline: none;
+  border-color: #ff5a1f;
+  background: #fff;
+}
+
+.search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  color: #999;
+}
+
+/* sections */
+.section {
+  padding: 50px 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.section h2 {
+  font-size: 28px;
+  margin-bottom: 0px;
+}
+
+.see-more {
+  font-size: 14px;
+  color: #000000;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+}
+
+.see-more .arrow {
+  font-size: 13px;
+  transition: 0.3s;
+  margin-left: 5px;
+}
+
+.see-more:hover .arrow {
+  transform: translateX(3px);
+}
+
+/*card grid */
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: left;
+  border: 1px solid #eee;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.card img {
+  width: 100%;
+  height: 200px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+/* Card Info */
+.card-info h3 {
+  font-size: 18px;
+  margin: 10px 0 5px 0; 
+  color: #333;
+}
+
+.card-info p.address,
+.card-info p.role {
+  font-size: 14px;
+  color: #666;
+  margin: 0;
+}
+
+.card-info p.highlights {
+  font-size: 13px;
+  color: #888;
+  margin-top: 5px;
+}
+
+/* Card Bottom Section */
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.cards-bottom {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.rating {
+  font-size: 14px;
+  color: #000000; 
+}
+
+.view-btn {
+  background: #ff7f00;
+  color: white !important;
+  padding: 8px 20px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+  display: inline-block;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.view-btn:hover {
+  background: #e66c00;
+}
+
+/* about */
+.about-section {
+  background: #f5f5f5;
+  padding: 80px 5%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.about-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #000;
+}
+
+.about-content p {
+  color: #999;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+}
+
+.explore-btn {
+  background: linear-gradient(135deg, #00bcd4, #0097a7);
+  color: white !important;
+  padding: 15px 35px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  clip-path: polygon(0 0, 92% 0, 100% 100%, 0% 100%);
+  display: inline-block;
+  text-decoration: none;
+}
+
+.explore-btn:hover {
+  background: linear-gradient(135deg, #0097a7, #00838f);
+}
+
+.about-images {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.image-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.image-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.image-card.venue-hall {
+  grid-column: 1 / -1;
+  height: 200px;
+}
+
+.image-card.venue-resort {
+  height: 250px;
+}
+
+.image-card.performer {
+  height: 250px;
+}
+
+.venue-badge {
+  position: absolute;
+  bottom: -5px;
+  left: 0px;
+  background: #00bcd4;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-align: center;
+  font-weight: 700;
+  box-shadow: 0 4px 20px rgba(0,188,212,0.3);
+  z-index: 10;
+}
+
+.venue-badge .number {
+  font-size: 2.5rem;
+  display: block;
+  line-height: 1;
+}
+
+.venue-badge .label {
+  font-size: 1.3rem;
+  display: block;
+}
+
+/* why choose*/
+.why-choose-section {
+  background: #eae8e8;
+  padding: 80px 5%;
+}
+
+.why-choose-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.why-choose-content h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 50px;
+  color: #000;
+}
+
+.features-grid {
+  display: grid;
+  gap: 40px;
+}
+
+.feature-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.feature-icon {
+  width: 35px;
+  height: 35px;
+  background: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.feature-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.feature-content p {
+  color: #666;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.book-now-btn {
+  background: #000000 !important;
+  color: #ffffff !important;
+  padding: 15px 45px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 40px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.book-now-btn:hover {
+  background: #333333 !important;
+}
+
+
+/* responsive */
+@media (max-width: 1024px) {
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-container {
+    padding: 12px 20px;
+  }
+
+  .nav-links a:not(.book-btn):not(.login-btn) {
+    display: none;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+
+  .about-content h1,
+  .why-choose-content h1 {
+    font-size: 2rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .about-images {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-title {
+    font-size: 18px;
+  }
+
+  .brand-tag {
+    display: none;
+  }
+
+  .logo-img {
+    width: 36px;
+    height: 36px;
+  }
+
+  .book-btn,
+  .login-btn {
+    padding: 8px 16px;
+    font-size: 13px;
+  }
+}
+/*artists */
+.section {
+  padding: 80px 0;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.section-header h2 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #222;
+}
+
+.see-more {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ff6600;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 16px;
+  transition: all 0.3s;
+}
+
+.see-more:hover {
+  gap: 12px;
+  color: #e55a00;
+}
+
+.arrow {
+  font-size: 20px;
+}
+
+/* Artists Grid */
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+}
+
+.artist-card {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.artist-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+.artist-img-container {
+  height: 200px;
+  overflow: hidden;
+}
+
+.artist-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.artist-card:hover .artist-img {
+  transform: scale(1.05);
+}
+
+.artist-info {
+  padding: 24px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.artist-info h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+.artist-role {
+  color: #ff6600;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.artist-highlights {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.card-bottom {
+  margin-top: auto;
+}
+
+.artist-view-btn {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.artist-view-btn:hover {
+  background: linear-gradient(135deg, #5a6fd8, #684496);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .artists-grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0;
+  }
+  
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .section-header h2 {
+    font-size: 28px;
+  }
+  
+  .artists-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .artist-img-container {
+    height: 180px;
+  }
+  
+  .artist-info {
+    padding: 20px;
+  }
+
+  /* Artist Cards in Home Page */
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.artist-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s;
+}
+
+.artist-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+}
+
+.artist-img-container {
+  width: 100%;
+  height: 250px;
+  overflow: hidden;
+}
+
+.artist-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+}
+
+.artist-card:hover .artist-img {
+  transform: scale(1.1);
+}
+
+.artist-info {
+  padding: 20px;
+}
+
+.artist-info h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.artist-role {
+  font-size: 14px;
+  color: #ff5a1f;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.artist-highlights {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  height: 40px;
+  overflow: hidden;
+}
+
+.artist-view-btn {
+  width: 100%;
+  padding: 10px;
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f);
+  color: white !important;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: block;
+}
+
+.artist-view-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 90, 31, 0.3);
+}
+
+@media (max-width: 768px) {
+  .artists-grid {
+    grid-template-columns: 1fr;
+  }
+}
+}</style><style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/pages/Login.css">/* src/pages/Login.css */
+
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ========= HEADER STYLES ========= */
+.topbar {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #f1f1f1;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+}
+
+/* Brand Section */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  background-color: #ff5a1f;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.brand-tag {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Navigation */
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav a {
+  color: #374151;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: color 0.2s;
+  padding: 4px 0;
+}
+
+.nav a:hover {
+  color: #ff5a1f;
+}
+
+/* Buttons */
+.cta {
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-left: 8px;
+}
+
+.cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 90, 31, 0.3);
+}
+
+.login-outline {
+  background: transparent;
+  border: 1.5px solid #d1d5db;
+  color: #374151;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-left: 8px;
+}
+
+.login-outline:hover {
+  border-color: #ff8a2f;
+  color: #ff5a1f;
+}
+
+/* ========= MAIN CONTENT ========= */
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 60px 20px 80px;
+  min-height: calc(100vh - 70px);
+}
+
+.page-title {
+  font-size: 36px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.page-sub {
+  font-size: 16px;
+  color: #6b7280;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+/* ========= LOGIN CARD ========= */
+.login-card {
+  width: 440px;
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f3f4f6;
+}
+
+.login-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 32px;
+}
+
+/* Form Labels */
+.login-card label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+/* Input Fields */
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #111827;
+  background: #ffffff;
+  transition: all 0.2s;
+  margin-bottom: 24px;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #ff8a2f;
+  box-shadow: 0 0 0 3px rgba(255, 138, 47, 0.1);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+/* Password Row */
+.pw-row {
+  position: relative;
+  margin-bottom: 24px;
+}
+
+.eye-icon {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+
+.eye-icon:hover {
+  opacity: 1;
+}
+
+/* Forgot Password */
+.forgot {
+  text-align: right;
+  font-size: 14px;
+  color: #ff5a1f;
+  font-weight: 600;
+  margin-bottom: 32px;
+  cursor: pointer;
+}
+
+.forgot:hover {
+  text-decoration: underline;
+}
+
+/* Login Button */
+.login-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 24px;
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 90, 31, 0.3);
+}
+
+/* Sign Up Link */
+.signup {
+  text-align: center;
+  font-size: 15px;
+  color: #6b7280;
+}
+
+.link {
+  color: #ff5a1f;
+  font-weight: 700;
+  cursor: pointer;
+  margin-left: 4px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+/* ========= RESPONSIVE DESIGN ========= */
+@media (max-width: 1024px) {
+  .nav {
+    gap: 20px;
+  }
+  
+  .nav a {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-inner {
+    padding: 12px 0;
+  }
+  
+  .nav a {
+    display: none;
+  }
+  
+  .cta, .login-outline {
+    display: none;
+  }
+  
+  .page {
+    padding: 40px 16px 60px;
+  }
+  
+  .page-title {
+    font-size: 28px;
+  }
+  
+  .login-card {
+    width: 100%;
+    padding: 32px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-title {
+    font-size: 18px;
+  }
+  
+  .brand-tag {
+    display: none;
+  }
+  
+  .logo {
+    width: 36px;
+    height: 36px;
+  }
+}</style><style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/pages/Register.css">/* Register.css - Add to your existing pages folder */
+
+.register-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #f9fafb;
+}
+
+/* Card Styles */
+.register-card {
+  width: 500px;
+  max-width: 95%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f0f0f0;
+  margin: 0 auto;
+}
+
+/* User Type Selection */
+.user-type-selector {
+  margin: 20px 0 30px;
+}
+
+.user-type-options {
+  display: flex;
+  gap: 15px;
+}
+
+.user-type-btn {
+  flex: 1;
+  padding: 20px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user-type-btn:hover {
+  border-color: #ff8a2f;
+  transform: translateY(-2px);
+}
+
+.user-type-btn.active {
+  border-color: #ff5a1f;
+  background: rgba(255, 90, 31, 0.05);
+  box-shadow: 0 4px 15px rgba(255, 90, 31, 0.1);
+}
+
+.user-icon {
+  font-size: 32px;
+  margin-bottom: 10px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f3f4f6;
+}
+
+.user-type-btn span {
+  font-size: 16px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 4px;
+}
+
+.user-type-btn small {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* Form Sections */
+.form-section {
+  margin: 30px 0;
+  padding-bottom: 25px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.form-section h3 {
+  font-size: 17px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 600px) {
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+/* Input Styles */
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 15px;
+  color: #111827;
+  background: white;
+  transition: all 0.2s;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #ff8a2f;
+  box-shadow: 0 0 0 3px rgba(255, 138, 47, 0.1);
+}
+
+.input::placeholder {
+  color: #9ca3af;
+}
+
+/* Helper & Error Text */
+.helper-text {
+  font-size: 12px;
+  color: #6b7280;
+  margin-top: 6px;
+  display: block;
+}
+
+.error-text {
+  font-size: 12px;
+  color: #ef4444;
+  margin-top: 6px;
+  display: block;
+}
+
+/* Password Hint */
+.password-hint {
+  margin-top: 8px;
+}
+
+.hint-item {
+  font-size: 12px;
+  color: #9ca3af;
+  display: block;
+}
+
+.hint-item.valid {
+  color: #10b981;
+}
+
+/* Terms Checkbox */
+.terms-check {
+  margin: 25px 0 30px;
+}
+
+.checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin-top: 3px;
+  accent-color: #ff5a1f;
+}
+
+/* Register Button */
+.register-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 20px;
+}
+
+.register-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 90, 31, 0.3);
+}
+
+/* Login Link */
+.login-link {
+  text-align: center;
+  font-size: 15px;
+  color: #6b7280;
+  margin-top: 15px;
+}
+
+.login-link .link {
+  color: #ff5a1f;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.login-link .link:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+.auth-footer {
+  margin-top: auto;
+  padding: 20px 0;
+  text-align: center;
+  color: #6b7280;
+  font-size: 14px;
+  border-top: 1px solid #e5e7eb;
+  background: white;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .register-card {
+    padding: 25px 20px;
+    width: 100%;
+  }
+  
+  .user-type-options {
+    flex-direction: column;
+  }
+  
+  .user-type-btn {
+    padding: 15px;
+  }
+}</style><style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/pages/ForgotPassword.css">/* ForgotPassword.css */
+
+.forgot-root {
+  min-height: 100vh;
+  background: #f9fafb;
+}
+
+/* Card */
+.forgot-card {
+  width: 440px;
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+  border: 1px solid #f3f4f6;
+}
+
+.forgot-card h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 32px;
+}
+
+/* Reset Button */
+.reset-btn {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.reset-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 90, 31, 0.3);
+}
+
+/* Back to Login */
+.back-login {
+  text-align: center;
+  font-size: 15px;
+  color: #6b7280;
+}
+</style><style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/pages/VenueDetails.css">.venue-details-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.brand-tag {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.2s;
+  padding: 4px 0;
+}
+
+.nav-links a:hover {
+  color: #ff5a1f;
+}
+
+.book-btn {
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f) !important;
+  color: white !important;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.book-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 90, 31, 0.3);
+}
+
+.login-btn {
+  background: transparent !important;
+  border: 1.5px solid #d1d5db !important;
+  color: #374151 !important;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.login-btn:hover {
+  border-color: #ff8a2f !important;
+  color: #ff5a1f !important;
+}
+
+/* Main Content */
+.venue-details-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 40px 40px;
+}
+
+.breadcrumb {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.breadcrumb a {
+  color: #ff6600;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  color: #333;
+}
+
+/* Venue Header */
+.venue-header {
+  margin-bottom: 30px;
+}
+
+.venue-header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+  color: #333;
+  font-weight: 700;
+}
+
+.venue-meta {
+  display: flex;
+  gap: 30px;
+  font-size: 16px;
+  color: #666;
+}
+
+/* Venue Images */
+.venue-images {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 15px;
+  margin-bottom: 40px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.main-image {
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail-images {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.thumbnail-images img {
+  width: 100%;
+  height: calc(50% - 7.5px);
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.thumbnail-images img:hover {
+  transform: scale(1.05);
+}
+
+/* Venue Content */
+.venue-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+}
+
+.venue-main-info section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.venue-main-info h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 700;
+}
+
+.description-section p {
+  line-height: 1.8;
+  color: #555;
+  font-size: 16px;
+}
+
+/* Amenities */
+.amenities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.amenity-icon {
+  color: #28a745;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/* Details */
+.detail-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+  color: #555;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-item strong {
+  color: #333;
+  margin-right: 10px;
+}
+
+/* Sidebar */
+.venue-sidebar {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.booking-card,
+.contact-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.booking-card h3,
+.contact-card h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 700;
+}
+
+.price-info {
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.price-label {
+  display: block;
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+.price-amount {
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+  color: #ff6600;
+}
+
+.book-venue-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.book-venue-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 90, 31, 0.3);
+}
+
+.booking-note {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}
+
+.contact-btn {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #ff6600;
+  border: 2px solid #ff6600;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-top: 15px;
+}
+
+.contact-btn:hover {
+  background: #ff6600;
+  color: white;
+}
+
+.contact-card p {
+  color: #666;
+  line-height: 1.6;
+}
+
+/* Not Found */
+.venue-not-found {
+  text-align: center;
+  padding: 100px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.venue-not-found h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.back-home-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.back-home-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 90, 31, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .venue-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .venue-images {
+    grid-template-columns: 1fr;
+  }
+  
+  .thumbnail-images {
+    flex-direction: row;
+  }
+  
+  .thumbnail-images img {
+    height: 150px;
+  }
+  
+  .venue-sidebar {
+    position: static;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .venue-details-container {
+    padding: 90px 20px 40px;
+  }
+
+  .venue-header h1 {
+    font-size: 28px;
+  }
+
+  .venue-meta {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .main-image {
+    height: 300px;
+  }
+
+  .amenities-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links a:not(.book-btn):not(.login-btn) {
+    display: none;
+  }
+}</style><style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/pages/ArtistDetails.css">.artist-details-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+
+/* Breadcrumb */
+.breadcrumb {
+  margin-bottom: 20px;
+  color: #666;
+  font-size: 14px;
+}
+
+.breadcrumb a {
+  color: #ff6600;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb span {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Artist Header */
+.artist-header {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.artist-profile {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: 1fr 850px;
+}
+
+.artist-image {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.artist-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.artist-basic-info {
+  flex-grow: 1;
+}
+
+.artist-basic-info h1 {
+  font-size: 36px;
+  margin-bottom: 5px;
+  color: #222;
+  font-weight: 700;
+}
+
+.artist-type {
+  font-size: 18px;
+  color: #666;
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.artist-meta {
+  display: flex;
+  gap: 30px;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: #555;
+}
+
+.artist-genres {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.genre-tag {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Artist Content */
+.artist-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 40px;
+}
+
+.artist-main-info section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.artist-main-info h2 {
+  font-size: 24px;
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 700;
+}
+
+.description-section p {
+  line-height: 1.8;
+  color: #555;
+  font-size: 16px;
+}
+
+/* Awards Section */
+.awards-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.award-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px;
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 193, 7, 0.05));
+  border-left: 4px solid #ffc107;
+  border-radius: 8px;
+}
+
+.trophy-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+/* Details Section */
+.detail-item {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 16px;
+  color: #555;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-item strong {
+  color: #333;
+  margin-right: 10px;
+  min-width: 120px;
+  display: inline-block;
+}
+
+.members-list {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+.members-list li {
+  padding: 4px 0;
+  color: #555;
+  position: relative;
+}
+
+.members-list li:before {
+  content: "•";
+  color: #ff6600;
+  font-weight: bold;
+  position: absolute;
+  left: -15px;
+}
+
+.availability-tags {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.availability-tag {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* Songs Section */
+.songs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.song-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+
+.song-item:hover {
+  background: #e9ecef;
+  transform: translateX(5px);
+}
+
+.music-icon {
+  color: #ff6600;
+  font-size: 18px;
+}
+
+/* Social Section */
+.social-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.social-link {
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s;
+}
+
+.social-link.fb {
+  background: #1877f2;
+  color: white;
+}
+
+.social-link.ig {
+  background: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+  color: white;
+}
+
+.social-link.yt {
+  background: #ff0000;
+  color: white;
+}
+
+.social-link.sp {
+  background: #1db954;
+  color: white;
+}
+
+.social-link:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Sidebar */
+.artist-sidebar {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+.booking-card,
+.contact-card,
+.availability-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.booking-card h3,
+.contact-card h3,
+.availability-card h3 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 700;
+}
+
+.price-info {
+
+  text-align: center;
+  margin-bottom: 20px;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 8px;
+  color: white;
+}
+
+.price-label {
+  color: white;
+  display: block;
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 5px;
+}
+
+.price-amount {
+  color: white;
+  display: block;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.book-artist-btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.book-artist-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.3);
+}
+
+.booking-note {
+  margin-top: 15px;
+  font-size: 12px;
+  color: #888;
+  text-align: center;
+}
+
+.contact-info {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.contact-item {
+  padding: 8px 0;
+  font-size: 14px;
+  color: #555;
+}
+
+.contact-item strong {
+  color: #333;
+  margin-right: 10px;
+}
+
+.inquiry-btn {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.inquiry-btn:hover {
+  background: #667eea;
+  color: white;
+}
+
+.facts-list {
+  list-style: none;
+  padding: 0;
+}
+
+.facts-list li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  color: #555;
+  font-size: 14px;
+}
+
+.facts-list li:last-child {
+  border-bottom: none;
+}
+
+/* Not Found */
+.artist-not-found {
+  text-align: center;
+  padding: 100px 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.artist-not-found h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.back-home-btn {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.back-home-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .artist-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .artist-sidebar {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .artist-details-container {
+    padding: 90px 20px 40px;
+  }
+
+  .artist-profile {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .artist-image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .artist-basic-info h1 {
+    font-size: 28px;
+  }
+
+  .artist-meta {
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .songs-grid {
+    grid-template-columns: 1fr;
+  }
+}</style><style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/pages/Venue.css">.venues-content {
+  padding: 160px 8% 80px;
+  background-color: #ffffff;
+}
+
+/* PAGE HEADER */
+/* .page-header {
+  text-align: center;
+  margin-bottom: 80px;
+
+}
+
+.page-header h1 {
+  font-size: 44px;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  font-size: 16px;
+  color: #6b7280;
+} */
+
+/* CATEGORY BUTTONS */
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 60px;
+  flex-wrap: wrap;
+}
+
+.category-tab {
+  padding: 10px 24px;
+  border-radius: 25px;
+  border: 2px solid #ff5a1f;
+  background: #ffffff;
+  color: #ff5a1f;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.category-tab.active {
+  background-color: #ff5a1f;
+  color: black;
+}
+
+/* GRID */
+.venues-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+/* CARD */
+.venue-card {
+  background: #ffffff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.venue-card:hover {
+  transform: translateY(-6px);
+}
+
+/* IMAGE */
+.venue-image img {
+  width: 100%;
+  height: 230px;
+  object-fit: cover;
+}
+
+/* DETAILS */
+.venue-details {
+  padding: 22px;
+}
+
+.venue-details h3 {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.venue-location {
+  font-size: 14px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.venue-rating {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.venue-description {
+  font-size: 14px;
+  color: #4b5563;
+  margin-bottom: 16px;
+}
+
+/* ACTIONS */
+.venue-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.profile-btn {
+  font-size: 14px;
+  font-weight: 600;
+  color: #ff5a1f;
+  text-decoration: none;
+}
+</style><style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/pages/Artists.css">/* Artists.css */
+
+.artists-page {
+  min-height: 100vh;
+  background-color: #f8f9fa;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-img {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+}
+
+.brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.brand-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.brand-tag {
+  font-size: 12px;
+  color: #6b7280;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #374151;
+  font-weight: 600;
+  font-size: 15px;
+  transition: color 0.2s;
+  padding: 4px 0;
+}
+
+.nav-links a:hover {
+  color: #ff5a1f;
+}
+
+.login-btn {
+  background: transparent !important;
+  border: 1.5px solid #d1d5db !important;
+  color: #374151 !important;
+  padding: 8px 20px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.login-btn:hover {
+  border-color: #ff8a2f !important;
+  color: #ff5a1f !important;
+}
+
+/* Main Content */
+.artists-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 40px 40px;
+}
+
+/* Page Header */
+.page-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.page-header h1 {
+  font-size: 42px;
+  font-weight: 800;
+  color: #111827;
+  margin-bottom: 10px;
+}
+
+.page-header p {
+  font-size: 18px;
+  color: #6b7280;
+}
+
+/* Category Tabs */
+.category-tabs {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.category-tab {
+  padding: 12px 24px;
+  background: white;
+  border: 2px solid #e5e7eb;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.category-tab:hover {
+  border-color: #ff8a2f;
+  color: #ff5a1f;
+}
+
+.category-tab.active {
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f);
+  color: white;
+  border-color: transparent;
+}
+
+.category-tab .badge {
+  background: rgba(255, 138, 47, 0.2);
+  color: #ff5a1f;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.category-tab.active .badge {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+/* Artists Grid */
+.artists-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  
+}
+
+.artist-card {
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.artist-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.artist-image {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+  border-radius: 0%;
+}
+
+.artist-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s;
+  border-radius: 20px;
+
+}
+
+.artist-card:hover .artist-image img {
+  transform: scale(1.1);
+}
+
+.artist-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f);
+  color: white;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.artist-details {
+  padding: 20px;
+}
+
+.artist-details h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 5px;
+}
+
+.artist-genre {
+  font-size: 14px;
+  color: #ff5a1f;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.artist-experience {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 10px;
+}
+
+.artist-rating {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.stars {
+  font-size: 14px;
+  color: #111827;
+  font-weight: 600;
+}
+
+.reviews {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+.artist-achievements {
+  font-size: 13px;
+  color: #6b7280;
+  line-height: 1.5;
+  margin-bottom: 15px;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.artist-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.profile-btn,
+.book-artist-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  display: block;
+}
+
+.profile-btn {
+  background: white;
+  color: #ff5a1f;
+  border: 2px solid #ff5a1f;
+}
+
+.profile-btn:hover {
+  background: #ff5a1f;
+  color: white;
+}
+
+.book-artist-btn {
+  background: linear-gradient(135deg, #ff8a2f, #ff5a1f);
+  color: white;
+  border: none;
+}
+
+.book-artist-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 90, 31, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .artists-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .artists-content {
+    padding: 90px 20px 40px;
+  }
+
+  .page-header h1 {
+    font-size: 32px;
+  }
+
+  .artists-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .category-tabs {
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+  }
+
+  .nav-links a:not(.book-btn):not(.login-btn) {
+    display: none;
+  }
+}</style><style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/components/Footer/Footer.css">/* footer*/
+.footer {
+  background: #1a2332;
+  color: #8b93a7;
+  padding: 60px 5%;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+}
+
+.footer-section h3 {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.footer-section p,
+.footer-section a {
+  color: #8b93a7;
+  text-decoration: none;
+  display: block;
+  margin-bottom: 12px;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.footer-section a:hover {
+  color: #00bcd4;
+}
+
+.footer-section ul {
+  list-style: none;
+}
+
+.footer-section li {
+  margin-bottom: 12px;
+}
+</style><style type="text/css" data-vite-dev-id="/Users/pranishprajapati/EventEase/frontend/src/index.css">* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f9fafb;
+  color: #111827;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Remove all default link/button styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}</style></head>
+  <body>
+    <div id="root"><header class="navbar"><div class="nav-container"><div class="brand"><a href="http://localhost:5177/"><img src="./EventEase - Event Management System_files/logos.jpg" class="logo-img" alt="EventEase"></a><div class="brand-text"><span class="brand-title">EventEase</span><small class="brand-tag">Book venue &amp; artists - fast</small></div></div><div class="nav-right"><nav class="nav-links"><a href="http://localhost:5177/">Home</a><a href="http://localhost:5177/venue">Venue</a><a href="http://localhost:5177/artists">Artists</a><a href="http://localhost:5177/eventspace">EventSpace</a><a href="http://localhost:5177/dashboard">Dashboard</a></nav><a class="profile-icon" href="http://localhost:5177/profile"><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 496 512" height="30" width="30" xmlns="http://www.w3.org/2000/svg"><path d="M248 8C111 8 0 119 0 256s111 248 248 248 248-111 248-248S385 8 248 8zm0 96c48.6 0 88 39.4 88 88s-39.4 88-88 88-88-39.4-88-88 39.4-88 88-88zm0 344c-58.7 0-111.3-26.6-146.5-68.2 18.8-35.4 55.6-59.8 98.5-59.8 2.4 0 4.8.4 7.1 1.1 13 4.2 26.6 6.9 40.9 6.9 14.3 0 28-2.7 40.9-6.9 2.3-.7 4.7-1.1 7.1-1.1 42.9 0 79.7 24.4 98.5 59.8C359.3 421.4 306.7 448 248 448z"></path></svg></a></div></div></header><div class="venues-page"><div class="venues-content"><div class="page-header"><h1>Featured Venues</h1><p>Find the perfect venue for your special event</p></div><div class="category-tabs"><button class="category-tab active">All</button><button class="category-tab ">Villas</button><button class="category-tab ">Restaurants</button><button class="category-tab ">Resorts</button></div><div class="venues-grid"><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/garden-plaza.jpg" alt="Smart Palace"></div><div class="venue-details"><h3>Smart Palace</h3><p class="venue-location">Chabahil, Kathmandu</p><div class="venue-rating">⭐ 4.5 (977+ reviews)</div><p class="venue-description">3 bedroom villa with Swimming Pool</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/1">View Details</a><a class="book-btn" href="http://localhost:5177/venue/1">Book Now</a></div></div></div><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/Queen&#39;s palace.jpg" alt="Queen&#39;s Palace &amp; Events"></div><div class="venue-details"><h3>Queen's Palace &amp; Events</h3><p class="venue-location">Sukedhara Chowk</p><div class="venue-rating">⭐ 4.8 (600+ reviews)</div><p class="venue-description">Garden meets timeless elegance</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/2">View Details</a><a class="book-btn" href="http://localhost:5177/venue/2">Book Now</a></div></div></div><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/silveroak.jpg" alt="Silver Oak Banquet"></div><div class="venue-details"><h3>Silver Oak Banquet</h3><p class="venue-location">Gairidhara, Kathmandu</p><div class="venue-rating">⭐ 4.4 (1400+ reviews)</div><p class="venue-description">Premium banquet &amp; dining</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/3">View Details</a><a class="book-btn" href="http://localhost:5177/venue/3">Book Now</a></div></div></div><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/Dorje&#39;s Resort &amp; Spa.jpg" alt="Dorje&#39;s Resort &amp; Spa"></div><div class="venue-details"><h3>Dorje's Resort &amp; Spa</h3><p class="venue-location">Dhulikhel</p><div class="venue-rating">⭐ 4.6 (820+ reviews)</div><p class="venue-description">Luxury resort with scenic views</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/4">View Details</a><a class="book-btn" href="http://localhost:5177/venue/4">Book Now</a></div></div></div><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/Fish Tail Lodge.jpg" alt="Fish Tail Lodge"></div><div class="venue-details"><h3>Fish Tail Lodge</h3><p class="venue-location">Pokhara</p><div class="venue-rating">⭐ 4.7 (1200+ reviews)</div><p class="venue-description">Lakeside heritage resort</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/5">View Details</a><a class="book-btn" href="http://localhost:5177/venue/5">Book Now</a></div></div></div><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/Jimbu Thakali By Capital Grill.jpg" alt="Jimbu Thakali By Capital Grill"></div><div class="venue-details"><h3>Jimbu Thakali By Capital Grill</h3><p class="venue-location">Kathmandu</p><div class="venue-rating">⭐ 4.5 (900+ reviews)</div><p class="venue-description">Authentic Thakali cuisine</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/6">View Details</a><a class="book-btn" href="http://localhost:5177/venue/6">Book Now</a></div></div></div><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/Hotel Mystic Mountain.jpg" alt="Hotel Mystic Mountain"></div><div class="venue-details"><h3>Hotel Mystic Mountain</h3><p class="venue-location">Nagarkot</p><div class="venue-rating">⭐ 4.6 (1100+ reviews)</div><p class="venue-description">Mountain view luxury hotel</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/7">View Details</a><a class="book-btn" href="http://localhost:5177/venue/7">Book Now</a></div></div></div><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/Patio-The Soaltee Kathmandu.jpg" alt="Patio - The Soaltee Kathmandu"></div><div class="venue-details"><h3>Patio - The Soaltee Kathmandu</h3><p class="venue-location">Soaltee Mode</p><div class="venue-rating">⭐ 4.4 (950+ reviews)</div><p class="venue-description">Premium dining experience</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/8">View Details</a><a class="book-btn" href="http://localhost:5177/venue/8">Book Now</a></div></div></div><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/Pinnacle Residency.jpg" alt="Pinnacle Residency"></div><div class="venue-details"><h3>Pinnacle Residency</h3><p class="venue-location">Lazimpat</p><div class="venue-rating">⭐ 4.3 (670+ reviews)</div><p class="venue-description">Modern luxury residency</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/9">View Details</a><a class="book-btn" href="http://localhost:5177/venue/9">Book Now</a></div></div></div><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/Raksi Music Bar.jpg" alt="Raksi Music Bar"></div><div class="venue-details"><h3>Raksi Music Bar</h3><p class="venue-location">Thamel</p><div class="venue-rating">⭐ 4.2 (540+ reviews)</div><p class="venue-description">Live music &amp; bar</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/10">View Details</a><a class="book-btn" href="http://localhost:5177/venue/10">Book Now</a></div></div></div><div class="venue-card"><div class="venue-image"><img src="./EventEase - Event Management System_files/rooftop-terrace.jpg" alt="Rooftop Terrace"></div><div class="venue-details"><h3>Rooftop Terrace</h3><p class="venue-location">Kathmandu</p><div class="venue-rating">⭐ 4.5 (780+ reviews)</div><p class="venue-description">Open-air rooftop venue</p><div class="venue-actions"><a class="profile-btn" href="http://localhost:5177/venue/11">View Details</a><a class="book-btn" href="http://localhost:5177/venue/11">Book Now</a></div></div></div></div></div></div><footer class="footer"><div class="footer-content"><div class="footer-section"><h3>EventEase</h3><p>EventEase is your ultimate platform for booking events, venues, and artists effortlessly. We bring together the best venues and performers under one roof, making event planning seamless and enjoyable. Whether it's a corporate party, wedding, or music festival, we've got you covered.</p></div><div class="footer-section"><h3>Services</h3><ul><li><a href="http://localhost:5177/venue">Venue</a></li><li><a href="http://localhost:5177/artists">Artists</a></li><li><a href="http://localhost:5177/venue#">Videography</a></li><li><a href="http://localhost:5177/venue#">Wedding Plans</a></li><li><a href="http://localhost:5177/venue#">Entertainment</a></li></ul></div><div class="footer-section"><h3>Quick Lines</h3><ul><li><a href="http://localhost:5177/">Home</a></li><li><a href="http://localhost:5177/venue">Venue</a></li><li><a href="http://localhost:5177/artists">Artists</a></li><li><a href="http://localhost:5177/eventspace">EventSpace</a></li><li><a href="http://localhost:5177/dashboard">Dashboard</a></li></ul></div><div class="footer-section"><h3>Contact us</h3><p>Kathmandu, Nepal<br>+977 9823812398<br>info@eventease.com</p></div></div></footer></div>
+    <script type="module" src="./EventEase - Event Management System_files/main.jsx"></script>
+  
+</body></html>
