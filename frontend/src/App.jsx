@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter,Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -16,16 +16,17 @@ export default function App() {
     <BrowserRouter>
       <Navbar /> 
       <Routes>
-        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/" element={<Home />} />
         <Route path="/venue/:venueId" element={<VenueDetails />} />
         <Route path="/artist/:artistId" element={<ArtistDetails />} />
         <Route path="/venue" element={<Venue />} />
         <Route path="/artists" element={<Artists />} />
-        <Route path="/venue/:venueId" element={<VenueDetails />} />
-        <Route path="/artist/:artistId" element={<ArtistDetails />} />
+        
+        {/* Redirect to login by default */}
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
       <Footer />
     </BrowserRouter>
