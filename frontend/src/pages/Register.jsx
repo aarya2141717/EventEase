@@ -32,7 +32,7 @@ export default function Register() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
     // Validation
@@ -46,13 +46,47 @@ export default function Register() {
       return;
     }
     
-    console.log("Registration Data:", {
-      ...formData,
-      userType
-    });
-    
-    // In real app: API call here
-    alert("Registration successful! Please check your email for verification.");
+    try {
+      console.log("📤 Sending signup request to http://localhost:5000/api/auth/signup");
+      console.log("📋 Data:", {
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: formData.phone,
+        userType: userType,
+        location: formData.location,
+      });
+
+      // Send signup request to backend
+      const response = await fetch("http://localhost:5000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          phone: formData.phone,
+          password: formData.password,
+          userType: userType,
+          location: formData.location,
+        }),
+      });
+
+      console.log("📬 Response status:", response.status);
+      const data = await response.json();
+      console.log("📬 Response data:", data);
+
+      if (response.ok) {
+        alert("Registration successful! Redirecting to login...");
+        // Redirect to login page
+        window.location.href = "/login";
+      } else {
+        alert(data.message || "Registration failed!");
+      }
+    } catch (error) {
+      console.error("❌ Error:", error);
+      alert(`Error during registration: ${error.message}`);
+    }
   };
 
   return (

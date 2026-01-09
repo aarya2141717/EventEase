@@ -1,10 +1,60 @@
 import React, { useState } from "react";
 import "./Login.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 
 export default function Login() {
   const [showPw, setShowPw] = useState(false);
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    setError("");
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Store user data in context and localStorage
+        login(data.user);
+        // Redirect to homepage after login
+        navigate("/");
+      } else {
+        setError(data.message || "Login failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      setError("An error occurred. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className="login-root">
@@ -38,34 +88,51 @@ export default function Login() {
         <div className="login-card">
           <h3>Welcome Back</h3>
 
-          <label>Email Address</label>
-          <input type="email" placeholder="Enter your email" className="input" />
+          {error && <div className="error-message">{error}</div>}
 
-          <label>Password</label>
-          <div className="pw-row">
+          <form onSubmit={handleSubmit}>
+            <label>Email Address</label>
             <input
-              type={showPw ? "text" : "password"}
-              placeholder="Enter your password"
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
               className="input"
+              required
             />
 
-            <img
-              src={showPw ? "/images/visibilityon.png" : "/images/visibilityoff.png"}
-              alt="toggle"
-              className="eye-icon"
-              onClick={() => setShowPw(!showPw)}
-            />
-          </div>
+            <label>Password</label>
+            <div className="pw-row">
+              <input
+                type={showPw ? "text" : "password"}
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                placeholder="Enter your password"
+                className="input"
+                required
+              />
 
-          <p className="forgot">
-            <Link to="/forgot-password" className="link">Forgot password?</Link>
-          </p>
+              <img
+                src={showPw ? "/images/visibilityon.png" : "/images/visibilityoff.png"}
+                alt="toggle"
+                className="eye-icon"
+                onClick={() => setShowPw(!showPw)}
+              />
+            </div>
 
-          <button className="login-btn">Log In</button>
+            <p className="forgot">
+              <Link to="/forgot-password" className="link">Forgot password?</Link>
+            </p>
 
-          <p className="signup">
-            Don't have an account? <Link to="/register" className="link">Sign up</Link>
-          </p>
+            <button type="submit" className="login-btn" disabled={loading}>
+              {loading ? "Logging in..." : "Log In"}
+            </button>
+            <p className="signup">
+              Don't have an account? <Link to="/register" className="link">Sign up</Link>
+            </p>
+          </form>
         </div>
       </main>
     </div>
