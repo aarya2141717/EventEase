@@ -43,8 +43,8 @@ export default function Login() {
       if (response.ok) {
         // Store user data in context and localStorage
         login(data.user);
-        // Redirect to homepage after login
-        navigate("/");
+        // Redirect to dashboard after login
+        navigate("/dashboard");
       } else {
         setError(data.message || "Login failed. Please try again.");
       }

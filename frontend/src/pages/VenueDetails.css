@@ -426,3 +426,41 @@
     display: none;
   }
 }
+
+@media (max-width: 480px) {
+  .venue-details-container {
+    padding: 80px 16px 30px;
+  }
+
+  .venue-header h1 {
+    font-size: 24px;
+  }
+
+  .main-image {
+    height: 250px;
+  }
+
+  .thumbnail-images {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .thumbnail-images img {
+    min-width: 100px;
+    height: 100px;
+  }
+
+  .venue-main-info section {
+    padding: 20px;
+  }
+
+  .booking-card,
+  .contact-card {
+    padding: 20px;
+  }
+
+  .book-venue-btn {
+    font-size: 16px;
+    padding: 12px;
+  }
+}

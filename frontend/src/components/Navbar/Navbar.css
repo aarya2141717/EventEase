@@ -141,7 +141,30 @@
   background: rgba(255, 90, 31, 0.05);
 }
 
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .nav-container {
+    padding: 14px 40px;
+  }
+
+  .nav-links {
+    gap: 20px;
+  }
+
+  .nav-links a {
+    font-size: 14px;
+  }
+}
+
 @media (max-width: 768px) {
+  .nav-container {
+    padding: 12px 20px;
+  }
+
+  .nav-links {
+    display: none;
+  }
+
   .user-name {
     display: none;
   }
@@ -149,5 +172,33 @@
   .logout-btn-nav {
     padding: 6px 12px;
     font-size: 12px;
+  }
+
+  .brand-title {
+    font-size: 18px;
+  }
+
+  .brand-tag {
+    display: none;
+  }
+
+  .logo-img {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-container {
+    padding: 10px 16px;
+  }
+
+  .brand-title {
+    font-size: 16px;
+  }
+
+  .logo-img {
+    width: 32px;
+    height: 32px;
   }
 }
