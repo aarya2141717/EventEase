@@ -1,4 +1,4 @@
-const express = require("express");
+ const express = require("express");
 const bcrypt = require("bcryptjs");
 
 const router = express.Router();
@@ -17,7 +17,7 @@ router.post("/signup", async (req, res) => {
   try {
     console.log("📝 Signup request received:", req.body);
     
-    const { fullName, email, phone, password, userType, location } = req.body;
+    const { fullName, email, phone, password, userType, location, securityQuestion, securityAnswer } = req.body;
 
     // Validation
     if (!fullName || !email || !password) {
@@ -45,7 +45,10 @@ router.post("/signup", async (req, res) => {
       phone: phone || null,
       password: hashedPassword,
       userType: normalizedUserType,
+      accountType: normalizedUserType, // Also set accountType for compatibility
       location: location || null,
+      securityQuestion: securityQuestion || null,
+      securityAnswer: securityAnswer || null,
     });
 
     console.log("✅ User created successfully:", newUser.email);
@@ -99,15 +102,20 @@ router.post("/login", async (req, res) => {
     }
 
     console.log("✅ Login successful:", user.email);
+    console.log("📋 User type from DB:", user.userType);
+    console.log("📋 Account type from DB:", user.accountType);
 
     // Return user data (without password)
+    // Use accountType if userType is null, otherwise use userType
+    const finalUserType = user.userType || user.accountType || "customer";
+    
     res.status(200).json({
       message: "Login successful",
       user: {
         id: user.id,
         fullName: user.fullName,
         email: user.email,
-        userType: user.userType,
+        userType: finalUserType,
         phone: user.phone,
         location: user.location,
       },
