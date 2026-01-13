@@ -13,11 +13,15 @@ import Artists from './pages/Artists';
 import AdminDashboard from './pages/AdminDashboard';
 import VendorDashboard from './pages/VendorDashboard';
 import UserDashboard from './pages/UserDashboard';
+import ArtistBooking from './pages/ArtistBooking';
+import VenueBooking from './pages/VenueBooking';
+import AddArtist from './pages/AddArtist';
+import AddVenue from './pages/AddVenue';
 import Footer from "./components/Footer/Footer";
 
 // Protected Route Component
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, loading } = useAuth();
+const ProtectedRoute = ({ children, requiredRole = null }) => {
+  const { isAuthenticated, loading, user } = useAuth();
   
   if (loading) {
     return <div style={{ padding: "100px 20px", textAlign: "center" }}>Loading...</div>;
@@ -25,6 +29,11 @@ const ProtectedRoute = ({ children }) => {
   
   if (!isAuthenticated()) {
     return <Navigate to="/login" replace />;
+  }
+  
+  // Check role if required
+  if (requiredRole && user?.userType !== requiredRole) {
+    return <Navigate to="/dashboard" replace />;
   }
   
   return children;
@@ -38,10 +47,15 @@ const DashboardRoute = () => {
     return <div style={{ padding: "100px 20px", textAlign: "center" }}>Loading...</div>;
   }
   
-  // Redirect based on user type
-  if (user?.userType === "admin") {
+  // Debug: Log user data
+  console.log("DashboardRoute - User data:", user);
+  console.log("DashboardRoute - UserType:", user?.userType);
+  
+  // Redirect based on user type (case-insensitive check)
+  const userType = user?.userType?.toLowerCase();
+  if (userType === "admin") {
     return <AdminDashboard />;
-  } else if (user?.userType === "vendor") {
+  } else if (userType === "vendor") {
     return <VendorDashboard />;
   } else {
     return <UserDashboard />;
@@ -61,6 +75,28 @@ function AppRoutes() {
         <Route path="/artist/:artistId" element={<ArtistDetails />} />
         <Route path="/venue" element={<Venue />} />
         <Route path="/artists" element={<Artists />} />
+        <Route path="/artist-booking" element={<ArtistBooking />} />
+        <Route path="/venue-booking" element={<VenueBooking />} />
+        
+        {/* Admin Routes */}
+        <Route 
+          path="/admin/add-artist" 
+          element={
+            <ProtectedRoute requiredRole="admin">
+              <AddArtist />
+            </ProtectedRoute>
+          } 
+        />
+        
+        {/* Vendor Routes */}
+        <Route 
+          path="/vendor/add-venue" 
+          element={
+            <ProtectedRoute requiredRole="vendor">
+              <AddVenue />
+            </ProtectedRoute>
+          } 
+        />
         
         {/* Dashboard Route - Protected and redirects based on user type */}
         <Route 
