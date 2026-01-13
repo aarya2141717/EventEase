@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./Register.css";
 
 export default function Register() {
-  const [userType, setUserType] = useState("customer");
+  const [userType, setUserType] = useState("customer"); // "customer" or "vendor"
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -67,8 +67,10 @@ export default function Register() {
           email: formData.email,
           phone: formData.phone,
           password: formData.password,
-          userType: userType,
+          userType: userType === "provider" ? "vendor" : userType,
           location: formData.location,
+          securityQuestion: formData.securityQuestion,
+          securityAnswer: formData.securityAnswer,
         }),
       });
 
