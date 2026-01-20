@@ -80,7 +80,7 @@ const artistsData = {
     },
     popularSongs: ["Pahadi Lokgeet", "Basanta Ritu", "Himal Ko Chauri", "Nepali Asmita"]
   },
-  "saijan-raj-vaidya": {
+  "sajjan-raj-vaidya": {
     id: "saijan-raj-vaidya",
     name: "Saijan Raj Vaidya",
     type: "Singer",
