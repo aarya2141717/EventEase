@@ -1,7 +1,7 @@
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-
 import "./ArtistDetails.css";
+import { getImagePath, handleImageError } from "../utils/imageHelper";
 
 // Artist data
 const artistsData = {
@@ -235,7 +235,7 @@ const ArtistDetails = () => {
   }
 
   const handleBookArtist = () => {
-    navigate('/booking', { state: { artist } });
+    navigate('/artist-booking', { state: { artist } });
   };
 
   return (
@@ -249,7 +249,11 @@ const ArtistDetails = () => {
         <div className="artist-header">
           <div className="artist-profile">
             <div className="artist-image">
-              <img src={artist.image || "/images/default-artist.jpg"} alt={artist.name} />
+              <img 
+                src={getImagePath(artist.image || "/images/default-artist.jpg")} 
+                alt={artist.name}
+                onError={(e) => handleImageError(e)}
+              />
             </div>
             <div className="artist-basic-info">
               <h1>{artist.name}</h1>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Venue.css";
+import { getImagePath, handleImageError } from "../utils/imageHelper";
 
 const venuesData = [
   {
@@ -21,7 +22,7 @@ const venuesData = [
     reviews: 600,
     category: "Banquets",
     description: "Garden meets timeless elegance",
-    image: "/images/Queen's palace.jpg",
+    image: "/images/queens palace.jpg",
   },
   {
     id: "silver-oak-banquet",
@@ -41,7 +42,7 @@ const venuesData = [
     reviews: 820,
     category: "Resorts",
     description: "Luxury resort with scenic views",
-    image: "/images/Dorje's Resort & Spa.jpg",
+    image: "/images/Dorje's Resort & Spa 1.jpg",
   },
   {
     id: "fish-tail-lodge",
@@ -135,7 +136,12 @@ const Venue = () => {
           {filteredVenues.map((venue) => (
             <div key={venue.id} className="venue-card">
               <div className="venue-image">
-                <img src={venue.image} alt={venue.name} />
+                <img 
+                  src={getImagePath(venue.image)} 
+                  alt={venue.name}
+                  data-original-src={venue.image}
+                  onError={(e) => handleImageError(e)}
+                />
               </div>
 
               <div className="venue-details">

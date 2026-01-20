@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Dashboard.css";
 
 const AdminDashboard = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const stats = [
     { label: "Total Users", value: "1,234", icon: "👥", color: "#ff5a1f" },
@@ -92,7 +94,10 @@ const AdminDashboard = () => {
               <span className="action-icon">➕</span>
               <span>Add Venue</span>
             </button>
-            <button className="action-card">
+            <button 
+              className="action-card"
+              onClick={() => navigate('/admin/add-artist')}
+            >
               <span className="action-icon">🎤</span>
               <span>Add Artist</span>
             </button>

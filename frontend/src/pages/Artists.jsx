@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Artists.css";
+import { getImagePath, handleImageError } from "../utils/imageHelper";
 
 const Artists = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -141,7 +142,11 @@ const Artists = () => {
           {filteredArtists.map((artist) => (
             <div key={artist.id} className="artist-card">
               <div className="artist-image">
-                <img src={artist.image} alt={artist.name} />
+                <img 
+                  src={getImagePath(artist.image)} 
+                  alt={artist.name}
+                  onError={(e) => handleImageError(e)}
+                />
                 <div className="artist-badge">{artist.category}</div>
               </div>
               <div className="artist-details">

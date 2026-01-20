@@ -1,9 +1,11 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Dashboard.css";
 
 const VendorDashboard = () => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const stats = [
     { label: "My Venues/Artists", value: "8", icon: "🏢", color: "#ff5a1f" },
@@ -72,7 +74,12 @@ const VendorDashboard = () => {
               </div>
             ))}
           </div>
-          <button className="add-listing-btn">+ Add New Listing</button>
+          <button 
+            className="add-listing-btn"
+            onClick={() => navigate('/vendor/add-venue')}
+          >
+            + Add New Venue
+          </button>
         </div>
 
         {/* Recent Booking Requests */}
@@ -119,9 +126,12 @@ const VendorDashboard = () => {
         <div className="dashboard-section">
           <h2>Quick Actions</h2>
           <div className="actions-grid">
-            <button className="action-card">
+            <button 
+              className="action-card"
+              onClick={() => navigate('/vendor/add-venue')}
+            >
               <span className="action-icon">➕</span>
-              <span>Add Venue/Artist</span>
+              <span>Add Venue</span>
             </button>
             <button className="action-card">
               <span className="action-icon">📊</span>

@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./VenueDetails.css";
+import { getImagePath, handleImageError } from "../utils/imageHelper";
 
 // Venue data
 const venuesData = {
@@ -68,16 +69,16 @@ const venuesData = {
     category: "Resorts",
     rating: 4.6,
     reviews: 820,
-    image: "/images/Dorje's Resort & Spa 3.jpg",
+    image: "/images/Dorje's Resort & Spa 1.jpg",
     description: "Dorje's Resort & Spa is a tranquil venue nestled in the scenic beauty of Dhulikhel. Ideal for weddings and retreats, it offers luxurious accommodations and top-notch amenities.",
     capacity: "200-600 guests",
     amenities: ["Resort Accommodation", "Spa Services", "Outdoor Venues", "Catering Options", "Adventure Activities", "Event Coordination"],
     price: "NPR 250,000 - 500,000",
     contact: "+977 9845678901",
     images: [
-      "/images/Dorje's Resort & Spa 3.jpg",
       "/images/Dorje's Resort & Spa 1.jpg",
-      "/images/Dorje's Resort & Spa 2.jpg"
+      "/images/Dorje's Resort & Spa 2.jpg",
+      "/images/Dorje's Resort & Spa 3.jpeg"
     ]
   },
   "fish-tail-lodge": {
@@ -87,7 +88,7 @@ const venuesData = {
     category: "Resorts",
     rating: 4.3,
     reviews: 750,
-    image: "/images/fish tail lodge 1.jpg",
+    image: "/images/Fish Tail Lodge.jpg",
     description: "Fish Tail Lodge is a unique venue offering a rustic charm and natural surroundings. Perfect for intimate gatherings and outdoor celebrations.",
     capacity: "100-300 guests",
     amenities: ["Natural Setting", "Outdoor Fire Pit", "Catering Services", "Event Planning", "Photography Services"],
@@ -201,7 +202,7 @@ const VenueDetails = () => {
   }
 
   const handleBookVenue = () => {
-    navigate('/booking', { state: { venue } });
+    navigate('/venue-booking', { state: { venue } });
   };
 
   return (
@@ -223,11 +224,22 @@ const VenueDetails = () => {
 
         <div className="venue-images">
           <div className="main-image">
-            <img src={venue.image} alt={venue.name} />
+            <img 
+              src={getImagePath(venue.image)} 
+              alt={venue.name}
+              data-original-src={venue.image}
+              onError={(e) => handleImageError(e)}
+            />
           </div>
           <div className="thumbnail-images">
             {venue.images.slice(1).map((img, index) => (
-              <img key={index} src={img} alt={`${venue.name} ${index + 2}`} />
+              <img 
+                key={index} 
+                src={getImagePath(img)} 
+                alt={`${venue.name} ${index + 2}`}
+                data-original-src={img}
+                onError={(e) => handleImageError(e)}
+              />
             ))}
           </div>
         </div>

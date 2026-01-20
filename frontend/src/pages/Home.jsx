@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
-
 import "./Home.css";
+import { getImagePath, handleImageError } from "../utils/imageHelper";
 
 const Home = () => {
   
@@ -12,7 +11,12 @@ const Home = () => {
       {/* HERO SECTION */}
       <section className="hero">
         <div className="hero-content">
-          <img src="/images/logos-removebg-preview.png" className="hero-logo" alt="EventEase Logo" />
+          <img 
+          src={getImagePath("/images/logos-removebg-preview.png")} 
+          className="hero-logo" 
+          alt="EventEase Logo"
+          onError={(e) => handleImageError(e)}
+        />
           <h1>EventEase</h1>
           <p>Find venues & book artists – all in one place.</p>
           <p className="sub-text">
@@ -33,7 +37,11 @@ const Home = () => {
         </div>
         <div className="grid-3">
           <div className="card">
-            <img src="/images/smart palace.webp" alt="Smart Palace" />
+            <img 
+              src={getImagePath("/images/smart palace.webp")} 
+              alt="Smart Palace"
+              onError={(e) => handleImageError(e)}
+            />
             <div className="card-info">
               <h3>Smart Palace</h3>
               <p className="address">Chabahil / Chuchhepati area</p>
@@ -45,7 +53,11 @@ const Home = () => {
           </div>
 
           <div className="card">
-            <img src="/images/queens palace.jpg" alt="Queen's Palace & Events" />
+            <img 
+              src={getImagePath("/images/queens palace.jpg")} 
+              alt="Queen's Palace & Events"
+              onError={(e) => handleImageError(e)}
+            />
             <div className="card-info">
               <h3>Queen's Palace & Events</h3>
               <p className="address">Sukedhara Chowk</p>
@@ -57,7 +69,11 @@ const Home = () => {
           </div>
 
           <div className="card">
-            <img src="/images/silveroak.jpg" alt="Silver Oak Banquet and Events" />
+            <img 
+              src={getImagePath("/images/silveroak.jpg")} 
+              alt="Silver Oak Banquet and Events"
+              onError={(e) => handleImageError(e)}
+            />
             <div className="card-info">
               <h3>Silver Oak Banquet and Events</h3>
               <p className="address">Gairidhara, Kathmandu</p>
@@ -80,7 +96,12 @@ const Home = () => {
     {/* Artist 1: Raju Lama */}
     <div className="artist-card">
       <div className="artist-img-container">
-        <img src="/images/raju.jpg" alt="Raju Lama" className="artist-img" />
+        <img 
+          src={getImagePath("/images/raju.jpg")} 
+          alt="Raju Lama" 
+          className="artist-img"
+          onError={(e) => handleImageError(e)}
+        />
       </div>
       <div className="artist-info">
         <h3>Raju Lama</h3>
@@ -95,7 +116,12 @@ const Home = () => {
     {/* Artist 2: The Elements */}
     <div className="artist-card">
       <div className="artist-img-container">
-        <img src="/images/elements.jpg" alt="The Elements" className="artist-img" />
+        <img 
+          src={getImagePath("/images/elements.jpg")} 
+          alt="The Elements" 
+          className="artist-img"
+          onError={(e) => handleImageError(e)}
+        />
       </div>
       <div className="artist-info">
         <h3>The Elements</h3>
@@ -110,7 +136,12 @@ const Home = () => {
     {/* Artist 3: Kuma Sagar & The Khwopa */}
     <div className="artist-card">
       <div className="artist-img-container">
-        <img src="/images/kuma.jpeg" alt="Kuma Sagar & The Khwopa" className="artist-img" />
+        <img 
+          src={getImagePath("/images/kuma.jpeg")} 
+          alt="Kuma Sagar & The Khwopa" 
+          className="artist-img"
+          onError={(e) => handleImageError(e)}
+        />
       </div>
       <div className="artist-info">
         <h3>Kuma Sagar & The Khwopa</h3>
@@ -125,7 +156,12 @@ const Home = () => {
     {/* Artist 4: Sajjan Raj Vaidya */}
     <div className="artist-card">
       <div className="artist-img-container">
-        <img src="/images/sajan.jpg" alt="Sajjan Raj Vaidya" className="artist-img" />
+        <img 
+          src={getImagePath("/images/sajan.jpg")} 
+          alt="Sajjan Raj Vaidya" 
+          className="artist-img"
+          onError={(e) => handleImageError(e)}
+        />
       </div>
       <div className="artist-info">
         <h3>Sajjan Raj Vaidya</h3>
@@ -140,7 +176,12 @@ const Home = () => {
     {/* Artist 5: Sushant K.C */}
     <div className="artist-card">
       <div className="artist-img-container">
-        <img src="/images/sushant.jpeg" alt="Sushant K.C" className="artist-img" />
+        <img 
+          src={getImagePath("/images/sushant.jpeg")} 
+          alt="Sushant K.C" 
+          className="artist-img"
+          onError={(e) => handleImageError(e)}
+        />
       </div>
       <div className="artist-info">
         <h3>Sushant K.C</h3>
@@ -155,7 +196,12 @@ const Home = () => {
     {/* Artist 6: Melina Rai */}
     <div className="artist-card">
       <div className="artist-img-container">
-        <img src="/images/melina.jpg" alt="Melina Rai" className="artist-img" />
+        <img 
+          src={getImagePath("/images/melina.jpg")} 
+          alt="Melina Rai" 
+          className="artist-img"
+          onError={(e) => handleImageError(e)}
+        />
       </div>
       <div className="artist-info">
         <h3>Melina Rai</h3>
@@ -179,17 +225,29 @@ const Home = () => {
         </div>
         <div className="about-images">
           <div className="image-card venue-hall">
-            <img src="/images/eventhall.webp" alt="Event Hall" />
+            <img 
+              src={getImagePath("/images/eventhall.webp")} 
+              alt="Event Hall"
+              onError={(e) => handleImageError(e)}
+            />
           </div>
           <div className="image-card venue-resort">
-            <img src="/images/resort.avif" alt="Resort Venue" />
+            <img 
+              src={getImagePath("/images/resort.avif")} 
+              alt="Resort Venue"
+              onError={(e) => handleImageError(e)}
+            />
             <div className="venue-badge">
               <span className="number">10+</span>
               <span className="label">Venues</span>
             </div>
           </div>
           <div className="image-card performer">
-            <img src="/images/nepathya.jpg" alt="Performer" />
+            <img 
+              src={getImagePath("/images/nepathya.jpg")} 
+              alt="Performer"
+              onError={(e) => handleImageError(e)}
+            />
           </div>
         </div>
       </section>
