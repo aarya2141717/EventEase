@@ -9,12 +9,12 @@ const AddVenue = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [selectedImages, setSelectedImages] = useState([]);
 
   const [formData, setFormData] = useState({
     name: "",
     location: "",
     category: "Banquets",
-    image: "",
     description: "",
     capacity: "",
     price: "",
@@ -31,6 +31,16 @@ const AddVenue = () => {
     setError("");
   };
 
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files || []).slice(0, 3);
+    setSelectedImages(files);
+    if (files.length === 0) {
+      setError("Please select at least one image (up to 3).");
+    } else {
+      setError("");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -41,24 +51,23 @@ const AddVenue = () => {
         ? formData.amenities.split(",").map((item) => item.trim())
         : [];
 
-      const venueData = {
-        name: formData.name,
-        location: formData.location,
-        category: formData.category,
-        image: formData.image,
-        description: formData.description,
-        capacity: formData.capacity,
-        price: formData.price,
-        contact: formData.contact,
-        amenities: amenitiesArray,
-      };
+      const payload = new FormData();
+      payload.append("name", formData.name);
+      payload.append("location", formData.location);
+      payload.append("category", formData.category);
+      payload.append("description", formData.description);
+      payload.append("capacity", formData.capacity);
+      payload.append("price", formData.price);
+      payload.append("contact", formData.contact);
+      payload.append("amenities", amenitiesArray.join(","));
+
+      selectedImages.forEach((file) => {
+        payload.append("images", file);
+      });
 
       const response = await fetch("http://localhost:5000/api/venues", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(venueData),
+        body: payload,
       });
 
       const data = await response.json();
@@ -171,15 +180,24 @@ const AddVenue = () => {
               </div>
 
               <div className="form-group" style={{ marginBottom: "20px" }}>
-                <label>Image URL</label>
+                <label>Upload Images (up to 3)</label>
                 <input
-                  type="text"
-                  name="image"
-                  value={formData.image}
-                  onChange={handleChange}
+                  type="file"
+                  name="images"
+                  accept="image/*"
+                  multiple
+                  onChange={handleFileChange}
                   className="input"
-                  placeholder="/images/venue-name.jpg"
+                  required
                 />
+                <small style={{ color: "#6b7280" }}>
+                  Please choose at least 1 and up to 3 images from your computer.
+                </small>
+                {selectedImages.length > 0 && (
+                  <div style={{ marginTop: "8px", color: "#374151" }}>
+                    Selected: {selectedImages.length} file(s)
+                  </div>
+                )}
               </div>
 
               <div className="form-group" style={{ marginBottom: "20px" }}>

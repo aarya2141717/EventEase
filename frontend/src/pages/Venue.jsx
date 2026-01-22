@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Venue.css";
 import { getImagePath, handleImageError } from "../utils/imageHelper";
 
-const venuesData = [
+const fallbackVenuesData = [
   {
     id: "smart-palace",
     name: "Smart Palace",
@@ -99,11 +99,34 @@ image: "/images/The White House Villa.avif"
 
 const Venue = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [venues, setVenues] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch venues from API
+  useEffect(() => {
+    const fetchVenues = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/venues");
+        if (response.ok) {
+          const data = await response.json();
+          setVenues(data);
+        } else {
+          setVenues(fallbackVenuesData);
+        }
+      } catch (error) {
+        console.error("Error fetching venues:", error);
+        setVenues(fallbackVenuesData);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVenues();
+  }, []);
 
   const filteredVenues =
     activeCategory === "All"
-      ? venuesData
-      : venuesData.filter(
+      ? [...fallbackVenuesData, ...venues]
+      : [...fallbackVenuesData, ...venues].filter(
           (venue) => venue.category === activeCategory
         );
 
@@ -133,7 +156,12 @@ const Venue = () => {
 
         {/* VENUE GRID */}
         <div className="venues-grid">
-          {filteredVenues.map((venue) => (
+          {loading ? (
+            <p style={{ gridColumn: "1 / -1", textAlign: "center", padding: "40px" }}>Loading additional venues...</p>
+          ) : null}
+          {filteredVenues.length === 0 ? (
+            <p style={{ gridColumn: "1 / -1", textAlign: "center", padding: "40px" }}>No venues found in this category</p>
+          ) : filteredVenues.map((venue) => (
             <div key={venue.id} className="venue-card">
               <div className="venue-image">
                 <img 

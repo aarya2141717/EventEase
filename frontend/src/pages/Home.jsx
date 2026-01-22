@@ -111,7 +111,7 @@ const Home = () => {
             </div>
             <div className="card-bottom">
               <span className="rating">⭐ 4.8 (600+ reviews)</span>
-              <Link to="/venue/queens-palace" className="view-btn">
+              <Link to="/venue/queens-palace-events" className="view-btn">
                 View
               </Link>
             </div>
@@ -125,7 +125,7 @@ const Home = () => {
             </div>
             <div className="card-bottom">
               <span className="rating">⭐ 4.4 (1400+ reviews)</span>
-              <Link to="/venue/silver-oak" className="view-btn">
+              <Link to="/venue/silver-oak-banquet" className="view-btn">
                 View
               </Link>
             </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./VenueDetails.css";
 import { getImagePath, handleImageError } from "../utils/imageHelper";
@@ -190,7 +190,59 @@ const venuesData = {
 const VenueDetails = () => {
   const { venueId } = useParams();
   const navigate = useNavigate();
-  const venue = venuesData[venueId];
+  const [venue, setVenue] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // First check hardcoded data
+    if (venuesData[venueId]) {
+      setVenue(venuesData[venueId]);
+      setLoading(false);
+    } else {
+      // Fetch from API if not in hardcoded data
+      const fetchVenue = async () => {
+        try {
+          const response = await fetch(`http://localhost:5000/api/venues`);
+          if (response.ok) {
+            const venues = await response.json();
+            const apiVenue = venues.find(v => v.id === venueId);
+            if (apiVenue) {
+              // Transform API venue to match expected structure
+              const transformedVenue = {
+                id: apiVenue.id,
+                name: apiVenue.name,
+                location: apiVenue.location,
+                category: apiVenue.category,
+                rating: apiVenue.rating || 4.5,
+                reviews: apiVenue.reviews || 0,
+                image: apiVenue.image,
+                description: apiVenue.description,
+                capacity: apiVenue.capacity,
+                amenities: apiVenue.amenities || [],
+                price: apiVenue.price,
+                contact: apiVenue.contact,
+                images: apiVenue.images || [apiVenue.image]
+              };
+              setVenue(transformedVenue);
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching venue:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchVenue();
+    }
+  }, [venueId]);
+
+  if (loading) {
+    return (
+      <div style={{ padding: "100px 20px", textAlign: "center" }}>
+        <p>Loading venue details...</p>
+      </div>
+    );
+  }
 
   if (!venue) {
     return (
@@ -232,7 +284,7 @@ const VenueDetails = () => {
             />
           </div>
           <div className="thumbnail-images">
-            {venue.images.slice(1).map((img, index) => (
+            {venue.images && venue.images.length > 1 && venue.images.slice(1).map((img, index) => (
               <img 
                 key={index} 
                 src={getImagePath(img)} 
@@ -254,12 +306,16 @@ const VenueDetails = () => {
             <section className="amenities-section">
               <h2>Amenities & Services</h2>
               <div className="amenities-grid">
-                {venue.amenities.map((amenity, index) => (
-                  <div key={index} className="amenity-item">
-                    <span className="amenity-icon">✓</span>
-                    <span>{amenity}</span>
-                  </div>
-                ))}
+                {venue.amenities && venue.amenities.length > 0 ? (
+                  venue.amenities.map((amenity, index) => (
+                    <div key={index} className="amenity-item">
+                      <span className="amenity-icon">✓</span>
+                      <span>{amenity}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p>No amenities listed</p>
+                )}
               </div>
             </section>
 
