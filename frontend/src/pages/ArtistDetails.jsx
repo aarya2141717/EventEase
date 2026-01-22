@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./ArtistDetails.css";
 import { getImagePath, handleImageError } from "../utils/imageHelper";
@@ -223,7 +223,61 @@ const artistsData = {
 const ArtistDetails = () => {
   const { artistId } = useParams();
   const navigate = useNavigate();
-  const artist = artistsData[artistId];
+  const [artist, setArtist] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // First check hardcoded data
+    if (artistsData[artistId]) {
+      setArtist(artistsData[artistId]);
+      setLoading(false);
+    } else {
+      // Fetch from API if not in hardcoded data
+      const fetchArtist = async () => {
+        try {
+          const response = await fetch(`http://localhost:5000/api/artists`);
+          if (response.ok) {
+            const artists = await response.json();
+            const apiArtist = artists.find(a => a.id === artistId);
+            if (apiArtist) {
+              // Transform API artist to match expected structure
+              const transformedArtist = {
+                id: apiArtist.id,
+                name: apiArtist.name,
+                type: apiArtist.category || "Artist",
+                image: apiArtist.image,
+                description: apiArtist.description,
+                awards: apiArtist.achievements ? apiArtist.achievements.split("\n").filter(Boolean) : [],
+                genre: apiArtist.genre ? apiArtist.genre.split(",").map(g => g.trim()) : [],
+                experience: apiArtist.experience || "N/A",
+                languages: ["Nepali", "English"],
+                performances: `${apiArtist.reviews || 0}+ shows`,
+                bookingFee: apiArtist.bookingFee,
+                contact: apiArtist.contact,
+                availability: apiArtist.availability ? JSON.parse(apiArtist.availability) : [],
+                socialMedia: apiArtist.socialMedia || {},
+                popularSongs: apiArtist.popularSongs ? JSON.parse(apiArtist.popularSongs) : []
+              };
+              setArtist(transformedArtist);
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching artist:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchArtist();
+    }
+  }, [artistId]);
+
+  if (loading) {
+    return (
+      <div style={{ padding: "100px 20px", textAlign: "center" }}>
+        <p>Loading artist details...</p>
+      </div>
+    );
+  }
 
   if (!artist) {
     return (
@@ -281,21 +335,25 @@ const ArtistDetails = () => {
             <section className="awards-section">
               <h2>Awards & Achievements</h2>
               <div className="awards-list">
-                {artist.awards.map((award, index) => (
-                  <div key={index} className="award-item">
-                    <span className="trophy-icon">🏆</span>
-                    <span>{award}</span>
-                  </div>
-                ))}
+                {artist.awards && artist.awards.length > 0 ? (
+                  artist.awards.map((award, index) => (
+                    <div key={index} className="award-item">
+                      <span className="trophy-icon">🏆</span>
+                      <span>{award}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p>No awards listed</p>
+                )}
               </div>
             </section>
 
             <section className="details-section">
               <h2>Artist Details</h2>
               <div className="detail-item">
-                <strong>Genre:</strong> {artist.genre.join(", ")}
+                <strong>Genre:</strong> {artist.genre ? artist.genre.join(", ") : "Various"}
               </div>
-              {artist.members && (
+              {artist.members && artist.members.length > 0 && (
                 <div className="detail-item">
                   <strong>Band Members:</strong>
                   <ul className="members-list">
@@ -311,9 +369,13 @@ const ArtistDetails = () => {
               <div className="detail-item">
                 <strong>Availability:</strong>
                 <div className="availability-tags">
-                  {artist.availability.map((item, index) => (
-                    <span key={index} className="availability-tag">{item}</span>
-                  ))}
+                  {artist.availability && artist.availability.length > 0 ? (
+                    artist.availability.map((item, index) => (
+                      <span key={index} className="availability-tag">{item}</span>
+                    ))
+                  ) : (
+                    <span>Contact for availability</span>
+                  )}
                 </div>
               </div>
             </section>
@@ -321,12 +383,16 @@ const ArtistDetails = () => {
             <section className="songs-section">
               <h2>Popular Songs</h2>
               <div className="songs-grid">
-                {artist.popularSongs.map((song, index) => (
-                  <div key={index} className="song-item">
-                    <span className="music-icon">🎵</span>
-                    <span>{song}</span>
-                  </div>
-                ))}
+                {artist.popularSongs && artist.popularSongs.length > 0 ? (
+                  artist.popularSongs.map((song, index) => (
+                    <div key={index} className="song-item">
+                      <span className="music-icon">🎵</span>
+                      <span>{song}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p>No songs listed</p>
+                )}
               </div>
             </section>
 

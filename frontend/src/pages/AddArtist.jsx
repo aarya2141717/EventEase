@@ -9,12 +9,12 @@ const AddArtist = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const [formData, setFormData] = useState({
     name: "",
     category: "Singers",
     genre: "",
-    image: "",
     description: "",
     experience: "",
     bookingFee: "",
@@ -36,6 +36,16 @@ const AddArtist = () => {
     setError("");
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setSelectedImage(file);
+      setError("");
+    } else {
+      setError("Please select an image file.");
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
@@ -49,31 +59,30 @@ const AddArtist = () => {
         ? formData.popularSongs.split(",").map((item) => item.trim())
         : [];
 
-      const artistData = {
-        name: formData.name,
-        category: formData.category,
-        genre: formData.genre,
-        image: formData.image,
-        description: formData.description,
-        experience: formData.experience,
-        bookingFee: formData.bookingFee,
-        contact: formData.contact,
-        availability: availabilityArray,
-        achievements: formData.achievements,
-        popularSongs: songsArray,
-        socialMedia: {
-          facebook: formData.facebook || null,
-          instagram: formData.instagram || null,
-          youtube: formData.youtube || null,
-        },
-      };
+      const payload = new FormData();
+      payload.append("name", formData.name);
+      payload.append("category", formData.category);
+      payload.append("genre", formData.genre);
+      payload.append("description", formData.description);
+      payload.append("experience", formData.experience);
+      payload.append("bookingFee", formData.bookingFee);
+      payload.append("contact", formData.contact);
+      payload.append("availability", availabilityArray.join(","));
+      payload.append("achievements", formData.achievements);
+      payload.append("popularSongs", songsArray.join(","));
+      payload.append("socialMedia", JSON.stringify({
+        facebook: formData.facebook || null,
+        instagram: formData.instagram || null,
+        youtube: formData.youtube || null,
+      }));
+
+      if (selectedImage) {
+        payload.append("image", selectedImage);
+      }
 
       const response = await fetch("http://localhost:5000/api/artists", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(artistData),
+        body: payload,
       });
 
       const data = await response.json();
@@ -184,15 +193,23 @@ const AddArtist = () => {
               </div>
 
               <div className="form-group" style={{ marginBottom: "20px" }}>
-                <label>Image URL</label>
+                <label>Upload Image *</label>
                 <input
-                  type="text"
+                  type="file"
                   name="image"
-                  value={formData.image}
-                  onChange={handleChange}
+                  accept="image/*"
+                  onChange={handleFileChange}
                   className="input"
-                  placeholder="/images/artist-name.jpg"
+                  required
                 />
+                <small style={{ color: "#6b7280" }}>
+                  Please choose an image file from your computer.
+                </small>
+                {selectedImage && (
+                  <div style={{ marginTop: "8px", color: "#374151" }}>
+                    Selected: {selectedImage.name}
+                  </div>
+                )}
               </div>
 
               <div className="form-group" style={{ marginBottom: "20px" }}>
