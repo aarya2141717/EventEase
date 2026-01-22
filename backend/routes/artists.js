@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const upload = require("../middleware/upload");
 
 let Artist;
 try {
@@ -25,7 +26,7 @@ router.get("/", async (req, res) => {
 });
 
 // POST /api/artists - Add new artist (Admin only)
-router.post("/", async (req, res) => {
+router.post("/", upload.single("image"), async (req, res) => {
   try {
     if (!Artist) {
       return res.status(500).json({ message: "Artist model not available" });
@@ -37,7 +38,6 @@ router.post("/", async (req, res) => {
       name,
       category,
       genre,
-      image,
       description,
       experience,
       bookingFee,
@@ -53,20 +53,36 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ message: "Artist name is required" });
     }
 
+    if (!req.file) {
+      return res.status(400).json({ message: "Artist image is required" });
+    }
+
+    const uploadedImage = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+
+    const availabilityArray = availability
+      ? availability.split(",").map((item) => item.trim()).filter(Boolean)
+      : null;
+
+    const songsArray = popularSongs
+      ? popularSongs.split(",").map((item) => item.trim()).filter(Boolean)
+      : null;
+
+    const socialMediaObj = socialMedia ? JSON.parse(socialMedia) : null;
+
     // Create artist
     const newArtist = await Artist.create({
       name,
       category: category || null,
       genre: genre || null,
-      image: image || null,
+      image: uploadedImage,
       description: description || null,
       experience: experience || null,
       bookingFee: bookingFee || null,
       contact: contact || null,
-      availability: availability ? JSON.stringify(availability) : null,
+      availability: availabilityArray ? JSON.stringify(availabilityArray) : null,
       achievements: achievements || null,
-      popularSongs: popularSongs ? JSON.stringify(popularSongs) : null,
-      socialMedia: socialMedia || null,
+      popularSongs: songsArray ? JSON.stringify(songsArray) : null,
+      socialMedia: socialMediaObj,
     });
 
     console.log("✅ Artist created successfully:", newArtist.name);
@@ -77,6 +93,33 @@ router.post("/", async (req, res) => {
     });
   } catch (error) {
     console.error("❌ Add artist error:", error.message);
+    res.status(500).json({ 
+      message: "Server error", 
+      error: error.message
+    });
+  }
+});
+
+// DELETE /api/artists/:id - Delete an artist (Admin only)
+router.delete("/:id", async (req, res) => {
+  try {
+    if (!Artist) {
+      return res.status(500).json({ message: "Artist model not available" });
+    }
+
+    const { id } = req.params;
+    const artist = await Artist.findByPk(id);
+
+    if (!artist) {
+      return res.status(404).json({ message: "Artist not found" });
+    }
+
+    await artist.destroy();
+    console.log("✅ Artist deleted:", id);
+
+    res.json({ message: "Artist deleted successfully" });
+  } catch (error) {
+    console.error("❌ Delete artist error:", error.message);
     res.status(500).json({ 
       message: "Server error", 
       error: error.message
