@@ -1,61 +1,70 @@
- const express = require("express");
+const express = require("express");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
+const User = require("../models/User");
 
 const router = express.Router();
 
-// Load User model safely
-let User;
-try {
-  User = require("../models/User");
-  console.log("✅ User model loaded");
-} catch (error) {
-  console.error("❌ Error loading User model:", error.message);
-}
+/**
+ * 🔑 Helper: Generate JWT Token
+ */
+const generateToken = (user) => {
+  return jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+      role: user.userType || user.accountType,
+    },
+    process.env.JWT_SECRET,
+    { expiresIn: process.env.JWT_EXPIRES_IN || "7d" }
+  );
+};
 
-// ===== SIGNUP ROUTE =====
+// ======================= SIGNUP =======================
 router.post("/signup", async (req, res) => {
   try {
-    console.log("📝 Signup request received:", req.body);
-    
-    const { fullName, email, phone, password, userType, location, securityQuestion, securityAnswer } = req.body;
+    const {
+      fullName,
+      email,
+      phone,
+      password,
+      userType,
+      location,
+      securityQuestion,
+      securityAnswer,
+    } = req.body;
 
-    // Validation
     if (!fullName || !email || !password) {
-      console.warn("❌ Missing required fields");
-      return res.status(400).json({ message: "Please provide fullName, email, and password" });
+      return res.status(400).json({ message: "Missing required fields" });
     }
 
-    // Check if user already exists
     const existingUser = await User.findOne({ where: { email } });
     if (existingUser) {
-      console.warn("❌ Email already registered:", email);
       return res.status(409).json({ message: "Email already registered" });
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Normalize userType (handle "provider" from frontend)
-    let normalizedUserType = userType === "provider" ? "vendor" : (userType || "customer");
+    const normalizedUserType =
+      userType === "provider" ? "vendor" : userType || "customer";
 
-    // Create user in database
     const newUser = await User.create({
       fullName,
       email,
       phone: phone || null,
       password: hashedPassword,
       userType: normalizedUserType,
-      accountType: normalizedUserType, // Also set accountType for compatibility
+      accountType: normalizedUserType,
       location: location || null,
       securityQuestion: securityQuestion || null,
       securityAnswer: securityAnswer || null,
     });
 
-    console.log("✅ User created successfully:", newUser.email);
+    const token = generateToken(newUser);
 
-    // Return user data (without password)
     res.status(201).json({
-      message: "User registered successfully",
+      message: "Signup successful",
+      token,
       user: {
         id: newUser.id,
         fullName: newUser.fullName,
@@ -64,68 +73,44 @@ router.post("/signup", async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("❌ Signup error:", error.message);
-    console.error("Full error:", error);
-    res.status(500).json({ 
-      message: "Server error", 
-      error: error.message,
-      details: error.errors ? error.errors.map(e => e.message) : null
-    });
+    console.error("Signup error:", error);
+    res.status(500).json({ message: "Server error" });
   }
 });
 
-// ===== LOGIN ROUTE =====
+// ======================= LOGIN =======================
 router.post("/login", async (req, res) => {
   try {
-    console.log("🔐 Login request received:", req.body.email);
-    
     const { email, password } = req.body;
 
-    // Validation
-    if (!email || !password) {
-      console.warn("❌ Missing email or password");
-      return res.status(400).json({ message: "Please provide email and password" });
-    }
+    if (!email || !password)
+      return res.status(400).json({ message: "Missing credentials" });
 
-    // Find user by email
     const user = await User.findOne({ where: { email } });
-    if (!user) {
-      console.warn("❌ User not found:", email);
+    if (!user)
       return res.status(401).json({ message: "Invalid email or password" });
-    }
 
-    // Check password
-    const isPasswordValid = await bcrypt.compare(password, user.password);
-    if (!isPasswordValid) {
-      console.warn("❌ Invalid password for:", email);
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch)
       return res.status(401).json({ message: "Invalid email or password" });
-    }
 
-    console.log("✅ Login successful:", user.email);
-    console.log("📋 User type from DB:", user.userType);
-    console.log("📋 Account type from DB:", user.accountType);
+    const token = generateToken(user);
 
-    // Return user data (without password)
-    // Use accountType if userType is null, otherwise use userType
-    const finalUserType = user.userType || user.accountType || "customer";
-    
-    res.status(200).json({
+    res.json({
       message: "Login successful",
+      token,
       user: {
         id: user.id,
         fullName: user.fullName,
         email: user.email,
-        userType: finalUserType,
+        userType: user.userType || user.accountType,
         phone: user.phone,
         location: user.location,
       },
     });
   } catch (error) {
-    console.error("❌ Login error:", error.message);
-    res.status(500).json({ 
-      message: "Server error", 
-      error: error.message
-    });
+    console.error("Login error:", error);
+    res.status(500).json({ message: "Server error" });
   }
 });
 
