@@ -1,6 +1,7 @@
 // backend/index.js
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config({ path: __dirname + '/.env' });
 
 const { connectDB, sequelize } = require("./db/db");
@@ -24,6 +25,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
 // Load routes
 const artistRoutes = require("./routes/artists");
