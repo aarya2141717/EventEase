@@ -123,10 +123,13 @@ const Venue = () => {
     fetchVenues();
   }, []);
 
+  // Use API venues if available, otherwise use fallback
+  const allVenues = venues.length > 0 ? venues : fallbackVenuesData;
+  
   const filteredVenues =
     activeCategory === "All"
-      ? [...fallbackVenuesData, ...venues]
-      : [...fallbackVenuesData, ...venues].filter(
+      ? allVenues
+      : allVenues.filter(
           (venue) => venue.category === activeCategory
         );
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Dashboard.css";
@@ -6,23 +6,106 @@ import "./Dashboard.css";
 const VendorDashboard = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const [myVenues, setMyVenues] = useState([]);
+  const [bookings, setBookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [message, setMessage] = useState("");
+  const [editVenue, setEditVenue] = useState(null);
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const token = localStorage.getItem("token");
+      const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+      const [venuesRes, bookingsRes] = await Promise.all([
+        fetch("http://localhost:5000/api/venues/mine", { headers }),
+        fetch("http://localhost:5000/api/bookings/vendor", { headers }),
+      ]);
+
+      if (venuesRes.ok) {
+        const data = await venuesRes.json();
+        setMyVenues(data);
+      }
+
+      if (bookingsRes.ok) {
+        const data = await bookingsRes.json();
+        setBookings(data);
+      }
+    } catch (error) {
+      setMessage("Unable to load data");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleDeleteVenue = async (venueId, venueName) => {
+    if (!window.confirm(`Delete ${venueName}?`)) return;
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:5000/api/venues/${venueId}`, {
+        method: "DELETE",
+        headers: { Authorization: token ? `Bearer ${token}` : "" },
+      });
+      if (response.ok) {
+        setMessage("Venue removed");
+        fetchData();
+      } else {
+        setMessage("Failed to delete venue");
+      }
+    } catch (error) {
+      setMessage("Error deleting venue");
+    }
+  };
+
+  const beginEditVenue = (venue) => {
+    setEditVenue({
+      id: venue.id,
+      name: venue.name,
+      location: venue.location || "",
+      category: venue.category || "",
+      capacity: venue.capacity || "",
+      price: venue.price || "",
+      contact: venue.contact || "",
+      amenities: Array.isArray(venue.amenities) ? venue.amenities.join(",") : "",
+      description: venue.description || "",
+    });
+  };
+
+  const handleVenueUpdate = async (e) => {
+    e.preventDefault();
+    if (!editVenue) return;
+
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:5000/api/venues/${editVenue.id}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+        body: JSON.stringify(editVenue),
+      });
+      if (response.ok) {
+        setMessage("Venue updated");
+        setEditVenue(null);
+        fetchData();
+      } else {
+        setMessage("Failed to update venue");
+      }
+    } catch (error) {
+      setMessage("Error updating venue");
+    }
+  };
 
   const stats = [
-    { label: "My Venues/Artists", value: "8", icon: "🏢", color: "#ff5a1f" },
-    { label: "Total Bookings", value: "124", icon: "📅", color: "#00bcd4" },
-    { label: "Pending Requests", value: "12", icon: "⏳", color: "#ffa500" },
-    { label: "Revenue", value: "₹2.4L", icon: "💰", color: "#10b981" },
-  ];
-
-  const myListings = [
-    { id: 1, name: "Smart Palace", type: "Venue", status: "Active", bookings: 45 },
-    { id: 2, name: "Queen's Palace", type: "Venue", status: "Active", bookings: 38 },
-    { id: 3, name: "Silver Oak Banquet", type: "Venue", status: "Inactive", bookings: 21 },
-  ];
-
-  const recentRequests = [
-    { id: 1, customer: "John Doe", venue: "Smart Palace", date: "2025-01-20", status: "Pending" },
-    { id: 2, customer: "Jane Smith", venue: "Queen's Palace", date: "2025-01-22", status: "Pending" },
+    { label: "My Venues", value: myVenues.length.toString(), icon: "🏢", color: "#ff5a1f" },
+    { label: "Bookings", value: bookings.length.toString(), icon: "📅", color: "#00bcd4" },
+    { label: "Pending", value: bookings.filter(b => b.status === "pending").length.toString(), icon: "⏳", color: "#ffa500" },
+    { label: "Confirmed", value: bookings.filter(b => b.status === "confirmed").length.toString(), icon: "✓", color: "#10b981" },
   ];
 
   return (
@@ -39,6 +122,11 @@ const VendorDashboard = () => {
       </div>
 
       <div className="dashboard-content">
+        {message && (
+          <div style={{ background: "#e0f2fe", color: "#0369a1", padding: "12px", borderRadius: "8px", marginBottom: "12px" }}>
+            {message}
+          </div>
+        )}
         {/* Stats Cards */}
         <div className="stats-grid">
           {stats.map((stat, index) => (
@@ -57,68 +145,112 @@ const VendorDashboard = () => {
         {/* My Listings */}
         <div className="dashboard-section">
           <h2>My Listings</h2>
-          <div className="listings-grid">
-            {myListings.map((listing) => (
-              <div key={listing.id} className="listing-card">
-                <div className="listing-header">
-                  <h3>{listing.name}</h3>
-                  <span className={`status-badge ${listing.status.toLowerCase()}`}>
-                    {listing.status}
-                  </span>
-                </div>
-                <p className="listing-type">{listing.type}</p>
-                <div className="listing-footer">
-                  <span className="listing-stat">📅 {listing.bookings} Bookings</span>
-                  <button className="action-btn">Manage</button>
-                </div>
-              </div>
-            ))}
-          </div>
-          <button 
-            className="add-listing-btn"
-            onClick={() => navigate('/vendor/add-venue')}
-          >
-            + Add New Venue
-          </button>
+          {loading ? (
+            <p>Loading...</p>
+          ) : myVenues.length === 0 ? (
+            <div className="empty-state">
+              <p>No venues yet. Add your first venue.</p>
+              <button className="add-listing-btn" onClick={() => navigate('/vendor/add-venue')}>
+                + Add New Venue
+              </button>
+            </div>
+          ) : (
+            <div className="table-container">
+              <table className="dashboard-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {myVenues.map((venue) => (
+                    <tr key={venue.id}>
+                      <td>{venue.name}</td>
+                      <td>{venue.location || "-"}</td>
+                      <td>{venue.category || "-"}</td>
+                      <td>{venue.price || "-"}</td>
+                      <td>
+                        <div className="action-buttons">
+                          <button className="action-btn" onClick={() => beginEditVenue(venue)}>Edit</button>
+                          <button className="action-btn reject" onClick={() => handleDeleteVenue(venue.id, venue.name)}>Delete</button>
+                        </div>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+              <button 
+                className="add-listing-btn"
+                onClick={() => navigate('/vendor/add-venue')}
+              >
+                + Add New Venue
+              </button>
+            </div>
+          )}
         </div>
+
+        {editVenue && (
+          <div className="dashboard-section">
+            <h2>Edit Venue</h2>
+            <form onSubmit={handleVenueUpdate} className="simple-form">
+              <div className="form-row">
+                <input value={editVenue.name} onChange={(e) => setEditVenue({ ...editVenue, name: e.target.value })} placeholder="Name" required />
+                <input value={editVenue.location} onChange={(e) => setEditVenue({ ...editVenue, location: e.target.value })} placeholder="Location" />
+                <input value={editVenue.category} onChange={(e) => setEditVenue({ ...editVenue, category: e.target.value })} placeholder="Category" />
+              </div>
+              <div className="form-row">
+                <input value={editVenue.capacity} onChange={(e) => setEditVenue({ ...editVenue, capacity: e.target.value })} placeholder="Capacity" />
+                <input value={editVenue.price} onChange={(e) => setEditVenue({ ...editVenue, price: e.target.value })} placeholder="Price" />
+                <input value={editVenue.contact} onChange={(e) => setEditVenue({ ...editVenue, contact: e.target.value })} placeholder="Contact" />
+              </div>
+              <textarea value={editVenue.description} onChange={(e) => setEditVenue({ ...editVenue, description: e.target.value })} placeholder="Description" />
+              <input value={editVenue.amenities} onChange={(e) => setEditVenue({ ...editVenue, amenities: e.target.value })} placeholder="Amenities (comma separated)" />
+              <div className="form-actions">
+                <button type="button" className="btn-secondary" onClick={() => setEditVenue(null)}>Cancel</button>
+                <button type="submit" className="logout-btn">Save</button>
+              </div>
+            </form>
+          </div>
+        )}
 
         {/* Recent Booking Requests */}
         <div className="dashboard-section">
           <h2>Recent Booking Requests</h2>
           <div className="table-container">
-            <table className="dashboard-table">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Customer</th>
-                  <th>Venue/Artist</th>
-                  <th>Date</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {recentRequests.map((request) => (
-                  <tr key={request.id}>
-                    <td>#{request.id}</td>
-                    <td>{request.customer}</td>
-                    <td>{request.venue}</td>
-                    <td>{request.date}</td>
-                    <td>
-                      <span className={`status-badge ${request.status.toLowerCase()}`}>
-                        {request.status}
-                      </span>
-                    </td>
-                    <td>
-                      <div className="action-buttons">
-                        <button className="action-btn approve">Approve</button>
-                        <button className="action-btn reject">Reject</button>
-                      </div>
-                    </td>
+            {bookings.length === 0 ? (
+              <p>No booking requests yet</p>
+            ) : (
+              <table className="dashboard-table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Customer</th>
+                    <th>Venue</th>
+                    <th>Date</th>
+                    <th>Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {bookings.map((booking) => (
+                    <tr key={booking.id}>
+                      <td>#{booking.id.slice(0, 6)}</td>
+                      <td>{booking.contactName}</td>
+                      <td>{booking.itemName}</td>
+                      <td>{booking.startDate || booking.eventDate || "-"}</td>
+                      <td>
+                        <span className={`status-badge ${booking.status.toLowerCase()}`}>
+                          {booking.status}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            )}
           </div>
         </div>
 

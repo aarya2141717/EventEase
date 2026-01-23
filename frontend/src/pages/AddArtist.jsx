@@ -80,8 +80,13 @@ const AddArtist = () => {
         payload.append("image", selectedImage);
       }
 
+      const token = localStorage.getItem("token");
+
       const response = await fetch("http://localhost:5000/api/artists", {
         method: "POST",
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "",
+        },
         body: payload,
       });
 

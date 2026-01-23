@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from "../context/AuthContext";
 import './VenueBooking.css';
 
 const VenueBooking = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
   const venue = location.state?.venue || null;
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
+    fullName: user?.fullName || '',
+    email: user?.email || '',
+    phone: user?.phone || '',
     startDate: '',
     endDate: '',
     startTime: '',
@@ -21,6 +23,17 @@ const VenueBooking = () => {
     numberOfGuests: '',
     specialRequirements: '',
   });
+
+  useEffect(() => {
+    if (user) {
+      setFormData((prev) => ({
+        ...prev,
+        fullName: user.fullName || '',
+        email: user.email || '',
+        phone: user.phone || '',
+      }));
+    }
+  }, [user]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -105,10 +118,13 @@ const VenueBooking = () => {
         venueName: venue?.name || 'Unknown Venue',
       };
 
+      const token = localStorage.getItem('token');
+
       const response = await fetch('http://localhost:5000/api/bookings/venue', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: token ? `Bearer ${token}` : '',
         },
         body: JSON.stringify(bookingData),
       });
@@ -130,6 +146,18 @@ const VenueBooking = () => {
       setLoading(false);
     }
   };
+
+  if (!user) {
+    return (
+      <div style={{ padding: '100px 20px', textAlign: 'center' }}>
+        <h2>Please log in</h2>
+        <p>You need to be logged in to book a venue.</p>
+        <button onClick={() => navigate('/login')} className="btn-primary">
+          Go to Login
+        </button>
+      </div>
+    );
+  }
 
   if (!venue) {
     return (
@@ -166,6 +194,7 @@ const VenueBooking = () => {
                 onChange={handleChange}
                 className={errors.fullName ? 'error' : ''}
                 placeholder="Enter your full name"
+                readOnly
               />
               {errors.fullName && <span className="error-message">{errors.fullName}</span>}
             </div>
@@ -181,6 +210,7 @@ const VenueBooking = () => {
                   onChange={handleChange}
                   className={errors.email ? 'error' : ''}
                   placeholder="your.email@example.com"
+                  readOnly
                 />
                 {errors.email && <span className="error-message">{errors.email}</span>}
               </div>

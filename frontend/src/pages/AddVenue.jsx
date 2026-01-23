@@ -65,8 +65,13 @@ const AddVenue = () => {
         payload.append("images", file);
       });
 
+      const token = localStorage.getItem("token");
+
       const response = await fetch("http://localhost:5000/api/venues", {
         method: "POST",
+        headers: {
+          Authorization: token ? `Bearer ${token}` : "",
+        },
         body: payload,
       });
 

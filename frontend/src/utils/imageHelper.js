@@ -2,8 +2,12 @@
 export const getImagePath = (imagePath) => {
   if (!imagePath) return '/images/default-placeholder.jpg';
   
-  // Try the path as-is first (Vite handles most cases)
-  // If it contains special characters, encode them
+  // If already encoded (contains %), return as-is
+  if (imagePath.includes("%")) {
+    return imagePath;
+  }
+  
+  // If it contains special characters that need encoding
   if (imagePath.includes("'") || imagePath.includes("&") || imagePath.includes(" ")) {
     // Split and encode only the filename
     const parts = imagePath.split('/');
