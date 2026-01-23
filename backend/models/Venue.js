@@ -1,47 +1,62 @@
 const { DataTypes } = require("sequelize");
 const { sequelize } = require("../db/db");
 
-const User = sequelize.define("User", {
+const Venue = sequelize.define("Venue", {
   id: {
     type: DataTypes.UUID,
     defaultValue: DataTypes.UUIDV4,
     primaryKey: true,
   },
-  fullName: {
+  name: {
     type: DataTypes.STRING,
     allowNull: false,
-  },
-  email: {
-    type: DataTypes.STRING,
-    allowNull: false,
-    unique: true,
-  },
-  phone: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },
-  password: {
-    type: DataTypes.STRING,
-    allowNull: false,
-  },
-  userType: {
-    type: DataTypes.ENUM("customer", "vendor", "admin"),
-    defaultValue: "customer",
   },
   location: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  securityQuestion: {
+  category: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  securityAnswer: {
+  image: {
     type: DataTypes.STRING,
     allowNull: true,
   },
-  accountType: {
-    type: DataTypes.ENUM("customer", "vendor", "admin"),
+  images: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  description: {
+    type: DataTypes.TEXT,
+    allowNull: true,
+  },
+  capacity: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  amenities: {
+    type: DataTypes.JSON,
+    allowNull: true,
+  },
+  price: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  contact: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  rating: {
+    type: DataTypes.DECIMAL(3, 1),
+    defaultValue: 0,
+  },
+  reviews: {
+    type: DataTypes.INTEGER,
+    defaultValue: 0,
+  },
+  createdBy: {
+    type: DataTypes.UUID,
     allowNull: true,
   },
   createdAt: {
@@ -54,7 +69,7 @@ const User = sequelize.define("User", {
   },
 }, {
   timestamps: true,
-  tableName: "users",
+  tableName: "venues",
 });
 
-module.exports = User;
+module.exports = Venue;

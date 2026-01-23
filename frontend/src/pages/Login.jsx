@@ -3,7 +3,6 @@ import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-
 export default function Login() {
   const [showPw, setShowPw] = useState(false);
   const [formData, setFormData] = useState({
@@ -12,6 +11,7 @@ export default function Login() {
   });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -41,9 +41,14 @@ export default function Login() {
       const data = await response.json();
 
       if (response.ok) {
-        // Store user data in context and localStorage
+        // 🔐 STORE JWT TOKEN + USER
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        // Store user in context
         login(data.user);
-        // Redirect to dashboard after login
+
+        // Redirect to dashboard
         navigate("/dashboard");
       } else {
         setError(data.message || "Login failed. Please try again.");
@@ -115,7 +120,11 @@ export default function Login() {
               />
 
               <img
-                src={showPw ? "/images/visibilityon.png" : "/images/visibilityoff.png"}
+                src={
+                  showPw
+                    ? "/images/visibilityon.png"
+                    : "/images/visibilityoff.png"
+                }
                 alt="toggle"
                 className="eye-icon"
                 onClick={() => setShowPw(!showPw)}
@@ -123,14 +132,20 @@ export default function Login() {
             </div>
 
             <p className="forgot">
-              <Link to="/forgot-password" className="link">Forgot password?</Link>
+              <Link to="/forgot-password" className="link">
+                Forgot password?
+              </Link>
             </p>
 
             <button type="submit" className="login-btn" disabled={loading}>
               {loading ? "Logging in..." : "Log In"}
             </button>
+
             <p className="signup">
-              Don't have an account? <Link to="/register" className="link">Sign up</Link>
+              Don't have an account?{" "}
+              <Link to="/register" className="link">
+                Sign up
+              </Link>
             </p>
           </form>
         </div>

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Venue.css";
+import { getImagePath, handleImageError } from "../utils/imageHelper";
 
-const venuesData = [
+const fallbackVenuesData = [
   {
     id: "smart-palace",
     name: "Smart Palace",
@@ -21,7 +22,7 @@ const venuesData = [
     reviews: 600,
     category: "Banquets",
     description: "Garden meets timeless elegance",
-    image: "/images/Queen's palace.jpg",
+    image: "/images/queens palace.jpg",
   },
   {
     id: "silver-oak-banquet",
@@ -41,7 +42,7 @@ const venuesData = [
     reviews: 820,
     category: "Resorts",
     description: "Luxury resort with scenic views",
-    image: "/images/Dorje's Resort & Spa.jpg",
+    image: "/images/Dorje's Resort & Spa 1.jpg",
   },
   {
     id: "fish-tail-lodge",
@@ -98,11 +99,37 @@ image: "/images/The White House Villa.avif"
 
 const Venue = () => {
   const [activeCategory, setActiveCategory] = useState("All");
+  const [venues, setVenues] = useState([]);
+  const [loading, setLoading] = useState(true);
 
+  // Fetch venues from API
+  useEffect(() => {
+    const fetchVenues = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/venues");
+        if (response.ok) {
+          const data = await response.json();
+          setVenues(data);
+        } else {
+          setVenues(fallbackVenuesData);
+        }
+      } catch (error) {
+        console.error("Error fetching venues:", error);
+        setVenues(fallbackVenuesData);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchVenues();
+  }, []);
+
+  // Use API venues if available, otherwise use fallback
+  const allVenues = venues.length > 0 ? venues : fallbackVenuesData;
+  
   const filteredVenues =
     activeCategory === "All"
-      ? venuesData
-      : venuesData.filter(
+      ? allVenues
+      : allVenues.filter(
           (venue) => venue.category === activeCategory
         );
 
@@ -132,10 +159,20 @@ const Venue = () => {
 
         {/* VENUE GRID */}
         <div className="venues-grid">
-          {filteredVenues.map((venue) => (
+          {loading ? (
+            <p style={{ gridColumn: "1 / -1", textAlign: "center", padding: "40px" }}>Loading additional venues...</p>
+          ) : null}
+          {filteredVenues.length === 0 ? (
+            <p style={{ gridColumn: "1 / -1", textAlign: "center", padding: "40px" }}>No venues found in this category</p>
+          ) : filteredVenues.map((venue) => (
             <div key={venue.id} className="venue-card">
               <div className="venue-image">
-                <img src={venue.image} alt={venue.name} />
+                <img 
+                  src={getImagePath(venue.image)} 
+                  alt={venue.name}
+                  data-original-src={venue.image}
+                  onError={(e) => handleImageError(e)}
+                />
               </div>
 
               <div className="venue-details">

@@ -1,6 +1,7 @@
 // backend/index.js
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config({ path: __dirname + '/.env' });
 
 const { connectDB, sequelize } = require("./db/db");
@@ -24,13 +25,24 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
+
+// Import models FIRST (before sync and routes)
+const User = require("./models/User");
+const Artist = require("./models/Artist");
+const Venue = require("./models/Venue");
+const Booking = require("./models/Booking");
 
 // Load routes
 const artistRoutes = require("./routes/artists");
 const authRoutes = require("./routes/auth");
+const bookingRoutes = require("./routes/bookings");
+const venueRoutes = require("./routes/venues");
 
 app.use("/api/artists", artistRoutes);
 app.use("/api/auth", authRoutes);
+app.use("/api/bookings", bookingRoutes);
+app.use("/api/venues", venueRoutes);
 
 app.get("/", (req, res) => res.send("EventEase API is running"));
 
@@ -49,6 +61,28 @@ const startServer = async () => {
     console.log("🔄 Syncing models...");
     await sequelize.sync({ alter: true });
     console.log("✅ Models synced with database");
+    
+    // Create admin user if it doesn't exist
+    try {
+      const User = require("./models/User");
+      const bcrypt = require("bcryptjs");
+      const adminExists = await User.findOne({ where: { email: "admin@eventease.com" } });
+      if (!adminExists) {
+        const hashedPassword = await bcrypt.hash("admin123", 10);
+        await User.create({
+          fullName: "Admin User",
+          email: "admin@eventease.com",
+          phone: "+977 9800000000",
+          password: hashedPassword,
+          userType: "admin",
+          accountType: "admin",
+          location: "Kathmandu",
+        });
+        console.log("✅ Default admin user created (admin@eventease.com / admin123)");
+      }
+    } catch (error) {
+      console.log("⚠️ Could not create admin user:", error.message);
+    }
     
     const PORT = process.env.PORT || 5000;
     const server = app.listen(PORT, () => {
@@ -83,3 +117,4 @@ process.on('uncaughtException', (error) => {
 });
 
 startServer();
+
