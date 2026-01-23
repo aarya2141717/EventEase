@@ -27,6 +27,12 @@ app.use(cors({
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
+// Import models FIRST (before sync and routes)
+const User = require("./models/User");
+const Artist = require("./models/Artist");
+const Venue = require("./models/Venue");
+const Booking = require("./models/Booking");
+
 // Load routes
 const artistRoutes = require("./routes/artists");
 const authRoutes = require("./routes/auth");
@@ -111,3 +117,4 @@ process.on('uncaughtException', (error) => {
 });
 
 startServer();
+

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/upload");
+const { authenticate, requireRole } = require("../middleware/auth");
 
 let Artist;
 try {
@@ -26,7 +27,7 @@ router.get("/", async (req, res) => {
 });
 
 // POST /api/artists - Add new artist (Admin only)
-router.post("/", upload.single("image"), async (req, res) => {
+router.post("/", authenticate, requireRole("admin"), upload.single("image"), async (req, res) => {
   try {
     if (!Artist) {
       return res.status(500).json({ message: "Artist model not available" });
@@ -83,6 +84,7 @@ router.post("/", upload.single("image"), async (req, res) => {
       achievements: achievements || null,
       popularSongs: songsArray ? JSON.stringify(songsArray) : null,
       socialMedia: socialMediaObj,
+      createdBy: req.user.id,
     });
 
     console.log("✅ Artist created successfully:", newArtist.name);
@@ -100,8 +102,83 @@ router.post("/", upload.single("image"), async (req, res) => {
   }
 });
 
+// PUT /api/artists/:id - Update an artist (Admin only)
+router.put("/:id", authenticate, requireRole("admin"), upload.single("image"), async (req, res) => {
+  try {
+    if (!Artist) {
+      return res.status(500).json({ message: "Artist model not available" });
+    }
+
+    const artist = await Artist.findByPk(req.params.id);
+    if (!artist) return res.status(404).json({ message: "Artist not found" });
+
+    const {
+      name,
+      category,
+      genre,
+      description,
+      experience,
+      bookingFee,
+      contact,
+      availability,
+      achievements,
+      popularSongs,
+      socialMedia,
+    } = req.body;
+
+    if (name) artist.name = name;
+    if (category) artist.category = category;
+    if (genre) artist.genre = genre;
+    if (description) artist.description = description;
+    if (experience) artist.experience = experience;
+    if (bookingFee) artist.bookingFee = bookingFee;
+    if (contact) artist.contact = contact;
+
+    if (availability) {
+      artist.availability = JSON.stringify(
+        availability
+          .split(",")
+          .map((item) => item.trim())
+          .filter(Boolean)
+      );
+    }
+
+    if (achievements) artist.achievements = achievements;
+
+    if (popularSongs) {
+      artist.popularSongs = JSON.stringify(
+        popularSongs
+          .split(",")
+          .map((item) => item.trim())
+          .filter(Boolean)
+      );
+    }
+
+    if (socialMedia) {
+      try {
+        artist.socialMedia = JSON.parse(socialMedia);
+      } catch (_) {
+        // ignore parse errors
+      }
+    }
+
+    if (req.file) {
+      artist.image = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+    }
+
+    await artist.save();
+    res.json({ message: "Artist updated successfully", artist });
+  } catch (error) {
+    console.error("❌ Update artist error:", error.message);
+    res.status(500).json({ 
+      message: "Server error", 
+      error: error.message
+    });
+  }
+});
+
 // DELETE /api/artists/:id - Delete an artist (Admin only)
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", authenticate, requireRole("admin"), async (req, res) => {
   try {
     if (!Artist) {
       return res.status(500).json({ message: "Artist model not available" });

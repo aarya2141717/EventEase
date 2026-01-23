@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const upload = require("../middleware/upload");
+const { authenticate, requireRole } = require("../middleware/auth");
 
 let Venue;
 try {
@@ -26,7 +27,7 @@ router.get("/", async (req, res) => {
 });
 
 // POST /api/venues - Add new venue (Vendor only)
-router.post("/", upload.array("images", 3), async (req, res) => {
+router.post("/", authenticate, requireRole("vendor", "admin"), upload.array("images", 3), async (req, res) => {
   try {
     if (!Venue) {
       return res.status(500).json({ message: "Venue model not available" });
@@ -80,6 +81,7 @@ router.post("/", upload.array("images", 3), async (req, res) => {
       amenities: amenitiesArray,
       price: price || null,
       contact: contact || null,
+      createdBy: req.user.id,
     });
 
     console.log("✅ Venue created successfully:", newVenue.name);
@@ -97,8 +99,66 @@ router.post("/", upload.array("images", 3), async (req, res) => {
   }
 });
 
-// DELETE /api/venues/:id - Delete a venue (Admin only)
-router.delete("/:id", async (req, res) => {
+// PUT /api/venues/:id - Update a venue (Owner vendor or admin)
+router.put("/:id", authenticate, requireRole("vendor", "admin"), upload.array("images", 3), async (req, res) => {
+  try {
+    if (!Venue) {
+      return res.status(500).json({ message: "Venue model not available" });
+    }
+
+    const venue = await Venue.findByPk(req.params.id);
+    if (!venue) return res.status(404).json({ message: "Venue not found" });
+
+    const isOwner = venue.createdBy && venue.createdBy === req.user.id;
+    const isAdmin = req.user.role === "admin";
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
+    const {
+      name,
+      location,
+      category,
+      description,
+      capacity,
+      amenities,
+      price,
+      contact,
+    } = req.body;
+
+    if (name) venue.name = name;
+    if (location) venue.location = location;
+    if (category) venue.category = category;
+    if (description) venue.description = description;
+    if (capacity) venue.capacity = capacity;
+    if (price) venue.price = price;
+    if (contact) venue.contact = contact;
+
+    if (amenities) {
+      venue.amenities = amenities
+        .split(",")
+        .map((item) => item.trim())
+        .filter(Boolean);
+    }
+
+    if (req.files && req.files.length > 0) {
+      const uploadedImages = req.files.map(
+        (file) => `${req.protocol}://${req.get("host")}/uploads/${file.filename}`
+      );
+      venue.image = uploadedImages[0];
+      venue.images = uploadedImages;
+    }
+
+    await venue.save();
+    res.json({ message: "Venue updated successfully", venue });
+  } catch (error) {
+    console.error("❌ Update venue error:", error.message);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+// DELETE /api/venues/:id - Delete a venue (Owner vendor or admin)
+router.delete("/:id", authenticate, requireRole("vendor", "admin"), async (req, res) => {
   try {
     if (!Venue) {
       return res.status(500).json({ message: "Venue model not available" });
@@ -111,6 +171,12 @@ router.delete("/:id", async (req, res) => {
       return res.status(404).json({ message: "Venue not found" });
     }
 
+    const isOwner = venue.createdBy && venue.createdBy === req.user.id;
+    const isAdmin = req.user.role === "admin";
+    if (!isOwner && !isAdmin) {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
     await venue.destroy();
     console.log("✅ Venue deleted:", id);
 
@@ -121,6 +187,20 @@ router.delete("/:id", async (req, res) => {
       message: "Server error",
       error: error.message,
     });
+  }
+});
+
+// GET /api/venues/mine - Venues created by current vendor
+router.get("/mine", authenticate, requireRole("vendor"), async (req, res) => {
+  try {
+    if (!Venue) return res.status(500).json({ message: "Venue model not available" });
+    const venues = await Venue.findAll({
+      where: { createdBy: req.user.id },
+      order: [["createdAt", "DESC"]],
+    });
+    res.json(venues);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
   }
 });
 
