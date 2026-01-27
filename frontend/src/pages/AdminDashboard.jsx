@@ -104,6 +104,31 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleAdminApproval = async (bookingId, approved) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:5000/api/bookings/${bookingId}/admin-approval`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+        body: JSON.stringify({ approved }),
+      });
+
+      if (response.ok) {
+        setDeleteMessage(`✓ Booking ${approved ? "approved" : "rejected"} successfully`);
+        fetchData();
+        setTimeout(() => setDeleteMessage(""), 3000);
+      } else {
+        setDeleteMessage(`✗ Failed to process booking`);
+      }
+    } catch (error) {
+      console.error("Error processing booking:", error);
+      setDeleteMessage(`✗ Error processing booking`);
+    }
+  };
+
   const beginEditVenue = (venue) => {
     setEditArtist(null);
     setEditVenue({
@@ -244,7 +269,7 @@ const AdminDashboard = () => {
 
         {/* Recent Bookings */}
         <div className="dashboard-section">
-          <h2>Recent Bookings</h2>
+          <h2>Pending Bookings for Approval</h2>
           <div className="table-container">
             {bookings.length === 0 ? (
               <p>No bookings yet</p>
@@ -256,23 +281,60 @@ const AdminDashboard = () => {
                     <th>Customer</th>
                     <th>Item</th>
                     <th>Date</th>
-                    <th>Status</th>
                     <th>Type</th>
+                    <th>Vendor</th>
+                    <th>Admin</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {bookings.slice(0, 5).map((booking) => (
+                  {bookings.filter(b => b.adminApproval === "pending").map((booking) => (
                     <tr key={booking.id}>
                       <td>#{booking.id.slice(0, 6)}</td>
                       <td>{booking.contactName}</td>
                       <td>{booking.itemName}</td>
                       <td>{booking.startDate || booking.eventDate || "-"}</td>
+                      <td>{booking.type}</td>
                       <td>
-                        <span className={`status-badge ${booking.status.toLowerCase()}`}>
-                          {booking.status}
+                        <span style={{
+                          padding: "4px 8px",
+                          borderRadius: "4px",
+                          backgroundColor: booking.vendorApproval === "approved" ? "#d1fae5" : booking.vendorApproval === "rejected" ? "#fee2e2" : "#fef3c7",
+                          color: booking.vendorApproval === "approved" ? "#065f46" : booking.vendorApproval === "rejected" ? "#7f1d1d" : "#92400e",
+                          fontSize: "12px"
+                        }}>
+                          {booking.vendorApproval}
                         </span>
                       </td>
-                      <td>{booking.type}</td>
+                      <td>
+                        <span style={{
+                          padding: "4px 8px",
+                          borderRadius: "4px",
+                          backgroundColor: booking.adminApproval === "approved" ? "#d1fae5" : booking.adminApproval === "rejected" ? "#fee2e2" : "#fef3c7",
+                          color: booking.adminApproval === "approved" ? "#065f46" : booking.adminApproval === "rejected" ? "#7f1d1d" : "#92400e",
+                          fontSize: "12px"
+                        }}>
+                          {booking.adminApproval}
+                        </span>
+                      </td>
+                      <td>
+                        <div style={{ display: "flex", gap: "4px" }}>
+                          <button 
+                            className="action-btn"
+                            onClick={() => handleAdminApproval(booking.id, true)}
+                            style={{ background: "#10b981", color: "white", padding: "6px 10px", fontSize: "12px" }}
+                          >
+                            Approve
+                          </button>
+                          <button 
+                            className="action-btn"
+                            onClick={() => handleAdminApproval(booking.id, false)}
+                            style={{ background: "#dc2626", color: "white", padding: "6px 10px", fontSize: "12px" }}
+                          >
+                            Reject
+                          </button>
+                        </div>
+                      </td>
                     </tr>
                   ))}
                 </tbody>

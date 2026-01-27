@@ -176,7 +176,7 @@ router.put("/:id", authenticate, async (req, res) => {
 
     const isOwner = booking.ownerId && booking.ownerId === req.user.id;
     const isCustomer = booking.userId === req.user.id;
-    const isAdmin = req.user.role === "admin";
+    const isAdmin = req.user.role === "admin" || req.user.userType === "admin";
 
     if (!isOwner && !isCustomer && !isAdmin) {
       return res.status(403).json({ message: "Forbidden" });
@@ -196,19 +196,88 @@ router.put("/:id", authenticate, async (req, res) => {
       "contactPhone",
     ];
 
+    // Only customers (booking owners) can edit details when status is pending
+    if (isCustomer && booking.status !== "pending") {
+      updatableFields.length = 0; // Can't edit if not in pending status
+    }
+
     updatableFields.forEach((field) => {
       if (req.body[field] !== undefined) {
         booking[field] = req.body[field];
       }
     });
 
-    if (req.body.status && (isAdmin || isOwner)) {
+    // Allow status update for cancellation
+    if (req.body.status === "cancelled" && isCustomer) {
       booking.status = req.body.status;
     }
 
     await booking.save();
     res.json({ message: "Booking updated", booking });
   } catch (error) {
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+// Vendor approval endpoint
+router.put("/:id/vendor-approval", authenticate, requireRole("vendor"), async (req, res) => {
+  try {
+    const booking = await Booking.findByPk(req.params.id);
+    if (!booking) return res.status(404).json({ message: "Booking not found" });
+
+    // Only the vendor who owns the venue can approve
+    if (booking.ownerId !== req.user.id) {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
+    const { approved } = req.body;
+    if (approved === undefined) {
+      return res.status(400).json({ message: "Missing approval status" });
+    }
+
+    booking.vendorApproval = approved ? "approved" : "rejected";
+    booking.vendorApprovalDate = new Date();
+
+    // Update main status if both vendor and admin approved
+    if (booking.vendorApproval === "approved" && booking.adminApproval === "approved") {
+      booking.status = "approved";
+    } else if (booking.vendorApproval === "rejected" || booking.adminApproval === "rejected") {
+      booking.status = "rejected";
+    }
+
+    await booking.save();
+    res.json({ message: "Booking approval updated", booking });
+  } catch (error) {
+    console.error("❌ Vendor approval error:", error);
+    res.status(500).json({ message: "Server error", error: error.message });
+  }
+});
+
+// Admin approval endpoint
+router.put("/:id/admin-approval", authenticate, requireRole("admin"), async (req, res) => {
+  try {
+    const booking = await Booking.findByPk(req.params.id);
+    if (!booking) return res.status(404).json({ message: "Booking not found" });
+
+    const { approved } = req.body;
+    if (approved === undefined) {
+      return res.status(400).json({ message: "Missing approval status" });
+    }
+
+    booking.adminApproval = approved ? "approved" : "rejected";
+    booking.adminApprovalDate = new Date();
+
+    // Update main status if both vendor and admin approved
+    if (booking.vendorApproval === "approved" && booking.adminApproval === "approved") {
+      booking.status = "approved";
+    } else if (booking.vendorApproval === "rejected" || booking.adminApproval === "rejected") {
+      booking.status = "rejected";
+    }
+
+    await booking.save();
+    res.json({ message: "Booking approval updated", booking });
+  } catch (error) {
+    console.error("❌ Admin approval error:", error);
     res.status(500).json({ message: "Server error", error: error.message });
   }
 });

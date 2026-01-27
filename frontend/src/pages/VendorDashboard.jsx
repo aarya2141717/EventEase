@@ -104,9 +104,34 @@ const VendorDashboard = () => {
   const stats = [
     { label: "My Venues", value: myVenues.length.toString(), icon: "🏢", color: "#ff5a1f" },
     { label: "Bookings", value: bookings.length.toString(), icon: "📅", color: "#00bcd4" },
-    { label: "Pending", value: bookings.filter(b => b.status === "pending").length.toString(), icon: "⏳", color: "#ffa500" },
-    { label: "Confirmed", value: bookings.filter(b => b.status === "confirmed").length.toString(), icon: "✓", color: "#10b981" },
+    { label: "Pending", value: bookings.filter(b => b.vendorApproval === "pending").length.toString(), icon: "⏳", color: "#ffa500" },
+    { label: "Approved", value: bookings.filter(b => b.vendorApproval === "approved").length.toString(), icon: "✓", color: "#10b981" },
   ];
+
+  const handleVendorApproval = async (bookingId, approved) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await fetch(`http://localhost:5000/api/bookings/${bookingId}/vendor-approval`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: token ? `Bearer ${token}` : "",
+        },
+        body: JSON.stringify({ approved }),
+      });
+
+      if (response.ok) {
+        setMessage(`✓ Booking ${approved ? "approved" : "rejected"} successfully`);
+        fetchData();
+        setTimeout(() => setMessage(""), 3000);
+      } else {
+        setMessage(`✗ Failed to process booking`);
+      }
+    } catch (error) {
+      console.error("Error processing booking:", error);
+      setMessage(`✗ Error processing booking`);
+    }
+  };
 
   return (
     <div className="dashboard-container">
@@ -219,7 +244,7 @@ const VendorDashboard = () => {
 
         {/* Recent Booking Requests */}
         <div className="dashboard-section">
-          <h2>Recent Booking Requests</h2>
+          <h2>Pending Booking Requests for Your Approval</h2>
           <div className="table-container">
             {bookings.length === 0 ? (
               <p>No booking requests yet</p>
@@ -231,20 +256,57 @@ const VendorDashboard = () => {
                     <th>Customer</th>
                     <th>Venue</th>
                     <th>Date</th>
-                    <th>Status</th>
+                    <th>Vendor Status</th>
+                    <th>Admin Status</th>
+                    <th>Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {bookings.map((booking) => (
+                  {bookings.filter(b => b.vendorApproval === "pending").map((booking) => (
                     <tr key={booking.id}>
                       <td>#{booking.id.slice(0, 6)}</td>
                       <td>{booking.contactName}</td>
                       <td>{booking.itemName}</td>
                       <td>{booking.startDate || booking.eventDate || "-"}</td>
                       <td>
-                        <span className={`status-badge ${booking.status.toLowerCase()}`}>
-                          {booking.status}
+                        <span style={{
+                          padding: "4px 8px",
+                          borderRadius: "4px",
+                          backgroundColor: "#fef3c7",
+                          color: "#92400e",
+                          fontSize: "12px"
+                        }}>
+                          {booking.vendorApproval}
                         </span>
+                      </td>
+                      <td>
+                        <span style={{
+                          padding: "4px 8px",
+                          borderRadius: "4px",
+                          backgroundColor: booking.adminApproval === "approved" ? "#d1fae5" : booking.adminApproval === "rejected" ? "#fee2e2" : "#fef3c7",
+                          color: booking.adminApproval === "approved" ? "#065f46" : booking.adminApproval === "rejected" ? "#7f1d1d" : "#92400e",
+                          fontSize: "12px"
+                        }}>
+                          {booking.adminApproval}
+                        </span>
+                      </td>
+                      <td>
+                        <div style={{ display: "flex", gap: "4px" }}>
+                          <button 
+                            className="action-btn"
+                            onClick={() => handleVendorApproval(booking.id, true)}
+                            style={{ background: "#10b981", color: "white", padding: "6px 10px", fontSize: "12px" }}
+                          >
+                            Approve
+                          </button>
+                          <button 
+                            className="action-btn"
+                            onClick={() => handleVendorApproval(booking.id, false)}
+                            style={{ background: "#dc2626", color: "white", padding: "6px 10px", fontSize: "12px" }}
+                          >
+                            Reject
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}

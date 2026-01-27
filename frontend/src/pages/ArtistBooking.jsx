@@ -338,9 +338,24 @@ const ArtistBooking = () => {
         <div className="modal-overlay">
           <div className="modal-content">
             <div className="success-icon">✓</div>
-            <h2>Booking Confirmed!</h2>
-            <p>Your booking request for {artist.name} has been submitted successfully.</p>
-            <p>We'll contact you shortly to confirm the details.</p>
+            <h2>Booking Request Submitted!</h2>
+            <p>Your booking request for <strong>{artist.name}</strong> has been submitted successfully.</p>
+            <div style={{ 
+              background: "#f0f9ff", 
+              border: "1px solid #0369a1", 
+              borderRadius: "8px", 
+              padding: "12px", 
+              margin: "15px 0",
+              fontSize: "14px",
+              color: "#0369a1"
+            }}>
+              <strong>📋 What's Next?</strong>
+              <p style={{ margin: "8px 0 0 0" }}>
+                Your booking needs approval from both the artist's manager and our admin team. 
+                You'll receive notifications once they review your request. 
+                Check your dashboard for real-time status updates!
+              </p>
+            </div>
             <p className="redirect-text">Redirecting to dashboard...</p>
           </div>
         </div>
