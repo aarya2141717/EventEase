@@ -178,20 +178,52 @@ const UserDashboard = () => {
                 <div key={booking.id} className="booking-card">
                   <div className="booking-header">
                     <h3>{booking.itemName}</h3>
-                    <span className={`status-badge ${booking.status.toLowerCase()}`}>
-                      {booking.status}
-                    </span>
+                    <div className="status-badges">
+                      <span className={`status-badge ${booking.status.toLowerCase()}`}>
+                        {booking.status.toUpperCase()}
+                      </span>
+                    </div>
                   </div>
                   <div className="booking-info">
                     <p className="booking-type">📌 {booking.type.toUpperCase()}</p>
                     <p className="booking-date">📅 {booking.startDate || booking.eventDate || "-"}</p>
                     {booking.numberOfGuests && <p className="booking-guests">👥 {booking.numberOfGuests} guests</p>}
                     {booking.numberOfTickets && <p className="booking-tickets">🎫 {booking.numberOfTickets} tickets</p>}
+                    
+                    {/* Approval Status */}
+                    <div className="approval-status" style={{ marginTop: "10px", paddingTop: "10px", borderTop: "1px solid #e5e7eb" }}>
+                      <p style={{ fontSize: "12px", color: "#666", marginBottom: "8px" }}>
+                        <strong>Approval Status:</strong>
+                      </p>
+                      <div style={{ display: "flex", gap: "10px", fontSize: "12px" }}>
+                        <span style={{
+                          padding: "4px 8px",
+                          borderRadius: "4px",
+                          backgroundColor: booking.vendorApproval === "approved" ? "#d1fae5" : booking.vendorApproval === "rejected" ? "#fee2e2" : "#fef3c7",
+                          color: booking.vendorApproval === "approved" ? "#065f46" : booking.vendorApproval === "rejected" ? "#7f1d1d" : "#92400e"
+                        }}>
+                          Vendor: {booking.vendorApproval}
+                        </span>
+                        <span style={{
+                          padding: "4px 8px",
+                          borderRadius: "4px",
+                          backgroundColor: booking.adminApproval === "approved" ? "#d1fae5" : booking.adminApproval === "rejected" ? "#fee2e2" : "#fef3c7",
+                          color: booking.adminApproval === "approved" ? "#065f46" : booking.adminApproval === "rejected" ? "#7f1d1d" : "#92400e"
+                        }}>
+                          Admin: {booking.adminApproval}
+                        </span>
+                      </div>
+                    </div>
                   </div>
                   <div className="booking-actions">
-                    <button className="action-btn" onClick={() => handleEditBooking(booking)}>Edit</button>
+                    {booking.status === "pending" && (
+                      <button className="action-btn" onClick={() => handleEditBooking(booking)}>Edit</button>
+                    )}
                     {booking.status === "pending" && (
                       <button className="action-btn cancel" onClick={() => handleCancelBooking(booking.id)}>Cancel</button>
+                    )}
+                    {booking.status === "approved" && (
+                      <span style={{ fontSize: "12px", color: "#10b981", fontWeight: "bold" }}>✓ Approved</span>
                     )}
                   </div>
                 </div>

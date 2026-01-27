@@ -117,7 +117,7 @@ const venuesData = {
       "/images/Jimbu Thakali By Capital Grill 1.jpg",
       "/images/Jimbu Thakali By Capital Grill 2.webp",
       "/images/Jimbu Thakali By Capital Grill 3.jpg"
-    ]
+    ] 
   },
   "hotel-mystic-mountain": {
     id: "hotel-mystic-mountain",

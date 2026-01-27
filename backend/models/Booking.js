@@ -14,8 +14,26 @@ const Booking = sequelize.define(
       allowNull: false,
     },
     status: {
-      type: DataTypes.ENUM("pending", "confirmed", "cancelled"),
+      type: DataTypes.ENUM("pending", "approved", "rejected", "cancelled"),
       defaultValue: "pending",
+    },
+    vendorApproval: {
+      type: DataTypes.ENUM("pending", "approved", "rejected"),
+      defaultValue: "pending",
+      allowNull: false,
+    },
+    adminApproval: {
+      type: DataTypes.ENUM("pending", "approved", "rejected"),
+      defaultValue: "pending",
+      allowNull: false,
+    },
+    vendorApprovalDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
+    adminApprovalDate: {
+      type: DataTypes.DATE,
+      allowNull: true,
     },
     userId: {
       type: DataTypes.UUID,
