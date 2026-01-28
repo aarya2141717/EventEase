@@ -4,7 +4,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "seed:venues": "node scripts/seedVenues.js",
+    "seed:artists": "node scripts/seedArtists.js",
+    "migrate:venue-slugs": "node scripts/migrateVenueSlugs.js",
+    "migrate:artist-slugs": "node scripts/migrateArtistSlugs.js"
   },
   "keywords": [],
   "author": "",

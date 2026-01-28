@@ -26,7 +26,6 @@ function Footer() {
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="/venue">Venue</Link></li>
                     <li><Link to="/artists">Artists</Link></li>
-                    <li><Link to="/eventspace">EventSpace</Link></li>
                     <li><Link to="/dashboard">Dashboard</Link></li>
                     
                   </ul>
