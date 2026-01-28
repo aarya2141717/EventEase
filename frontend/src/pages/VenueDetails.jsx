@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import "./VenueDetails.css";
+import { getImagePath, handleImageError } from "../utils/imageHelper";
 
 // Venue data
 const venuesData = {
@@ -68,16 +69,16 @@ const venuesData = {
     category: "Resorts",
     rating: 4.6,
     reviews: 820,
-    image: "/images/Dorje's Resort & Spa 3.jpg",
+    image: "/images/Dorje's Resort & Spa 1.jpg",
     description: "Dorje's Resort & Spa is a tranquil venue nestled in the scenic beauty of Dhulikhel. Ideal for weddings and retreats, it offers luxurious accommodations and top-notch amenities.",
     capacity: "200-600 guests",
     amenities: ["Resort Accommodation", "Spa Services", "Outdoor Venues", "Catering Options", "Adventure Activities", "Event Coordination"],
     price: "NPR 250,000 - 500,000",
     contact: "+977 9845678901",
     images: [
-      "/images/Dorje's Resort & Spa 3.jpg",
       "/images/Dorje's Resort & Spa 1.jpg",
-      "/images/Dorje's Resort & Spa 2.jpg"
+      "/images/Dorje's Resort & Spa 2.jpg",
+      "/images/Dorje's Resort & Spa 3.jpeg"
     ]
   },
   "fish-tail-lodge": {
@@ -87,7 +88,7 @@ const venuesData = {
     category: "Resorts",
     rating: 4.3,
     reviews: 750,
-    image: "/images/fish tail lodge 1.jpg",
+    image: "/images/Fish Tail Lodge.jpg",
     description: "Fish Tail Lodge is a unique venue offering a rustic charm and natural surroundings. Perfect for intimate gatherings and outdoor celebrations.",
     capacity: "100-300 guests",
     amenities: ["Natural Setting", "Outdoor Fire Pit", "Catering Services", "Event Planning", "Photography Services"],
@@ -116,7 +117,7 @@ const venuesData = {
       "/images/Jimbu Thakali By Capital Grill 1.jpg",
       "/images/Jimbu Thakali By Capital Grill 2.webp",
       "/images/Jimbu Thakali By Capital Grill 3.jpg"
-    ]
+    ] 
   },
   "hotel-mystic-mountain": {
     id: "hotel-mystic-mountain",
@@ -189,7 +190,59 @@ const venuesData = {
 const VenueDetails = () => {
   const { venueId } = useParams();
   const navigate = useNavigate();
-  const venue = venuesData[venueId];
+  const [venue, setVenue] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // First check hardcoded data
+    if (venuesData[venueId]) {
+      setVenue(venuesData[venueId]);
+      setLoading(false);
+    } else {
+      // Fetch from API if not in hardcoded data
+      const fetchVenue = async () => {
+        try {
+          const response = await fetch(`http://localhost:5000/api/venues`);
+          if (response.ok) {
+            const venues = await response.json();
+            const apiVenue = venues.find(v => v.id === venueId);
+            if (apiVenue) {
+              // Transform API venue to match expected structure
+              const transformedVenue = {
+                id: apiVenue.id,
+                name: apiVenue.name,
+                location: apiVenue.location,
+                category: apiVenue.category,
+                rating: apiVenue.rating || 4.5,
+                reviews: apiVenue.reviews || 0,
+                image: apiVenue.image,
+                description: apiVenue.description,
+                capacity: apiVenue.capacity,
+                amenities: apiVenue.amenities || [],
+                price: apiVenue.price,
+                contact: apiVenue.contact,
+                images: apiVenue.images || [apiVenue.image]
+              };
+              setVenue(transformedVenue);
+            }
+          }
+        } catch (error) {
+          console.error("Error fetching venue:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchVenue();
+    }
+  }, [venueId]);
+
+  if (loading) {
+    return (
+      <div style={{ padding: "100px 20px", textAlign: "center" }}>
+        <p>Loading venue details...</p>
+      </div>
+    );
+  }
 
   if (!venue) {
     return (
@@ -201,7 +254,7 @@ const VenueDetails = () => {
   }
 
   const handleBookVenue = () => {
-    navigate('/booking', { state: { venue } });
+    navigate('/venue-booking', { state: { venue } });
   };
 
   return (
@@ -223,11 +276,22 @@ const VenueDetails = () => {
 
         <div className="venue-images">
           <div className="main-image">
-            <img src={venue.image} alt={venue.name} />
+            <img 
+              src={getImagePath(venue.image)} 
+              alt={venue.name}
+              data-original-src={venue.image}
+              onError={(e) => handleImageError(e)}
+            />
           </div>
           <div className="thumbnail-images">
-            {venue.images.slice(1).map((img, index) => (
-              <img key={index} src={img} alt={`${venue.name} ${index + 2}`} />
+            {venue.images && venue.images.length > 1 && venue.images.slice(1).map((img, index) => (
+              <img 
+                key={index} 
+                src={getImagePath(img)} 
+                alt={`${venue.name} ${index + 2}`}
+                data-original-src={img}
+                onError={(e) => handleImageError(e)}
+              />
             ))}
           </div>
         </div>
@@ -242,12 +306,16 @@ const VenueDetails = () => {
             <section className="amenities-section">
               <h2>Amenities & Services</h2>
               <div className="amenities-grid">
-                {venue.amenities.map((amenity, index) => (
-                  <div key={index} className="amenity-item">
-                    <span className="amenity-icon">✓</span>
-                    <span>{amenity}</span>
-                  </div>
-                ))}
+                {venue.amenities && venue.amenities.length > 0 ? (
+                  venue.amenities.map((amenity, index) => (
+                    <div key={index} className="amenity-item">
+                      <span className="amenity-icon">✓</span>
+                      <span>{amenity}</span>
+                    </div>
+                  ))
+                ) : (
+                  <p>No amenities listed</p>
+                )}
               </div>
             </section>
 

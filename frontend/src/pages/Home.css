@@ -786,4 +786,117 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+/* Additional Responsive Styles */
+@media (max-width: 1024px) {
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: 70vh;
+    margin-top: 70px;
+  }
+
+  .hero-content {
+    padding: 30px 16px;
+  }
+
+  .hero-logo {
+    width: 100px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero-content p {
+    font-size: 14px;
+  }
+
+  .sub-text {
+    font-size: 13px;
+  }
+
+  .search-box {
+    margin-top: 25px;
+  }
+
+  .search-box input {
+    padding: 12px 40px 12px 40px;
+    font-size: 14px;
+  }
+
+  .section {
+    padding: 40px 16px;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+
+  .section h2 {
+    font-size: 24px;
+  }
+
+  .grid-3 {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .card img {
+    height: 180px;
+  }
+
+  .about-section {
+    padding: 50px 5%;
+    grid-template-columns: 1fr;
+  }
+
+  .about-content h1 {
+    font-size: 2rem;
+  }
+
+  .about-images {
+    grid-template-columns: 1fr;
+  }
+
+  .image-card.venue-hall {
+    height: 180px;
+  }
+
+  .image-card.venue-resort,
+  .image-card.performer {
+    height: 200px;
+  }
+
+  .why-choose-section {
+    padding: 50px 5%;
+  }
+
+  .why-choose-content h1 {
+    font-size: 2rem;
+  }
+
+  .features-grid {
+    gap: 25px;
+  }
+
+  .feature-item {
+    grid-template-columns: auto 1fr;
+    gap: 15px;
+  }
+
+  .feature-content h3 {
+    font-size: 1.2rem;
+  }
+}
 }

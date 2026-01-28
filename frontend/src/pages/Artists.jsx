@@ -1,11 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./Artists.css";
+import { getImagePath, handleImageError } from "../utils/imageHelper";
 
 const Artists = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [apiArtists, setApiArtists] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const artists = [
+  // Fetch artists from API
+  useEffect(() => {
+    const fetchArtists = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/api/artists");
+        if (response.ok) {
+          const data = await response.json();
+          setApiArtists(data);
+        }
+      } catch (error) {
+        console.error("Error fetching artists:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchArtists();
+  }, []);
+
+  const hardcodedArtists = [
     {
       id: "raju-lama",
       name: "Raju Lama",
@@ -107,11 +128,27 @@ const Artists = () => {
     }
   ];
 
+  // Transform API artists to match hardcoded structure
+  const transformedApiArtists = apiArtists.map(artist => ({
+    id: artist.id,
+    name: artist.name,
+    category: artist.category || "Singers",
+    genre: artist.genre || "Various",
+    image: artist.image,
+    rating: artist.rating || 4.5,
+    reviews: artist.reviews || 0,
+    experience: artist.experience || "N/A",
+    achievements: artist.achievements || "Professional Artist"
+  }));
+
+  // Combine hardcoded and API artists
+  const allArtists = [...hardcodedArtists, ...transformedApiArtists];
+
   const categories = ["All", "Singers", "Bands", "DJs"];
 
   const filteredArtists = selectedCategory === "All" 
-    ? artists 
-    : artists.filter(artist => artist.category === selectedCategory);
+    ? allArtists 
+    : allArtists.filter(artist => artist.category === selectedCategory);
 
   return (
     <div className="artists-page">
@@ -141,7 +178,11 @@ const Artists = () => {
           {filteredArtists.map((artist) => (
             <div key={artist.id} className="artist-card">
               <div className="artist-image">
-                <img src={artist.image} alt={artist.name} />
+                <img 
+                  src={getImagePath(artist.image)} 
+                  alt={artist.name}
+                  onError={(e) => handleImageError(e)}
+                />
                 <div className="artist-badge">{artist.category}</div>
               </div>
               <div className="artist-details">

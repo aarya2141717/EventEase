@@ -19,7 +19,6 @@ code {
     monospace;
 }
 
-/* Remove all default link/button styles */
 a {
   text-decoration: none;
   color: inherit;

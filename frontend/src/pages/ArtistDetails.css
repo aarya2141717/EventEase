@@ -1,6 +1,12 @@
 .artist-details-page {
-  padding: 100px 40px 40px;
+  min-height: 100vh;
   background-color: #f8f9fa;
+}
+
+.artist-details-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 100px 40px 40px;
 }
 
 
@@ -297,7 +303,6 @@
 }
 
 .price-info {
-
   text-align: center;
   margin-bottom: 20px;
   padding: 20px;
@@ -469,5 +474,57 @@
 
   .songs-grid {
     grid-template-columns: 1fr;
+  }
+
+  .artist-profile {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .artist-basic-info h1 {
+    font-size: 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .artist-details-page {
+    padding: 80px 16px 30px;
+  }
+
+  .artist-header {
+    padding: 20px;
+  }
+
+  .artist-image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .artist-basic-info h1 {
+    font-size: 22px;
+  }
+
+  .artist-main-info section {
+    padding: 20px;
+  }
+
+  .booking-card,
+  .contact-card,
+  .availability-card {
+    padding: 20px;
+  }
+
+  .book-artist-btn {
+    font-size: 16px;
+    padding: 12px;
+  }
+
+  .social-links {
+    flex-direction: column;
+  }
+
+  .social-link {
+    width: 100%;
+    text-align: center;
   }
 }
