@@ -13,23 +13,36 @@ const ArtistBooking = () => {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   const [formData, setFormData] = useState({
-    fullName: user?.fullName || '',
-    email: user?.email || '',
-    phone: user?.phone || '',
+    // Event Organizer Details
+    organizerName: user?.fullName || '',
+    organizerEmail: user?.email || '',
+    organizerPhone: user?.phone || '',
+    organizationName: '',
+    
+    // Event Type & Venue
+    eventType: '',
+    venueName: '',
+    venueCity: '',
     eventDate: '',
     eventTime: '',
-    numberOfTickets: '1',
-    eventType: '',
-    specialRequirements: '',
+    performanceDuration: '1', // in hours
+    expectedGuests: '1', // number of attendees
+    
+    // Event Requirements
+    soundSystemAvailable: 'no',
+    stageSetupRequired: 'no',
+    specialSongRequests: '',
+    additionalPerformers: '',
+    additionalRequirements: '',
   });
 
   useEffect(() => {
     if (user) {
       setFormData((prev) => ({
         ...prev,
-        fullName: user.fullName || '',
-        email: user.email || '',
-        phone: user.phone || '',
+        organizerName: user.fullName || '',
+        organizerEmail: user.email || '',
+        organizerPhone: user.phone || '',
       }));
     }
   }, [user]);
@@ -49,20 +62,32 @@ const ArtistBooking = () => {
   const validateForm = () => {
     const newErrors = {};
     
-    if (!formData.fullName.trim()) {
-      newErrors.fullName = 'Full name is required';
+    if (!formData.organizerName.trim()) {
+      newErrors.organizerName = 'Your name is required';
     }
     
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email address';
+    if (!formData.organizerEmail.trim()) {
+      newErrors.organizerEmail = 'Email is required';
+    } else if (!/\S+@\S+\.\S+/.test(formData.organizerEmail)) {
+      newErrors.organizerEmail = 'Please enter a valid email address';
     }
     
-    if (!formData.phone.trim()) {
-      newErrors.phone = 'Phone number is required';
-    } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
-      newErrors.phone = 'Please enter a valid 10-digit phone number';
+    if (!formData.organizerPhone.trim()) {
+      newErrors.organizerPhone = 'Phone number is required';
+    } else if (!/^\d{10}$/.test(formData.organizerPhone.replace(/\D/g, ''))) {
+      newErrors.organizerPhone = 'Please enter a valid 10-digit phone number';
+    }
+
+    if (!formData.eventType) {
+      newErrors.eventType = 'Event type is required';
+    }
+
+    if (!formData.venueName.trim()) {
+      newErrors.venueName = 'Venue name is required';
+    }
+
+    if (!formData.venueCity.trim()) {
+      newErrors.venueCity = 'City is required';
     }
     
     if (!formData.eventDate) {
@@ -80,12 +105,12 @@ const ArtistBooking = () => {
       newErrors.eventTime = 'Event time is required';
     }
     
-    if (!formData.numberOfTickets || formData.numberOfTickets < 1) {
-      newErrors.numberOfTickets = 'Please select at least 1 ticket';
+    if (!formData.performanceDuration || formData.performanceDuration < 1) {
+      newErrors.performanceDuration = 'Performance duration is required';
     }
 
-    if (!formData.eventType) {
-      newErrors.eventType = 'Event type is required';
+    if (!formData.expectedGuests || formData.expectedGuests < 1) {
+      newErrors.expectedGuests = 'Expected number of guests is required';
     }
     
     return newErrors;
@@ -166,66 +191,79 @@ const ArtistBooking = () => {
     <div className="artist-booking-container">
       <div className="artist-booking-wrapper">
         <div className="booking-header">
-          <h1>Book {artist.name}</h1>
-          <p>Reserve your tickets for an unforgettable experience</p>
+          <h1>Hire {artist.name}</h1>
+          <p>Fill in your event details and booking requirements</p>
         </div>
 
         <form onSubmit={handleSubmit} className="artist-booking-form">
-          {/* Personal Information */}
+          {/* Organizer Information */}
           <div className="form-section">
-            <h3>Personal Information</h3>
+            <h3>📋 Your Details</h3>
             
             <div className="form-group">
-              <label htmlFor="fullName">Full Name <span className="required">*</span></label>
+              <label htmlFor="organizerName">Your Name <span className="required">*</span></label>
               <input
                 type="text"
-                id="fullName"
-                name="fullName"
-                value={formData.fullName}
+                id="organizerName"
+                name="organizerName"
+                value={formData.organizerName}
                 onChange={handleChange}
-                className={errors.fullName ? 'error' : ''}
+                className={errors.organizerName ? 'error' : ''}
                 placeholder="Enter your full name"
                 readOnly
               />
-              {errors.fullName && <span className="error-message">{errors.fullName}</span>}
+              {errors.organizerName && <span className="error-message">{errors.organizerName}</span>}
             </div>
 
             <div className="form-row">
               <div className="form-group">
-                <label htmlFor="email">Email Address <span className="required">*</span></label>
+                <label htmlFor="organizerEmail">Email Address <span className="required">*</span></label>
                 <input
                   type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
+                  id="organizerEmail"
+                  name="organizerEmail"
+                  value={formData.organizerEmail}
                   onChange={handleChange}
-                  className={errors.email ? 'error' : ''}
+                  className={errors.organizerEmail ? 'error' : ''}
                   placeholder="your.email@example.com"
                   readOnly
                 />
-                {errors.email && <span className="error-message">{errors.email}</span>}
+                {errors.organizerEmail && <span className="error-message">{errors.organizerEmail}</span>}
               </div>
 
               <div className="form-group">
-                <label htmlFor="phone">Phone Number <span className="required">*</span></label>
+                <label htmlFor="organizerPhone">Phone Number <span className="required">*</span></label>
                 <input
                   type="tel"
-                  id="phone"
-                  name="phone"
-                  value={formData.phone}
+                  id="organizerPhone"
+                  name="organizerPhone"
+                  value={formData.organizerPhone}
                   onChange={handleChange}
-                  className={errors.phone ? 'error' : ''}
+                  className={errors.organizerPhone ? 'error' : ''}
                   placeholder="(555) 123-4567"
+                  readOnly
                 />
-                {errors.phone && <span className="error-message">{errors.phone}</span>}
+                {errors.organizerPhone && <span className="error-message">{errors.organizerPhone}</span>}
               </div>
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="organizationName">Organization/Company Name (Optional)</label>
+              <input
+                type="text"
+                id="organizationName"
+                name="organizationName"
+                value={formData.organizationName}
+                onChange={handleChange}
+                placeholder="e.g., ABC Weddings, XYZ Corporate, etc."
+              />
             </div>
           </div>
 
-          {/* Event Details */}
+          {/* Event Information */}
           <div className="form-section">
-            <h3>Event Details</h3>
-
+            <h3>🎉 Event Details</h3>
+            
             <div className="form-group">
               <label htmlFor="eventType">Event Type <span className="required">*</span></label>
               <select
@@ -235,17 +273,51 @@ const ArtistBooking = () => {
                 onChange={handleChange}
                 className={errors.eventType ? 'error' : ''}
               >
-                <option value="">Select event type</option>
-                <option value="Wedding">Wedding</option>
-                <option value="Corporate Event">Corporate Event</option>
-                <option value="Concert">Concert</option>
-                <option value="Private Party">Private Party</option>
-                <option value="Festival">Festival</option>
-                <option value="Other">Other</option>
+                <option value="">-- Select Event Type --</option>
+                <option value="wedding">💒 Wedding</option>
+                <option value="corporate">🏢 Corporate Event</option>
+                <option value="birthday">🎂 Birthday Party</option>
+                <option value="private">🏠 Private Party</option>
+                <option value="conference">🎯 Conference/Seminar</option>
+                <option value="festival">🎪 Festival</option>
+                <option value="cultural">🎭 Cultural Event</option>
+                <option value="fundraiser">❤️ Fundraiser</option>
+                <option value="college">🎓 College/University Event</option>
+                <option value="other">📌 Other</option>
               </select>
               {errors.eventType && <span className="error-message">{errors.eventType}</span>}
             </div>
-            
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="venueName">Venue Name <span className="required">*</span></label>
+                <input
+                  type="text"
+                  id="venueName"
+                  name="venueName"
+                  value={formData.venueName}
+                  onChange={handleChange}
+                  className={errors.venueName ? 'error' : ''}
+                  placeholder="e.g., Grand Ballroom, Hotel ABC, Community Hall"
+                />
+                {errors.venueName && <span className="error-message">{errors.venueName}</span>}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="venueCity">City/Location <span className="required">*</span></label>
+                <input
+                  type="text"
+                  id="venueCity"
+                  name="venueCity"
+                  value={formData.venueCity}
+                  onChange={handleChange}
+                  className={errors.venueCity ? 'error' : ''}
+                  placeholder="e.g., Kathmandu, Pokhara"
+                />
+                {errors.venueCity && <span className="error-message">{errors.venueCity}</span>}
+              </div>
+            </div>
+
             <div className="form-row">
               <div className="form-group">
                 <label htmlFor="eventDate">Event Date <span className="required">*</span></label>
@@ -275,38 +347,114 @@ const ArtistBooking = () => {
               </div>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="numberOfTickets">Number of Tickets <span className="required">*</span></label>
-              <select
-                id="numberOfTickets"
-                name="numberOfTickets"
-                value={formData.numberOfTickets}
-                onChange={handleChange}
-                className={errors.numberOfTickets ? 'error' : ''}
-              >
-                <option value="1">1 Ticket</option>
-                <option value="2">2 Tickets</option>
-                <option value="3">3 Tickets</option>
-                <option value="4">4 Tickets</option>
-                <option value="5">5 Tickets</option>
-                <option value="6">6 Tickets</option>
-                <option value="7">7 Tickets</option>
-                <option value="8">8 Tickets</option>
-                <option value="9">9 Tickets</option>
-                <option value="10">10 Tickets</option>
-              </select>
-              {errors.numberOfTickets && <span className="error-message">{errors.numberOfTickets}</span>}
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="performanceDuration">Performance Duration <span className="required">*</span></label>
+                <select
+                  id="performanceDuration"
+                  name="performanceDuration"
+                  value={formData.performanceDuration}
+                  onChange={handleChange}
+                  className={errors.performanceDuration ? 'error' : ''}
+                >
+                  <option value="1">1 Hour</option>
+                  <option value="2">2 Hours</option>
+                  <option value="3">3 Hours</option>
+                  <option value="4">4 Hours</option>
+                  <option value="5">5 Hours</option>
+                  <option value="6">6+ Hours (Full Day)</option>
+                </select>
+                {errors.performanceDuration && <span className="error-message">{errors.performanceDuration}</span>}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="expectedGuests">Expected Number of Guests <span className="required">*</span></label>
+                <select
+                  id="expectedGuests"
+                  name="expectedGuests"
+                  value={formData.expectedGuests}
+                  onChange={handleChange}
+                  className={errors.expectedGuests ? 'error' : ''}
+                >
+                  <option value="1">1-50 guests</option>
+                  <option value="2">51-100 guests</option>
+                  <option value="3">101-250 guests</option>
+                  <option value="4">251-500 guests</option>
+                  <option value="5">501-1000 guests</option>
+                  <option value="6">1000+ guests</option>
+                </select>
+                {errors.expectedGuests && <span className="error-message">{errors.expectedGuests}</span>}
+              </div>
+            </div>
+          </div>
+
+          {/* Requirements Section */}
+          <div className="form-section">
+            <h3>🎤 Performance Requirements</h3>
+            
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="soundSystemAvailable">Do you have Sound System? <span className="required">*</span></label>
+                <select
+                  id="soundSystemAvailable"
+                  name="soundSystemAvailable"
+                  value={formData.soundSystemAvailable}
+                  onChange={handleChange}
+                >
+                  <option value="no">❌ No - Need to arrange</option>
+                  <option value="yes">✅ Yes - Already available</option>
+                  <option value="partial">⚠️ Partial - Need additional equipment</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="stageSetupRequired">Stage Setup Required?</label>
+                <select
+                  id="stageSetupRequired"
+                  name="stageSetupRequired"
+                  value={formData.stageSetupRequired}
+                  onChange={handleChange}
+                >
+                  <option value="no">No - Simple setup</option>
+                  <option value="simple">Simple - Basic stage</option>
+                  <option value="professional">Professional - Full setup with lighting</option>
+                </select>
+              </div>
             </div>
 
             <div className="form-group">
-              <label htmlFor="specialRequirements">Special Requirements</label>
+              <label htmlFor="specialSongRequests">Special Song Requests</label>
               <textarea
-                id="specialRequirements"
-                name="specialRequirements"
-                value={formData.specialRequirements}
+                id="specialSongRequests"
+                name="specialSongRequests"
+                value={formData.specialSongRequests}
                 onChange={handleChange}
-                rows="4"
-                placeholder="Any special arrangements, equipment needs, or song requests..."
+                rows="3"
+                placeholder="Any specific songs you'd like the artist to perform? (Optional)"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="additionalPerformers">Additional Performers Needed?</label>
+              <textarea
+                id="additionalPerformers"
+                name="additionalPerformers"
+                value={formData.additionalPerformers}
+                onChange={handleChange}
+                rows="2"
+                placeholder="Do you need backup dancers, additional musicians, etc.? (Optional)"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="additionalRequirements">Additional Requirements & Notes</label>
+              <textarea
+                id="additionalRequirements"
+                name="additionalRequirements"
+                value={formData.additionalRequirements}
+                onChange={handleChange}
+                rows="3"
+                placeholder="Any other specific arrangements, accommodations, or notes... (Optional)"
               />
             </div>
           </div>
@@ -339,7 +487,7 @@ const ArtistBooking = () => {
           <div className="modal-content">
             <div className="success-icon">✓</div>
             <h2>Booking Request Submitted!</h2>
-            <p>Your booking request for <strong>{artist.name}</strong> has been submitted successfully.</p>
+            <p><strong>{artist.name}</strong> has been sent your booking request.</p>
             <div style={{ 
               background: "#f0f9ff", 
               border: "1px solid #0369a1", 
@@ -349,11 +497,29 @@ const ArtistBooking = () => {
               fontSize: "14px",
               color: "#0369a1"
             }}>
-              <strong>📋 What's Next?</strong>
+              <strong>📋 Booking Details:</strong>
               <p style={{ margin: "8px 0 0 0" }}>
-                Your booking needs approval from both the artist's manager and our admin team. 
-                You'll receive notifications once they review your request. 
-                Check your dashboard for real-time status updates!
+                <strong>Artist:</strong> {artist.name}<br/>
+                <strong>Event:</strong> {formData.eventType?.toUpperCase() || 'TBD'}<br/>
+                <strong>Location:</strong> {formData.venueName}, {formData.venueCity}<br/>
+                <strong>Date:</strong> {new Date(formData.eventDate).toLocaleDateString()} at {formData.eventTime}<br/>
+                <strong>Duration:</strong> {formData.performanceDuration} hour(s)<br/>
+                <strong>Expected Guests:</strong> {formData.expectedGuests}
+              </p>
+            </div>
+            <div style={{ 
+              background: "#f0fdf4", 
+              border: "1px solid #16a34a", 
+              borderRadius: "8px", 
+              padding: "12px", 
+              margin: "15px 0",
+              fontSize: "14px",
+              color: "#16a34a"
+            }}>
+              <strong>✅ What Happens Next?</strong>
+              <p style={{ margin: "8px 0 0 0" }}>
+                The artist will review your booking request and contact you within 24-48 hours to confirm availability, discuss final details, and confirm the booking fee.
+                You'll receive confirmation details via email and can track the status in your dashboard.
               </p>
             </div>
             <p className="redirect-text">Redirecting to dashboard...</p>
