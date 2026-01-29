@@ -12,6 +12,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #f9fafb;
   color: #111827;
+  overflow-x: hidden;
 }
 
 code {
@@ -27,3 +28,134 @@ a {
 button {
   font-family: inherit;
 }
+
+/* Responsive Typography */
+html {
+  font-size: 16px;
+}
+
+/* Mobile Responsive Typography */
+@media (max-width: 768px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+/* Global Responsive Image */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive Video Embed */
+iframe,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+@media (max-width: 768px) {
+  table {
+    font-size: 14px;
+  }
+  
+  th, td {
+    padding: 8px 4px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  table {
+    font-size: 12px;
+    display: block;
+    overflow-x: auto;
+  }
+}
+
+/* Responsive Utility Classes */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 8px;
+  }
+}
+
+/* Responsive Grid */
+.grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+@media (max-width: 768px) {
+  .grid {
+    gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    gap: 12px;
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive Flex */
+.flex-responsive {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 768px) {
+  .flex-responsive {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .flex-responsive {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* Touch-Friendly Buttons */
+@media (hover: none) {
+  button {
+    padding: 16px !important;
+    min-height: 44px;
+    min-width: 44px;
+  }
