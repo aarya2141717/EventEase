@@ -27,12 +27,6 @@ app.use(cors({
 app.use(express.json());
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-// Import models FIRST (before sync and routes)
-const User = require("./models/User");
-const Artist = require("./models/Artist");
-const Venue = require("./models/Venue");
-const Booking = require("./models/Booking");
-
 // Load routes
 const artistRoutes = require("./routes/artists");
 const authRoutes = require("./routes/auth");
@@ -53,6 +47,11 @@ app.get("/api/test", (req, res) => {
 
 // Sync database models and start server
 const startServer = async () => {
+  // Skip initialization during tests
+  if (process.env.NODE_ENV === "test") {
+    return;
+  }
+
   try {
     console.log("🔄 Connecting to database...");
     await connectDB();
@@ -95,7 +94,6 @@ const startServer = async () => {
       console.error("❌ Server error:", error.message);
       process.exit(1);
     });
-
   } catch (error) {
     console.error("❌ Error starting server:");
     console.error("Error message:", error.message);
@@ -118,3 +116,4 @@ process.on('uncaughtException', (error) => {
 
 startServer();
 
+module.exports = app;
