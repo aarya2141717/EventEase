@@ -425,15 +425,15 @@ const ArtistDetails = () => {
 
           <div className="artist-sidebar">
             <div className="booking-card">
-              <h3>Book This Artist</h3>
+              <h3>Hire This Artist</h3>
               <div className="price-info">
                 <span className="price-label">Starting from</span>
                 <span className="price-amount">{artist.bookingFee.split('-')[0].trim()}</span>
               </div>
               <button className="book-artist-btn" onClick={handleBookArtist}>
-                Book This Artist
+                Send Booking Request
               </button>
-              <p className="booking-note">* Final price depends on event type, duration, and requirements</p>
+              <p className="booking-note">* Final price depends on event type, duration, date, and requirements</p>
             </div>
 
             <div className="contact-card">
