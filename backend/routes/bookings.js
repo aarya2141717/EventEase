@@ -6,6 +6,12 @@ const Venue = require("../models/Venue");
 const Artist = require("../models/Artist");
 const { authenticate, requireRole } = require("../middleware/auth");
 
+// Helper function to check if a string is a valid UUID
+const isValidUUID = (str) => {
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+  return uuidRegex.test(str);
+};
+
 // Create artist booking
 router.post("/artist", authenticate, async (req, res) => {
   try {
@@ -24,7 +30,14 @@ router.post("/artist", authenticate, async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const artist = await Artist.findByPk(artistId);
+    // Try to find artist by ID (UUID) first, then by slug
+    let artist;
+    if (isValidUUID(artistId)) {
+      artist = await Artist.findByPk(artistId);
+    }
+    if (!artist) {
+      artist = await Artist.findOne({ where: { slug: artistId } });
+    }
     if (!artist) {
       return res.status(404).json({ message: "Artist not found" });
     }
@@ -32,6 +45,8 @@ router.post("/artist", authenticate, async (req, res) => {
     const booking = await Booking.create({
       type: "artist",
       status: "pending",
+      vendorApproval: "approved", // Artists don't need vendor approval - auto approve
+      adminApproval: "pending", // Admin needs to approve
       userId: req.user.id,
       ownerId: artist.createdBy || null,
       itemId: artist.id,
@@ -42,7 +57,7 @@ router.post("/artist", authenticate, async (req, res) => {
       eventDate,
       eventTime,
       numberOfTickets: Number(numberOfTickets) || 1,
-      eventType: eventType || "General",
+      eventType: eventType || null,
       specialRequirements: specialRequirements || null,
     });
 
@@ -77,7 +92,14 @@ router.post("/venue", authenticate, async (req, res) => {
       return res.status(400).json({ message: "Missing required fields" });
     }
 
-    const venue = await Venue.findByPk(venueId);
+    // Try to find venue by ID (UUID) first, then by slug
+    let venue;
+    if (isValidUUID(venueId)) {
+      venue = await Venue.findByPk(venueId);
+    }
+    if (!venue) {
+      venue = await Venue.findOne({ where: { slug: venueId } });
+    }
     if (!venue) {
       return res.status(404).json({ message: "Venue not found" });
     }

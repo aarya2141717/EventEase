@@ -19,7 +19,6 @@ const ArtistBooking = () => {
     eventDate: '',
     eventTime: '',
     numberOfTickets: '1',
-    eventType: '',
     specialRequirements: '',
   });
 
@@ -82,10 +81,6 @@ const ArtistBooking = () => {
     
     if (!formData.numberOfTickets || formData.numberOfTickets < 1) {
       newErrors.numberOfTickets = 'Please select at least 1 ticket';
-    }
-
-    if (!formData.eventType) {
-      newErrors.eventType = 'Event type is required';
     }
     
     return newErrors;
@@ -225,26 +220,6 @@ const ArtistBooking = () => {
           {/* Event Details */}
           <div className="form-section">
             <h3>Event Details</h3>
-
-            <div className="form-group">
-              <label htmlFor="eventType">Event Type <span className="required">*</span></label>
-              <select
-                id="eventType"
-                name="eventType"
-                value={formData.eventType}
-                onChange={handleChange}
-                className={errors.eventType ? 'error' : ''}
-              >
-                <option value="">Select event type</option>
-                <option value="Wedding">Wedding</option>
-                <option value="Corporate Event">Corporate Event</option>
-                <option value="Concert">Concert</option>
-                <option value="Private Party">Private Party</option>
-                <option value="Festival">Festival</option>
-                <option value="Other">Other</option>
-              </select>
-              {errors.eventType && <span className="error-message">{errors.eventType}</span>}
-            </div>
             
             <div className="form-row">
               <div className="form-group">
@@ -351,8 +326,7 @@ const ArtistBooking = () => {
             }}>
               <strong>📋 What's Next?</strong>
               <p style={{ margin: "8px 0 0 0" }}>
-                Your booking needs approval from both the artist's manager and our admin team. 
-                You'll receive notifications once they review your request. 
+                Your booking is pending admin approval. Once approved, you'll be able to proceed with your event. 
                 Check your dashboard for real-time status updates!
               </p>
             </div>

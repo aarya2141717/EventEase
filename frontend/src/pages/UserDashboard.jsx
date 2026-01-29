@@ -63,7 +63,6 @@ const UserDashboard = () => {
       eventDate: booking.eventDate || "",
       eventTime: booking.eventTime || "",
       numberOfTickets: booking.numberOfTickets || "",
-      eventType: booking.eventType || "",
       specialRequirements: booking.specialRequirements || "",
       contactPhone: booking.contactPhone || "",
     });
@@ -195,15 +194,17 @@ const UserDashboard = () => {
                       <p style={{ fontSize: "12px", color: "#666", marginBottom: "8px" }}>
                         <strong>Approval Status:</strong>
                       </p>
-                      <div style={{ display: "flex", gap: "10px", fontSize: "12px" }}>
-                        <span style={{
-                          padding: "4px 8px",
-                          borderRadius: "4px",
-                          backgroundColor: booking.vendorApproval === "approved" ? "#d1fae5" : booking.vendorApproval === "rejected" ? "#fee2e2" : "#fef3c7",
-                          color: booking.vendorApproval === "approved" ? "#065f46" : booking.vendorApproval === "rejected" ? "#7f1d1d" : "#92400e"
-                        }}>
-                          Vendor: {booking.vendorApproval}
-                        </span>
+                      <div style={{ display: "flex", gap: "10px", fontSize: "12px", flexWrap: "wrap" }}>
+                        {booking.type === "venue" && (
+                          <span style={{
+                            padding: "4px 8px",
+                            borderRadius: "4px",
+                            backgroundColor: booking.vendorApproval === "approved" ? "#d1fae5" : booking.vendorApproval === "rejected" ? "#fee2e2" : "#fef3c7",
+                            color: booking.vendorApproval === "approved" ? "#065f46" : booking.vendorApproval === "rejected" ? "#7f1d1d" : "#92400e"
+                          }}>
+                            Vendor: {booking.vendorApproval}
+                          </span>
+                        )}
                         <span style={{
                           padding: "4px 8px",
                           borderRadius: "4px",
@@ -212,6 +213,17 @@ const UserDashboard = () => {
                         }}>
                           Admin: {booking.adminApproval}
                         </span>
+                        {booking.type === "artist" && booking.adminApproval === "pending" && (
+                          <span style={{
+                            fontSize: "11px",
+                            color: "#666",
+                            fontStyle: "italic",
+                            marginLeft: "4px",
+                            alignSelf: "center"
+                          }}>
+                            (Awaiting admin approval)
+                          </span>
+                        )}
                       </div>
                     </div>
                   </div>

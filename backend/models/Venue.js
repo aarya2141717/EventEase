@@ -11,6 +11,11 @@ const Venue = sequelize.define("Venue", {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  slug: {
+    type: DataTypes.STRING,
+    allowNull: true,
+    unique: true,
+  },
   location: {
     type: DataTypes.STRING,
     allowNull: true,

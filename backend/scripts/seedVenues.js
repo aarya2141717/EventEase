@@ -4,6 +4,7 @@ require("dotenv").config({ path: __dirname + "/../.env" });
 
 const hardcodedVenues = [
   {
+    slug: "smart-palace",
     name: "Smart Palace",
     location: "Chabahil, Kathmandu",
     category: "Banquets",
@@ -18,6 +19,7 @@ const hardcodedVenues = [
     reviews: 977,
   },
   {
+    slug: "queens-palace-events",
     name: "Queen's Palace & Events",
     location: "Sukedhara Chowk",
     category: "Banquets",
@@ -32,6 +34,7 @@ const hardcodedVenues = [
     reviews: 600,
   },
   {
+    slug: "silver-oak-banquet",
     name: "Silver Oak Banquet",
     location: "Gairidhara, Kathmandu",
     category: "Banquets",
@@ -46,6 +49,7 @@ const hardcodedVenues = [
     reviews: 1400,
   },
   {
+    slug: "dorjes-resort-spa",
     name: "Dorje's Resort & Spa",
     location: "Dhulikhel",
     category: "Resorts",
@@ -60,6 +64,7 @@ const hardcodedVenues = [
     reviews: 820,
   },
   {
+    slug: "fish-tail-lodge",
     name: "Fish Tail Lodge",
     location: "Pokhara",
     category: "Resorts",
@@ -74,6 +79,7 @@ const hardcodedVenues = [
     reviews: 1200,
   },
   {
+    slug: "jimbu-thakali",
     name: "Jimbu Thakali By Capital Grill",
     location: "Kathmandu",
     category: "Restaurants",
@@ -88,6 +94,7 @@ const hardcodedVenues = [
     reviews: 900,
   },
   {
+    slug: "hotel-mystic-mountain",
     name: "Hotel Mystic Mountain",
     location: "Nagarkot",
     category: "Resorts",
@@ -102,6 +109,7 @@ const hardcodedVenues = [
     reviews: 1100,
   },
   {
+    slug: "patio-soaltee",
     name: "Patio - The Soaltee Kathmandu",
     location: "Soaltee Mode",
     category: "Restaurants",
@@ -116,6 +124,7 @@ const hardcodedVenues = [
     reviews: 950,
   },
   {
+    slug: "the-white-house-villa",
     name: "The White House Villa",
     location: "Tarakeshwar-2, Kavresthali, Kathmandu, Nepal",
     category: "Villas / Holiday Home",
