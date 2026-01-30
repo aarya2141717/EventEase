@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import Navbar from "../components/Navbar/Navbar";
 
 export default function Login() {
   const [showPw, setShowPw] = useState(false);
@@ -63,28 +64,7 @@ export default function Login() {
 
   return (
     <div className="login-root">
-      <header className="topbar">
-        <div className="container header-inner">
-          <div className="brand">
-            <Link to="/">
-              <img src="/images/logo.png" alt="EventEase" className="logo" />
-            </Link>
-            <div className="brand-text">
-              <span className="brand-title">EventEase</span>
-              <small className="brand-tag">Book venue & artists - fast</small>
-            </div>
-          </div>
-
-          <nav className="nav">
-            <Link to="/">Home</Link>
-            <Link to="/venues">Venues</Link>
-            <Link to="/artists">Artists</Link>
-            <Link to="/dashboard">Dashboard</Link>
-            <button className="cta">Book now</button>
-            <button className="login-outline">Log In</button>
-          </nav>
-        </div>
-      </header>
+      <Navbar />
 
       <main className="page">
         <h2 className="page-title">Log In</h2>

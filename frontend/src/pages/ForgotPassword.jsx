@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Navbar from "../components/Navbar/Navbar";
 import "./ForgotPassword.css";
 
 export default function ForgotPassword() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
     securityQuestion: "What is your mother's maiden name?",
@@ -10,6 +12,8 @@ export default function ForgotPassword() {
     newPassword: "",
     confirmPassword: ""
   });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const securityQuestions = [
     "What is your mother's maiden name?",
@@ -28,50 +32,55 @@ export default function ForgotPassword() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
     if (formData.newPassword.length < 6) {
-      alert("Password must be at least 6 characters long");
+      setError("Password must be at least 6 characters long");
       return;
     }
 
     if (formData.newPassword !== formData.confirmPassword) {
-      alert("Passwords do not match");
+      setError("Passwords do not match");
       return;
     }
 
-    console.log("Forgot Password Data:", formData);
-    alert("Password reset successful! Please login.");
+    setLoading(true);
 
-    // Later: API call + redirect to login
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/forgot-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          securityQuestion: formData.securityQuestion,
+          securityAnswer: formData.securityAnswer,
+          newPassword: formData.newPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Password reset successful! Please login with your new password.");
+        navigate("/login");
+      } else {
+        setError(data.message || "Password reset failed. Please try again.");
+      }
+    } catch (error) {
+      console.error("Password reset error:", error);
+      setError("Network error. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <div className="forgot-root">
-      {/* Header (same as Login/Register) */}
-      <header className="topbar">
-        <div className="container header-inner">
-          <div className="brand">
-            <img src="/images/logo.png" alt="EventEase" className="logo" />
-            <div className="brand-text">
-              <span className="brand-title">EventEase</span>
-              <small className="brand-tag">Book venue & artists - fast</small>
-            </div>
-          </div>
-
-          <nav className="nav">
-            <Link to="/">Home</Link>
-            <Link to="/venues">Venues</Link>
-            <Link to="/artists">Artists</Link>
-            <Link to="/dashboard">Dashboard</Link>
-            <button className="cta">Book now</button>
-            <Link to="/login">
-              <button className="login-outline">Log In</button>
-            </Link>
-          </nav>
-        </div>
-      </header>
+      <Navbar />
 
       <main className="page">
         <h2 className="page-title">Forgot Password</h2>
@@ -80,6 +89,8 @@ export default function ForgotPassword() {
         <div className="forgot-card">
           <form onSubmit={handleSubmit}>
             <h3>Account Verification</h3>
+
+            {error && <div className="error-message" style={{color: 'red', marginBottom: '10px', padding: '10px', background: '#fee', borderRadius: '4px'}}>{error}</div>}
 
             <label>Email Address</label>
             <input
@@ -138,8 +149,8 @@ export default function ForgotPassword() {
               required
             />
 
-            <button type="submit" className="reset-btn">
-              Reset Password
+            <button type="submit" className="reset-btn" disabled={loading}>
+              {loading ? "Resetting Password..." : "Reset Password"}
             </button>
 
             <p className="back-login">
