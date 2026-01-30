@@ -18,7 +18,9 @@ const ArtistBooking = () => {
     phone: user?.phone || '',
     eventDate: '',
     eventTime: '',
-    numberOfTickets: '1',
+    venueName: '',
+    numberOfGuests: '',
+    performanceDuration: '',
     specialRequirements: '',
   });
 
@@ -79,8 +81,16 @@ const ArtistBooking = () => {
       newErrors.eventTime = 'Event time is required';
     }
     
-    if (!formData.numberOfTickets || formData.numberOfTickets < 1) {
-      newErrors.numberOfTickets = 'Please select at least 1 ticket';
+    if (!formData.venueName.trim()) {
+      newErrors.venueName = 'Venue name is required';
+    }
+    
+    if (!formData.numberOfGuests || formData.numberOfGuests < 1) {
+      newErrors.numberOfGuests = 'Expected number of guests is required';
+    }
+    
+    if (!formData.performanceDuration) {
+      newErrors.performanceDuration = 'Performance duration is required';
     }
     
     return newErrors;
@@ -161,8 +171,8 @@ const ArtistBooking = () => {
     <div className="artist-booking-container">
       <div className="artist-booking-wrapper">
         <div className="booking-header">
-          <h1>Book {artist.name}</h1>
-          <p>Reserve your tickets for an unforgettable experience</p>
+          <h1>Hire {artist.name}</h1>
+          <p>Fill in the details to book this artist for your event</p>
         </div>
 
         <form onSubmit={handleSubmit} className="artist-booking-form">
@@ -251,26 +261,53 @@ const ArtistBooking = () => {
             </div>
 
             <div className="form-group">
-              <label htmlFor="numberOfTickets">Number of Tickets <span className="required">*</span></label>
-              <select
-                id="numberOfTickets"
-                name="numberOfTickets"
-                value={formData.numberOfTickets}
+              <label htmlFor="venueName">Venue Name / Location <span className="required">*</span></label>
+              <input
+                type="text"
+                id="venueName"
+                name="venueName"
+                value={formData.venueName}
                 onChange={handleChange}
-                className={errors.numberOfTickets ? 'error' : ''}
-              >
-                <option value="1">1 Ticket</option>
-                <option value="2">2 Tickets</option>
-                <option value="3">3 Tickets</option>
-                <option value="4">4 Tickets</option>
-                <option value="5">5 Tickets</option>
-                <option value="6">6 Tickets</option>
-                <option value="7">7 Tickets</option>
-                <option value="8">8 Tickets</option>
-                <option value="9">9 Tickets</option>
-                <option value="10">10 Tickets</option>
-              </select>
-              {errors.numberOfTickets && <span className="error-message">{errors.numberOfTickets}</span>}
+                className={errors.venueName ? 'error' : ''}
+                placeholder="Enter venue name or location"
+              />
+              {errors.venueName && <span className="error-message">{errors.venueName}</span>}
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label htmlFor="numberOfGuests">Expected Number of Guests <span className="required">*</span></label>
+                <input
+                  type="number"
+                  id="numberOfGuests"
+                  name="numberOfGuests"
+                  value={formData.numberOfGuests}
+                  onChange={handleChange}
+                  className={errors.numberOfGuests ? 'error' : ''}
+                  placeholder="e.g., 100"
+                  min="1"
+                />
+                {errors.numberOfGuests && <span className="error-message">{errors.numberOfGuests}</span>}
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="performanceDuration">Performance Duration <span className="required">*</span></label>
+                <select
+                  id="performanceDuration"
+                  name="performanceDuration"
+                  value={formData.performanceDuration}
+                  onChange={handleChange}
+                  className={errors.performanceDuration ? 'error' : ''}
+                >
+                  <option value="">Select duration</option>
+                  <option value="1 hour">1 hour</option>
+                  <option value="2 hours">2 hours</option>
+                  <option value="3 hours">3 hours</option>
+                  <option value="4 hours">4 hours</option>
+                  <option value="Full day">Full day</option>
+                </select>
+                {errors.performanceDuration && <span className="error-message">{errors.performanceDuration}</span>}
+              </div>
             </div>
 
             <div className="form-group">
@@ -303,7 +340,7 @@ const ArtistBooking = () => {
               className="btn-primary"
               disabled={loading}
             >
-              {loading ? 'Processing...' : 'Book Tickets'}
+              {loading ? 'Processing...' : 'Send Booking Request'}
             </button>
           </div>
         </form>

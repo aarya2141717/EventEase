@@ -19,12 +19,16 @@ router.post("/artist", authenticate, async (req, res) => {
       eventDate,
       eventTime,
       numberOfTickets,
+      numberOfGuests,
+      venueName,
+      performanceDuration,
       eventType,
       specialRequirements,
       artistId,
+      artistName,
     } = req.body;
 
-    console.log("📝 Artist booking request:", { artistId, eventDate, eventTime, userId: req.user?.id });
+    console.log("📝 Artist booking request:", { artistId, artistName, eventDate, eventTime, userId: req.user?.id });
 
     if (!artistId || !eventDate || !eventTime) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -38,8 +42,10 @@ router.post("/artist", authenticate, async (req, res) => {
     if (!artist) {
       artist = await Artist.findOne({ where: { slug: artistId } });
     }
+    
+    // If still not found, create booking anyway with the provided name (for static data)
     if (!artist) {
-      return res.status(404).json({ message: "Artist not found" });
+      console.log("⚠️ Artist not in database, using provided name:", artistName);
     }
 
     const booking = await Booking.create({
@@ -48,17 +54,17 @@ router.post("/artist", authenticate, async (req, res) => {
       vendorApproval: "approved", // Artists don't need vendor approval - auto approve
       adminApproval: "pending", // Admin needs to approve
       userId: req.user.id,
-      ownerId: artist.createdBy || null,
-      itemId: artist.id,
-      itemName: artist.name,
+      ownerId: artist?.createdBy || null,
+      itemId: artist?.id || artistId,
+      itemName: artist?.name || artistName || 'Unknown Artist',
       contactName: req.user.fullName,
       contactEmail: req.user.email,
       contactPhone: req.user.phone || null,
       eventDate,
       eventTime,
-      numberOfTickets: Number(numberOfTickets) || 1,
+      numberOfTickets: Number(numberOfGuests || numberOfTickets) || 1,
       eventType: eventType || null,
-      specialRequirements: specialRequirements || null,
+      specialRequirements: specialRequirements || `Venue: ${venueName || 'TBD'}, Duration: ${performanceDuration || 'TBD'}, ${specialRequirements || ''}`.trim(),
     });
 
     console.log("✅ Artist booking created:", booking.id);

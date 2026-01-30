@@ -1,4 +1,25 @@
-*.md 
-!README.md 
-"*.md" 
-"!README.md" 
+*.md
+!README.md
+
+# Dependencies
+**/node_modules/
+
+# Environment
+.env
+**/.env
+
+# Build outputs
+**/dist/
+**/build/
+**/.vite/
+
+# Logs
+*.log
+
+# Uploads (user-generated)
+backend/uploads/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/

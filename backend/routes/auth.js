@@ -114,4 +114,42 @@ router.post("/login", async (req, res) => {
   }
 });
 
+// ======================= FORGOT PASSWORD =======================
+router.post("/forgot-password", async (req, res) => {
+  try {
+    const { email, securityQuestion, securityAnswer, newPassword } = req.body;
+
+    if (!email || !securityQuestion || !securityAnswer || !newPassword) {
+      return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    // Find user by email
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    // Verify security question and answer
+    if (
+      user.securityQuestion !== securityQuestion ||
+      user.securityAnswer !== securityAnswer
+    ) {
+      return res.status(401).json({ 
+        message: "Security question or answer is incorrect" 
+      });
+    }
+
+    // Hash new password and update
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    await user.update({ password: hashedPassword });
+
+    console.log(`✅ Password reset successful for user: ${email}`);
+
+    res.json({ message: "Password reset successful" });
+  } catch (error) {
+    console.error("Forgot password error:", error);
+    res.status(500).json({ message: "Server error" });
+  }
+});
+
 module.exports = router;
